@@ -1,0 +1,16 @@
+{
+  "name": "Bochazo",
+  "version": "0.0.0",
+  "description": "Bochazo",
+  "main": "app.js",
+  "author": {
+    "name": "nicolase",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*",
+    "stylus": "*",
+    "less-middleware": "~0.1.14"
+  }
+}

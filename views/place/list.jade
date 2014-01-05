@@ -1,0 +1,23 @@
+.row
+  .col-md-8
+    .alert.alert-success(ng-show='count != null')
+      p
+        strong {{count}}
+        | &nbsp;complejos encontrados.
+    .place(ng-repeat='place in places')
+      .content
+        a(href='#/{{place.name}}')
+          h3 {{place.description}}
+        ul
+          li(ng-show='place.fullAddress') {{place.fullAddress}}
+          li(ng-show='place.phone') {{place.phone}}
+          li(ng-repeat='court in place.courts')
+            | {{court.length}} cancha{{court.length > 1 ? 's' : ''}} de {{court.key}}
+          li(ng-show='place.services.length > 0')
+            label.label.label-primary(ng-repeat='service in place.services') {{service}}
+    a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-show='!loading && count > places.length') Mostrar más
+    a.center-block.btn.btn-primary.disabled(style='width: 200px;', ng-show='loading') Cargando ...
+  .col-md-4
+    | ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click
+    a(href='#/canchas/agregar') &nbsp;acá
+    | .
