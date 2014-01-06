@@ -1,5 +1,6 @@
 function ListCtrl($http, $scope, $location, $routeParams) {
     $scope.places = [];
+
     $scope.showMore = function () {
         if ($scope.count != $scope.places.length) {
             $scope.loading = true;
