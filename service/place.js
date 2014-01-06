@@ -1,11 +1,13 @@
 'use strict';
 
-var place = require('../model/place');
+var Place = require('../model/place');
 
 exports.get = function () {
-	return place;
+	return Place;
 };
 
 exports.insert = function (model) {
-
-}
+	new Place(model).save(function (err) {
+		console.log(err);
+	});
+};

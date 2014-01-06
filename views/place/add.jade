@@ -17,14 +17,13 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
       label.control-label.col-sm-3(for='address') Buscá la ubicación en el mapa (*)
       .col-sm-6
         .input-group
-          input#address.form-control(type='text', ng-model='address', placeholder='Alguna dirección')
+          input#address.form-control(type='text', ng-model='address', ng-enter='addressSearch()' placeholder='Alguna dirección')
           span.input-group-btn
             button.btn.btn-primary(type='button', ng-click='addressSearch()') Buscar
-        .map-container(ng-class='showMap && "map-search"')
-          ol(ng-show='addressResults.length > 0')
-            li(ng-repeat='result in addressResults') 
-              a(href='', ng-click='setAddress(result)') {{result.address}}
-          #map-canvas
+        ol(ng-show='addressResults.length > 0')
+          li(ng-repeat='result in addressResults') 
+            a(href='', ng-click='setAddress(result)') {{result.address}}
+        #map-canvas
     .form-group
       label.control-label.col-sm-3(for='howToArrive') Indicanos cómo llegar (colectivos, trenes, etc.)
       .col-sm-6

@@ -1,8 +1,19 @@
 function PlaceCtrl($http, $scope, $location, $routeParams) {
     var latLng = new google.maps.LatLng(-38, -63),
-        mapOptions = { zoom: 15, center: latLng },
+        mapOptions = { zoom: 4, center: latLng },
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions),
         geocoder = new google.maps.Geocoder();
+
+    addMarker({
+        latLng: latLng,
+        map: map,
+        onDrag: function (results) {
+            var addressResults = mapResults(results);
+
+            assignResult(addressResults[0]);
+            $scope.$apply();
+        }
+    })
 
     if ($routeParams.name) {
         $http({ method: 'GET', url: '/api/place/get', params: { name: $routeParams.name } }).success(function (data, status, xhr) {
@@ -24,31 +35,33 @@ function PlaceCtrl($http, $scope, $location, $routeParams) {
     }
 
     $scope.save = function () {
-        $http({ method: 'POST', url: '/api/place/insert', data: { testing: 'post' } });
+        $http({ method: 'POST', url: '/api/place/insert', data: { 
+            description: $scope.description,
+            info: $scope.info,
+            phone: $scope.phone,
+            address: $scope.address,
+            addressComponents: $scope.addressComponents,
+            howToArrive: $scope.howToArrive
+        } });
+
+        console.log($scope.addressComponents);
     };
 
     $scope.setAddress = function (address, assignAddress) {
-        var latLng = new google.maps.LatLng(address.latitude, address.longitude);
+        addMarker({
+            latitude: address.latitude,
+            longitude: address.longitude,
+            map: map,
+            description: $scope.description,
+            onDrag: function (results) {
+                var addressResults = mapResults(results);
 
-        if (map.marker) {
-            map.marker.setMap(null);
-        }
-
-        map.marker = new google.maps.Marker({ map: map, title: $scope.description, position: latLng });
-        map.marker.setDraggable(true);
-        map.setCenter(latLng);
-
-        google.maps.event.addListener(map.marker, 'position_changed', function () {
-            geocoder.geocode({ latLng: map.marker.getPosition() }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    var addressResults = mapResults(results);
-
-                    assignResult(addressResults[0]);
-                    $scope.$apply();
-                }
-            });
+                assignResult(addressResults[0]);
+                $scope.$apply();
+            }
         });
 
+        map.setZoom(15);
         assignResult($scope.addressResults[0], assignAddress);
     };
 
@@ -66,6 +79,28 @@ function PlaceCtrl($http, $scope, $location, $routeParams) {
             $scope.$apply();
         });
     };
+
+    function addMarker(options) {
+        var latLng = options.latLng || new google.maps.LatLng(options.latitude, options.longitude);
+
+        if (options.map.marker) {
+            options.map.marker.setMap(null);
+        }
+
+        options.map.marker = new google.maps.Marker({ map: options.map, title: options.description, position: latLng });
+        options.map.marker.setDraggable(true);
+        options.map.setCenter(latLng);
+
+        if (options.onDrag) {
+            google.maps.event.addListener(options.map.marker, 'position_changed', function () {
+                geocoder.geocode({ latLng: options.map.marker.getPosition() }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        options.onDrag(results);
+                    }
+                });
+            });
+        }
+    }
 
     function mapResults(results) {
         return results.map(function (i) {

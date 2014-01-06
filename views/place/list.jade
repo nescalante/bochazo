@@ -9,7 +9,7 @@
         a(href='#/{{place.name}}')
           h3 {{place.description}}
         ul
-          li(ng-show='place.fullAddress') {{place.fullAddress}}
+          li(ng-show='place.address') {{place.address}}
           li(ng-show='place.phone') {{place.phone}}
           li(ng-repeat='court in place.courts')
             | {{court.length}} cancha{{court.length > 1 ? 's' : ''}} de {{court.key}}

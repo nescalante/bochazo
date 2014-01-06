@@ -10,7 +10,7 @@
   "dependencies": {
     "express": "3.4.4",
     "jade": "*",
-    "stylus": "*",
-    "less-middleware": "~0.1.14"
+    "less-middleware": "~0.1.14",
+    "mongoose": "~3.8.3"
   }
 }
