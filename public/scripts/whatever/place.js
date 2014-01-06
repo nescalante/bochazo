@@ -1,11 +1,11 @@
-function PlaceCtrl($http, $scope, $location, $routeParams, getPlaceUrl) {
+function PlaceCtrl($http, $scope, $location, $routeParams) {
     var latLng = new google.maps.LatLng(-38, -63),
         mapOptions = { zoom: 15, center: latLng },
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions),
         geocoder = new google.maps.Geocoder();
 
     if ($routeParams.name) {
-        $http({ method: 'GET', url: getPlaceUrl, params: { name: $routeParams.name } }).success(function (data, status, xhr) {
+        $http({ method: 'GET', url: '/api/place/get', params: { name: $routeParams.name } }).success(function (data, status, xhr) {
             // bchz.mapping.get('Place', data, $scope);
 
             var placeLatLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
@@ -24,7 +24,7 @@ function PlaceCtrl($http, $scope, $location, $routeParams, getPlaceUrl) {
     }
 
     $scope.save = function () {
-
+        $http({ method: 'POST', url: '/api/place/insert', data: { testing: 'post' } });
     };
 
     $scope.setAddress = function (address, assignAddress) {

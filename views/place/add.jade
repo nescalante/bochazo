@@ -20,10 +20,11 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
           input#address.form-control(type='text', ng-model='address', placeholder='Alguna dirección')
           span.input-group-btn
             button.btn.btn-primary(type='button', ng-click='addressSearch()') Buscar
-        ol(ng-show='addressResults.length > 0')
-          li(ng-repeat='result in addressResults') 
-            a(href='', ng-click='setAddress(result)') {{result.address}}
-        #map-canvas(ng-class='showMap && "map-search"')
+        .map-container(ng-class='showMap && "map-search"')
+          ol(ng-show='addressResults.length > 0')
+            li(ng-repeat='result in addressResults') 
+              a(href='', ng-click='setAddress(result)') {{result.address}}
+          #map-canvas
     .form-group
       label.control-label.col-sm-3(for='howToArrive') Indicanos cómo llegar (colectivos, trenes, etc.)
       .col-sm-6
@@ -41,4 +42,4 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
             | lala
     .form-group
       .col-sm-offset-3
-        button.btn.btn-primary(type='submit', ng-click='save') ¡Agregar complejo!
+        button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!

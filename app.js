@@ -31,6 +31,7 @@ app.get('/', routes.index);
 app.get('/:partial/:name.html', partials.get);
 app.get('/api/place/get', place.get);
 app.get('/api/place/list', place.list);
+app.post('/api/place/insert', place.insert);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('express server listening on port ' + app.get('port'));

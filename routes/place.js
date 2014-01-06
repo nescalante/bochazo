@@ -36,3 +36,7 @@ exports.list = function(req, res) {
 			});
 	}
 };
+
+exports.insert = function(req, res) {
+	console.log(req.body);
+};
