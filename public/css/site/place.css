@@ -1,0 +1,80 @@
+body {
+  background-color: #ffffbb;
+  font-family: 'Raleway', sans-serif;
+}
+.container.body-content {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+.place.ng-enter,
+.place.ng-leave {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  top: -50px;
+  opacity: 0;
+  -webkit-box-shadow: 1px 1px 6px #aaaaaa;
+  box-shadow: 1px 1px 6px #aaaaaa;
+}
+.place.ng-enter-active,
+.place.ng-leave-active {
+  opacity: 1;
+  top: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.place-info {
+  margin-bottom: 20px;
+}
+.place {
+  position: relative;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-left: 10px solid transparent;
+  padding: 10px;
+  margin-bottom: 10px;
+  opacity: 1;
+}
+.place h3 {
+  margin-top: 0;
+}
+.place h3 {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-weight: 100;
+  padding: 5px;
+  text-decoration: none;
+}
+.place a {
+  text-decoration: none;
+}
+.place h3:hover {
+  background-color: #c2da9a;
+  color: #333;
+  text-decoration: none;
+  -webkit-box-shadow: 1px 1px 4px #cccccc;
+  box-shadow: 1px 1px 4px #cccccc;
+}
+.place:hover {
+  border-left: 10px solid #428b0a;
+  background-color: #ffff88;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-box-shadow: 1px 1px 6px #aaaaaa;
+  box-shadow: 1px 1px 6px #aaaaaa;
+}
+.place .label {
+  margin-right: 2px;
+}
+.search-group #map-canvas {
+  height: 300px;
+  width: 100%;
+  margin-top: 10px;
+  border: 4px solid #428b0a;
+}
+.search-group li {
+  margin-top: 5px;
+}
+#map-canvas {
+  border: 4px solid #428b0a;
+  box-shadow: 1px 1px 4px #666;
+}

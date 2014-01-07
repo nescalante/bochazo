@@ -1,0 +1,32 @@
+h2 Vale por una Home
+.row
+    .col-md-8
+      p
+        | Para realizar una búsqueda rápida ingresá a continuación el nombre de algún
+        b &nbsp;barrio
+        | ,
+        b &nbsp;ciudad
+        | ,
+        b &nbsp;calle
+        | , o bien el nombre de alguna
+        b &nbsp;cancha
+        | &nbsp;que ya conozcas:
+      .input-group
+        .input-group-btn
+          button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+            | Todo
+            span.caret
+          ul.dropdown-menu
+            li
+              a(href='#') Action
+            li
+              a(href='#') Another action
+            li
+              a(href='#') Something else here
+            li.divider
+            li
+              a(href='#') Separated link
+        input#term.form-control(ng-model='query', name='term', type='text', autocomplete='off')
+        span.input-group-btn
+          button.btn.btn-primary(ng-click='search()', type='submit') Buscar
+    .col-md-4
