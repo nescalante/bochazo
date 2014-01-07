@@ -241,4 +241,4 @@
 
 		return source;
 	};
-}(Array.prototype)
+}(Array.prototype);

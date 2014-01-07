@@ -1,4 +1,4 @@
-function ListCtrl($http, $scope, $location, $routeParams) {
+function PlaceListCtrl($http, $scope, $location, $routeParams) {
     $scope.places = [];
 
     $scope.showMore = function () {
@@ -11,6 +11,7 @@ function ListCtrl($http, $scope, $location, $routeParams) {
                 data.list.each(function (ix, item) {
                     $scope.places.push(item);
                 });
+            });
         }
     };
 

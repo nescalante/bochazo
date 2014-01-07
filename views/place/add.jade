@@ -23,7 +23,7 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
         ol(ng-show='addressResults.length > 0')
           li(ng-repeat='result in addressResults') 
             a(href='', ng-click='setAddress(result)') {{result.address}}
-        #map-canvas
+        #map-add.map-canvas
     .form-group
       label.control-label.col-sm-3(for='howToArrive') Indicanos cómo llegar (colectivos, trenes, etc.)
       .col-sm-6

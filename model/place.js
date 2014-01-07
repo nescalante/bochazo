@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
     court = require('./schema/court'),
     schema = new mongoose.Schema({
+        name: { type: String, required: true, trim: true },
         description: { type: String, required: true, trim: true },
         info: { type: String, trim: true },
         addressComponents: [{
@@ -11,6 +12,8 @@ var mongoose = require('mongoose'),
             types: [{ type: String }]
         }],
         address: { type: String, trim: true },
+        latitude: { type: Number, required: true },
+        longitude: { type: Number, required: true },
         geometry: {
             lat: { type: Number },
             lng: { type: Number }

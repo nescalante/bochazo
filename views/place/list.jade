@@ -6,7 +6,7 @@
         | &nbsp;complejos encontrados.
     .place(ng-repeat='place in places')
       .content
-        a(href='#/{{place.description}}')
+        a(href='#/canchas/{{place.name}}')
           h3 {{place.description}}
         ul
           li(ng-show='place.address') {{place.address}}

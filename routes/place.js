@@ -7,10 +7,18 @@ exports.get = function(req, res) {
 	var qs = url.parse(req.url, true).query;
 
 	if (qs && qs.name) {
-		res.json({ sample: qs.name });
+		service.place.get(qs.name, function (err, result) {
+			if (err) {
+				res.json(500, err);
+			}
+			else {
+				res.json(result);
+			}
+		});
 	}
-	
-	res.json({ sample: 'some string' });
+	else {
+		res.json(404, { message: 'some error message' });
+	}
 };
 
 exports.list = function(req, res) {
@@ -28,9 +36,13 @@ exports.list = function(req, res) {
 };
 
 exports.insert = function(req, res) {
+	console.log("inserting");
+
 	service.place.insert(req.body, function (err) {
 		if (err) {
 			res.json(500, err);
 		}
+
+		res.json({ status: 'OK' });
 	});
 };

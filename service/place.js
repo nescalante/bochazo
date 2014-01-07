@@ -3,8 +3,8 @@
 var Place = require('../model/place'),
 	async = require('async');
 
-exports.get = function (callback) {
-	return Place.find(callback);
+exports.get = function (name, callback) {
+	return Place.findOne({ name: name }, callback);
 };
 
 exports.list = function (callback) {
