@@ -19,9 +19,15 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(require('less-middleware')({ src: __dirname + '/public' }));
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'bower_components')));
+
+var path = { 
+	public: path.join(__dirname, 'public'),
+	components: path.join(__dirname, 'bower_components')
+};
+
+app.use(require('less-middleware')({ src: path.public }));
+app.use('/', express.static(path.public));
+app.use('/components', express.static(path.components));
 
 // development only
 if ('development' == app.get('env')) {

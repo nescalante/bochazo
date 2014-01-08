@@ -31,14 +31,9 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
     .form-group
       label.control-label.col-sm-3(for='optionsCheckboxList') Marcá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
       .col-sm-6
-        .checkbox
-          label
-            input(type='checkbox') 
-            | testing
-        .checkbox
-          label
-            input(type='checkbox') 
-            | lala
+        span.label.label-primary test1
+        span.label.label-primary test2
+        input.form-control.input-sm(type='text')
     .form-group
       .col-sm-offset-3
         button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!
