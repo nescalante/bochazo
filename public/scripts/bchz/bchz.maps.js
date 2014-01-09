@@ -65,6 +65,15 @@
 
                     addMarker.bind(map, options)();
                 }
+                else {
+                    if (options.error) {
+                        options.error(status);
+                    }
+                }
+
+                if (options.complete) {
+                    options.complete(results, status);
+                }
             });
         }
     };

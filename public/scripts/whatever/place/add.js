@@ -52,24 +52,30 @@ function PlaceAddCtrl($http, $scope, $location) {
     };
 
     $scope.addressSearch = function () {
-        $scope.addressResults = [];
+        if ($scope.address) {
+            $scope.addressResults = [];
+            $scope.loadingAddress = true;
 
-        map.addMarker({
-            address: $scope.address,
-            description: $scope.description,
-            zoom: 15,
-            drag: function (results) {
-                assignResult(results[0]);
+            map.addMarker({
+                address: $scope.address,
+                description: $scope.description,
+                zoom: 15,
+                drag: function (results) {
+                    assignResult(results[0]);
 
-                $scope.$apply();
-            },
-            success: function (results) {
-                assignResult(results[0], false);
+                    $scope.$apply();
+                },
+                success: function (results) {
+                    assignResult(results[0], false);
 
-                $scope.addressResults = results;
-                $scope.$apply();
-            }
-        });
+                    $scope.addressResults = results;
+                },
+                complete: function () {
+                    $scope.loadingAddress = false;
+                    $scope.$apply();
+                }
+            });
+        }
     };
 
     $scope.addTag = function (tag) {

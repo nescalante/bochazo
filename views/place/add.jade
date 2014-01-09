@@ -19,7 +19,7 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
         .input-group
           input#address.form-control(type='text', placeholder='Alguna dirección', ng-model='address', ng-enter='addressSearch()')
           span.input-group-btn
-            button.btn.btn-primary(type='button', ng-click='addressSearch()') Buscar
+            button.btn.btn-primary(type='button', ng-class='{ disabled: loadingAddress }', ng-click='addressSearch()') {{loadingAddress ? 'Buscando ...' : 'Buscar'}}
         ol(ng-show='addressResults.length > 0')
           li(ng-repeat='result in addressResults') 
             a(href='', ng-click='setAddress(result)') {{result.address}}
