@@ -77,3 +77,64 @@ body {
   border: 4px solid #428b0a;
   box-shadow: 1px 1px 4px #666;
 }
+.tag-search {
+  padding: 5px 12px;
+  height: auto;
+  cursor: text;
+}
+.tag-search input[type=text] {
+  border: 0;
+  outline: none;
+  color: #555555;
+}
+.tag-search input[type=text].text-danger {
+  color: #b94a48;
+}
+.tag-search input[type=text].text-danger:hover {
+  color: #953b39;
+}
+.tag-search.focused {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.tag-search span.label {
+  font-weight: normal;
+  padding: .2em .3em .3em .6em;
+  font-size: 100%;
+  margin-right: 5px;
+  float: left;
+  margin-bottom: 4px;
+}
+.tag-search button.close {
+  position: relative;
+  top: 1px;
+  float: none;
+  background-color: #fff;
+  padding: 0 .1em;
+  font-size: 18px;
+  margin-left: 5px;
+  line-height: 0.8em;
+  border-radius: 15px;
+}
+.form-control[data-hint]:before {
+  margin-left: 0px !important;
+}
+.form-control[data-hint]:after {
+  font-size: 14px;
+  margin-left: 12px !important;
+  width: 200px;
+  white-space: pre-wrap;
+  line-height: 1.428571429;
+}
+.form-control[data-hint]:before,
+.form-control[data-hint]:after {
+  visibility: hidden;
+  opacity: 0;
+}
+.form-control.focused.has-no-tags[data-hint]:before,
+.form-control.focused.has-no-tags[data-hint]:after {
+  visibility: visible;
+  opacity: 1;
+}

@@ -14,6 +14,7 @@ function PlaceDetailCtrl($http, $scope, $location, $routeParams) {
             $scope.address = data.address;
             $scope.phone = data.phone;
             $scope.howToArrive = data.howToArrive;
+            $scope.tags = data.tags;
 
         }).error(function () {
             $location.path('/canchas/');

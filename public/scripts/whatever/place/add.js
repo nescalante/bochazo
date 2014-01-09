@@ -12,7 +12,13 @@ function PlaceAddCtrl($http, $scope, $location) {
         }
     });
 
+    $scope.tags = [];
+
     $scope.save = function () {
+        if ($scope.currentTag) {
+            $scope.tags.push($scope.currentTag);
+        }
+
         $http({ method: 'POST', url: '/api/place/insert', data: {
             name: $scope.description,
             description: $scope.description,
@@ -22,7 +28,8 @@ function PlaceAddCtrl($http, $scope, $location) {
             latitude: $scope.latitude,
             longitude: $scope.longitude,
             addressComponents: $scope.addressComponents,
-            howToArrive: $scope.howToArrive
+            howToArrive: $scope.howToArrive,
+            tags: $scope.tags
         } }).success(function () {
             $location.path('/canchas/' + $scope.description);
         });
@@ -63,6 +70,21 @@ function PlaceAddCtrl($http, $scope, $location) {
                 $scope.$apply();
             }
         });
+    };
+
+    $scope.addTag = function (tag) {
+        if (tag && !$scope.tags.contains(tag)) {
+            $scope.tags.push(tag);
+            $scope.currentTag = "";
+        }
+    };
+
+    $scope.removeTag = function (tag) {
+        $scope.tags = $scope.tags.where(function (t) { return t != tag });
+    };
+
+    $scope.validateTag = function (tag) {
+        return $scope.tags.contains(tag);
     };
 
     function assignResult(result, assignAddress) {

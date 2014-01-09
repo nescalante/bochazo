@@ -5,6 +5,7 @@ html(ng-app='bchz')
 		meta(name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no')
 		meta(name='DESCRIPTION' content='SportHub')
 		title= title
+		link(rel='stylesheet', href='/components/hint.css/hint.css')
 		link(rel='stylesheet', href='/css/bootstrap/bootstrap.css')
 		link(rel='stylesheet', href='/css/site/place.css')
 	body
@@ -26,7 +27,7 @@ html(ng-app='bchz')
 							a otro link
 					form.navbar-form.navbar-left(role='search', ng-controller='SearchCtrl')
 						.form-group
-							input#query.form-control(type='text', ng-model='query', placeholder='Search')
+							input#query.form-control(type='search', ng-model='query', placeholder='Search')
 						button.btn.btn-default(type='submit', ng-click='search()') Submit
 					ul.nav.navbar-nav.navbar-right
 						li
@@ -45,7 +46,6 @@ html(ng-app='bchz')
 	script(src='components/angular-route/angular-route.js')
 	script(src='components/angular-resource/angular-resource.js')
 	script(src='http://maps.google.com/maps/api/js?sensor=true&language=es')
-	script(src='scripts/directives/ngEnter.js')
 	script(src='scripts/whatever/home.js')
 	script(src='scripts/whatever/search.js')
 	script(src='scripts/whatever/place/list.js')
@@ -55,3 +55,5 @@ html(ng-app='bchz')
 	script(src='scripts/bchz/bchz.arrays.js')
 	script(src='scripts/bchz/bchz.util.js')
 	script(src='scripts/bchz/bchz.maps.js')
+	script(src='scripts/directives/ngEnter.js')
+	script(src='scripts/directives/ngFocusInput.js')

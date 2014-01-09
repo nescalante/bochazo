@@ -86,3 +86,72 @@ body {
     border: 4px solid @brand-primary;
     box-shadow: 1px 1px 4px #666;
 }
+
+.tag-search {
+    padding: 5px 12px;
+    height: auto;
+    cursor: text;
+}
+
+.tag-search input[type=text] {
+    border: 0;
+    outline: none;
+    color: @input-color;
+}
+
+.tag-search input[type=text].text-danger {
+    color: @state-danger-text;
+    &:hover {
+        color: darken(@state-danger-text, 10%);
+    }
+}
+
+.tag-search.focused {
+    @color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
+    border-color: @input-border-focus;
+    outline: 0;
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
+}
+
+.tag-search span.label {
+    font-weight: normal;
+    padding: .2em .3em .3em .6em;
+    font-size: 100%;
+    margin-right: 5px;
+    float: left;
+    margin-bottom: 4px;
+}
+
+.tag-search button.close {
+    position: relative;
+    top: 1px;
+    float: none;
+    background-color: #fff;
+    padding: 0 .1em;
+    font-size: 18px;
+    margin-left: 5px;
+    line-height: 0.8em;
+    border-radius: 15px;
+}
+
+.form-control[data-hint]:before {
+    margin-left: 0px !important;
+}
+
+.form-control[data-hint]:after {
+    font-size: 14px;
+    margin-left: 12px !important;
+    width: 200px;
+    white-space: pre-wrap;
+    line-height: @line-height-base;
+}
+
+.form-control[data-hint]:before, .form-control[data-hint]:after {
+    visibility: hidden;
+    opacity: 0; 
+}
+
+.form-control.focused.has-no-tags[data-hint]:before, .form-control.focused.has-no-tags[data-hint]:after {
+    visibility: visible;
+    opacity: 1; 
+}

@@ -13,8 +13,8 @@
           li(ng-show='place.phone') {{place.phone}}
           li(ng-repeat='court in place.courts')
             | {{court.length}} cancha{{court.length > 1 ? 's' : ''}} de {{court.key}}
-          li(ng-show='place.services.length > 0')
-            label.label.label-primary(ng-repeat='service in place.services') {{service}}
+          li(ng-show='place.tags.length > 0')
+            label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
     a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-show='!loading && count > places.length') Mostrar más
     a.center-block.btn.btn-primary.disabled(style='width: 200px;', ng-show='loading') Cargando ...
   .col-md-4

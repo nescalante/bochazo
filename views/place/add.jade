@@ -4,20 +4,20 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
     .form-group
       label.control-label.col-sm-3(for='description') Ingresá el nombre del complejo (*)
       .col-sm-6
-        input#description.form-control(type='text', ng-model='description', placeholder='Algún nombre')
+        input#description.form-control(type='text', placeholder='Algún nombre', ng-model='description')
     .form-group
       label.control-label.col-sm-3(for='info') Escribí una breve descripción
       .col-sm-6
-        input#description.form-control(type='text', ng-model='info', placeholder='Alguna descripción')
+        input#description.form-control(type='text', placeholder='Alguna descripción', ng-model='info')
     .form-group
       label.control-label.col-sm-3(for='phone') Indicanos algún teléfono
       .col-sm-6
-        input#phone.form-control(type='text', ng-model='phone', placeholder='Algún teléfono')
+        input#phone.form-control(type='tel', placeholder='Algún teléfono', ng-model='phone')
     .form-group.search-group
       label.control-label.col-sm-3(for='address') Buscá la ubicación en el mapa (*)
       .col-sm-6
         .input-group
-          input#address.form-control(type='text', ng-model='address', ng-enter='addressSearch()' placeholder='Alguna dirección')
+          input#address.form-control(type='text', placeholder='Alguna dirección', ng-model='address', ng-enter='addressSearch()')
           span.input-group-btn
             button.btn.btn-primary(type='button', ng-click='addressSearch()') Buscar
         ol(ng-show='addressResults.length > 0')
@@ -27,13 +27,14 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
     .form-group
       label.control-label.col-sm-3(for='howToArrive') Indicanos cómo llegar (colectivos, trenes, etc.)
       .col-sm-6
-        textarea#howToArrive.form-control(ng-model='howToArrive', placeholder='Alguna indicación')
+        textarea#howToArrive.form-control(placeholder='Alguna indicación', ng-model='howToArrive')
     .form-group
-      label.control-label.col-sm-3(for='optionsCheckboxList') Marcá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
-      .col-sm-6
-        span.label.label-primary test1
-        span.label.label-primary test2
-        input.form-control.input-sm(type='text')
+      label.control-label.col-sm-3(for='optionsCheckboxList') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
+      .col-sm-6()
+        .form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, escribí lo que desees y presioná la tecla ↲' class='hint--right hint--info hint--rounded')
+          span.label.label-primary(ng-repeat='tag in tags') {{tag}}
+            button.close(type='button', ng-click='removeTag(tag)') &times;
+          input(type='text', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
     .form-group
       .col-sm-offset-3
         button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!

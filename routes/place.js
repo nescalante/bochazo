@@ -36,8 +36,6 @@ exports.list = function(req, res) {
 };
 
 exports.insert = function(req, res) {
-	console.log("inserting");
-
 	service.place.insert(req.body, function (err) {
 		if (err) {
 			res.json(500, err);

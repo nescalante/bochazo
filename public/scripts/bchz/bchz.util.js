@@ -1,6 +1,4 @@
-﻿var bchz = bchz || {};
-
-~function (b) {
+﻿~function (b) {
     b.util = {
         getFunctionName: function (f) {
             var result = f
