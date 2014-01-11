@@ -1,5 +1,11 @@
 function PlaceAddCtrl($http, $scope, $location) {
-    var map = new google.maps.Map(document.getElementById('map-add'));
+    var map = new google.maps.Map(document.getElementById('map-add')),
+        indexedTypes = [];
+
+    $scope.types = ['Fútbol', 'Tenis', 'Paddle'];
+    $scope.floorTypes = ['Sintético', 'Carpeta', 'Caucho'];
+    $scope.tags = [];
+    $scope.courts = [];
 
     map.addMarker({
         latitude: -38,
@@ -12,11 +18,13 @@ function PlaceAddCtrl($http, $scope, $location) {
         }
     });
 
-    $scope.tags = [];
-
     $scope.save = function () {
         if ($scope.currentTag) {
             $scope.tags.push($scope.currentTag);
+        }
+
+        if ($scope.currentCourt.type && $scope.currentCourt.floor) {
+            $scope.courts.push($scope.currentCourt);
         }
 
         $http({ method: 'POST', url: '/api/place/insert', data: {
@@ -28,8 +36,8 @@ function PlaceAddCtrl($http, $scope, $location) {
             latitude: $scope.latitude,
             longitude: $scope.longitude,
             addressComponents: $scope.addressComponents,
-            howToArrive: $scope.howToArrive,
-            tags: $scope.tags
+            tags: $scope.tags,
+            courts: $scope.courts
         } }).success(function () {
             $location.path('/canchas/' + $scope.description);
         });
@@ -90,8 +98,20 @@ function PlaceAddCtrl($http, $scope, $location) {
     };
 
     $scope.validateTag = function (tag) {
-        return $scope.tags.contains(tag);
+        return $scope.tags
+            .select(function (t) { return t.toLowerCase(); })
+            .contains(tag && tag.toLowerCase());
     };
+
+    $scope.$watchCollection('courts', function() {
+        $scope.groupedCourts = $scope.courts
+            .groupBy(function (c) { return c.type });
+    });
+
+    $scope.addCourt = function(court) {
+        $scope.courts.push(court);
+        $scope.currentCourt = {};
+    }
 
     function assignResult(result, assignAddress) {
         if (assignAddress !== false) {

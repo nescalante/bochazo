@@ -27,13 +27,13 @@ html(ng-app='bchz')
 							a otro link
 					form.navbar-form.navbar-left(role='search', ng-controller='SearchCtrl')
 						.form-group
-							input#query.form-control(type='search', ng-model='query', placeholder='Search')
+							input.form-control(type='search', ng-model='query', placeholder='Search')
 						button.btn.btn-default(type='submit', ng-click='search()') Submit
 					ul.nav.navbar-nav.navbar-right
 						li
 							a(href='#') Register
 						li
-							a(href='#') Log in
+							a(href='/auth/google') Log in
 		.container.body-content
 			div(ng-view)
 				block content

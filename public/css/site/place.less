@@ -1,10 +1,8 @@
 ﻿@import "../bootstrap/mixins.less";
 @import "../bootstrap/variables.less";
 
-@site-background: #ffffbb;
-
 body {
-    background-color: @site-background;
+    background-color: @body-bg;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -55,7 +53,7 @@ body {
 }
 
 .place h3:hover {
-    background-color: lighten(average(@brand-primary, @site-background), 15%);
+    background-color: lighten(average(@brand-primary, @body-bg), 15%);
     color: #333;
     text-decoration: none;
     .box-shadow(1px 1px 4px #ccc);
@@ -63,7 +61,7 @@ body {
 
 .place:hover {
     border-left: 10px solid @brand-primary;
-    background-color: darken(@site-background, 10%);
+    background-color: darken(@body-bg, 10%);
     .transition(0.3s);
     .box-shadow(1px 1px 6px #aaa);
 }
@@ -120,6 +118,7 @@ body {
     margin-right: 5px;
     float: left;
     margin-bottom: 4px;
+    text-transform: lowercase;
 }
 
 .tag-search button.close {
@@ -154,4 +153,12 @@ body {
 .form-control.focused.has-no-tags[data-hint]:before, .form-control.focused.has-no-tags[data-hint]:after {
     visibility: visible;
     opacity: 1; 
+}
+
+.courts-list > div > label {
+    font-weight: normal;
+}
+
+.courts-list > div > div > select, .courts-list > div > div > input {
+    margin-bottom: 5px;
 }

@@ -1,3 +1,5 @@
+h2 Agregá tu cancha
+
 p Si tenés o conoces un complejo que no está en nuestra base de datos, te damos la posibilidad de sumarlo a nuestro sitio.
 p Te pedimos que ingreses a continuación los datos correspondientes al complejo. Los campos con marcados con (*) son obligatorios.
   form.form-horizontal
@@ -8,11 +10,7 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
     .form-group
       label.control-label.col-sm-3(for='info') Escribí una breve descripción
       .col-sm-6
-        input#description.form-control(type='text', placeholder='Alguna descripción', ng-model='info')
-    .form-group
-      label.control-label.col-sm-3(for='phone') Indicanos algún teléfono
-      .col-sm-6
-        input#phone.form-control(type='tel', placeholder='Algún teléfono', ng-model='phone')
+        input#info.form-control(type='text', placeholder='Alguna descripción', ng-model='info')
     .form-group.search-group
       label.control-label.col-sm-3(for='address') Buscá la ubicación en el mapa (*)
       .col-sm-6
@@ -25,16 +23,39 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
             a(href='', ng-click='setAddress(result)') {{result.address}}
         #map-add.map-canvas
     .form-group
-      label.control-label.col-sm-3(for='howToArrive') Indicanos cómo llegar (colectivos, trenes, etc.)
+      label.control-label.col-sm-3(for='phone') Indicanos algún teléfono
       .col-sm-6
-        textarea#howToArrive.form-control(placeholder='Alguna indicación', ng-model='howToArrive')
+        input#phone.form-control(type='tel', placeholder='Algún teléfono', ng-model='phone')        
+    .form-group.courts-list
+      label.control-label.col-sm-3(for='') Canchas del complejo
+      .col-sm-6
+        label.control-label.col-sm-3(for='type') Deporte
+        .col-sm-9
+          select#type.form-control(ng-model='currentCourt.type' ng-options='t for t in types')
+            option(value='') [Seleccione]
+      .col-sm-6.col-sm-offset-3
+        label.control-label.col-sm-3(for='players') Jugadores
+        .col-sm-9
+          input#players.form-control(type='number', placeholder='Alguna cantidad', ng-model='currentCourt.players')  
+      .col-sm-6.col-sm-offset-3
+        label.control-label.col-sm-3(for='floor') Superficie
+        .col-sm-9
+          select#floor.form-control(ng-model='currentCourt.floor' ng-options='f for f in floorTypes')
+            option(value='') [Seleccione]
+      .col-sm-6.col-sm-offset-3
+        a.btn.btn-primary.btn-xs.pull-right(ng-click='addCourt(currentCourt)') Agregar cancha
+      .col-sm-6.col-sm-offset-3
+        ul
+          li(ng-repeat='group in groupedCourts') {{group.key}}
+            ol
+              li(ng-repeat='court in group') {{court.floor}}{{court.players ? ', ' + court.players + ' jugadores' : null}}
     .form-group
-      label.control-label.col-sm-3(for='optionsCheckboxList') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
-      .col-sm-6()
+      label.control-label.col-sm-3(for='tags') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
+      .col-sm-6
         .form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, escribí lo que desees y presioná la tecla ↲' class='hint--right hint--info hint--rounded')
           span.label.label-primary(ng-repeat='tag in tags') {{tag}}
             button.close(type='button', ng-click='removeTag(tag)') &times;
-          input(type='text', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
+          input#tags(type='text', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
     .form-group
-      .col-sm-offset-3
+      .col-sm-offset-3.col-sm-6
         button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!
