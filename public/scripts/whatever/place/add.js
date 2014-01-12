@@ -105,12 +105,27 @@ function PlaceAddCtrl($http, $scope, $location) {
 
     $scope.$watchCollection('courts', function() {
         $scope.groupedCourts = $scope.courts
-            .groupBy(function (c) { return c.type });
+            .groupBy(function (c) { return {
+                type: c.type,
+                players: c.players,
+                floor: c.floor,
+                isIndoor: c.isIndoor
+            }; })
+            .groupBy(function (c) { return c.key.type })
+            .orderBy(function (c) { return c.key });
     });
 
     $scope.addCourt = function(court) {
-        $scope.courts.push(court);
-        $scope.currentCourt = {};
+        $scope.courts.push({
+            type: court.type,
+            players: court.players,
+            floor: court.floor,
+            isIndoor: court.isIndoor,
+        });
+    }
+
+    $scope.removeCourt = function(court) {
+        $scope.courts = $scope.courts.where(function (c) { return c != court });
     }
 
     function assignResult(result, assignAddress) {
