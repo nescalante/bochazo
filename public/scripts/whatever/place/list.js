@@ -9,6 +9,9 @@ function PlaceListCtrl($http, $scope, $location, $routeParams) {
                 $scope.loading = false;
 
                 data.list.each(function (ix, item) {
+                    item.summary = item.courts
+                        .groupBy(function (c) { return c.type })
+                        .orderBy(function (c) { return c.key });
                     $scope.places.push(item);
                 });
             });

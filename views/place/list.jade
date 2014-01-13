@@ -11,7 +11,7 @@
         ul
           li(ng-show='place.address') {{place.address}}
           li(ng-show='place.phone') {{place.phone}}
-          li(ng-repeat='court in place.courts') {{court.length}} cancha{{court.length > 1 ? 's' : ''}} de {{court.key}}
+          li(ng-repeat='summary in place.summary') {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
           li(ng-show='place.tags.length > 0')
             label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
     a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}

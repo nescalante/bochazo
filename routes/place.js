@@ -24,7 +24,8 @@ exports.get = function(req, res) {
 exports.list = function(req, res) {
 	service.place.list(function (err, result) {
 		if (err) {
-			res.json(500, err);
+			res.status(500);
+			res.json(err);
 		}
 		else {
 			res.json({
@@ -38,7 +39,8 @@ exports.list = function(req, res) {
 exports.insert = function(req, res) {
 	service.place.insert(req.body, function (err) {
 		if (err) {
-			res.json(500, err);
+			res.status(500);
+			res.json(err);
 		}
 
 		res.json({ status: 'OK' });

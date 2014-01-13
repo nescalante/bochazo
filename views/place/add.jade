@@ -56,9 +56,9 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
           li(ng-repeat='group in groupedCourts') 
             strong {{group.key}}
             ul
-              li(ng-repeat='court in group') 
-                a.btn.btn-primary.btn-xs.btn-court-action(ng-click='addCourt(court[0])' href='') +
-                a.btn.btn-primary.btn-xs.btn-court-action(ng-click='removeCourt(court[0])' href='') -
+              li.court-current-list-detail(ng-repeat='court in group')
+                a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='addCourt(court[0])' href='') +
+                a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='removeCourt(court[0])' href='') -
                 span {{court.length}} cancha{{court.length > 1 ? 's' : null}} de {{court.key.floor}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;
     .form-group
       label.control-label.col-sm-3(for='tags') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)

@@ -150,8 +150,62 @@ body {
   line-height: 1.1;
   border-radius: 10px;
   position: relative;
-  top: -1px;
+  top: 2px;
   width: 15px;
   margin-right: 3px;
   padding: 0;
+}
+li.court-current-list-detail {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  padding-left: 5px;
+}
+li.court-current-list-detail .btn-court-action {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  background: transparent;
+  border-width: 0;
+  color: #333;
+}
+li.court-current-list-detail:hover .btn-court-action {
+  border-width: 1px;
+  color: #ffffff;
+  background-color: #428b0a;
+  border-color: #377308;
+}
+li.court-current-list-detail:hover .btn-court-action:hover,
+li.court-current-list-detail:hover .btn-court-action:focus,
+li.court-current-list-detail:hover .btn-court-action:active,
+li.court-current-list-detail:hover .btn-court-action.active,
+.open .dropdown-toggleli.court-current-list-detail:hover .btn-court-action {
+  color: #ffffff;
+  background-color: #306507;
+  border-color: #1c3a04;
+}
+li.court-current-list-detail:hover .btn-court-action:active,
+li.court-current-list-detail:hover .btn-court-action.active,
+.open .dropdown-toggleli.court-current-list-detail:hover .btn-court-action {
+  background-image: none;
+}
+li.court-current-list-detail:hover .btn-court-action.disabled,
+li.court-current-list-detail:hover .btn-court-action[disabled],
+fieldset[disabled] li.court-current-list-detail:hover .btn-court-action,
+li.court-current-list-detail:hover .btn-court-action.disabled:hover,
+li.court-current-list-detail:hover .btn-court-action[disabled]:hover,
+fieldset[disabled] li.court-current-list-detail:hover .btn-court-action:hover,
+li.court-current-list-detail:hover .btn-court-action.disabled:focus,
+li.court-current-list-detail:hover .btn-court-action[disabled]:focus,
+fieldset[disabled] li.court-current-list-detail:hover .btn-court-action:focus,
+li.court-current-list-detail:hover .btn-court-action.disabled:active,
+li.court-current-list-detail:hover .btn-court-action[disabled]:active,
+fieldset[disabled] li.court-current-list-detail:hover .btn-court-action:active,
+li.court-current-list-detail:hover .btn-court-action.disabled.active,
+li.court-current-list-detail:hover .btn-court-action[disabled].active,
+fieldset[disabled] li.court-current-list-detail:hover .btn-court-action.active {
+  background-color: #428b0a;
+  border-color: #377308;
+}
+li.court-current-list-detail:hover {
+  background-color: #c2da9a;
+  border: 1px;
 }

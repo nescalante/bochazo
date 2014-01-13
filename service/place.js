@@ -43,6 +43,7 @@ exports.list = function (callback) {
 };
 
 exports.insert = function (model, callback) {
+	console.log(model);
 	new Place(model).save(callback);
 };
 
