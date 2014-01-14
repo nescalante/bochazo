@@ -11,7 +11,7 @@ exports.list = function (params, callback) {
 	params = params || {};
 
 	var init = params.init || 0,
-		limit = params.limit || 3;
+		limit = params.limit || 10;
 
 	async.parallel([
 		function (task) {
