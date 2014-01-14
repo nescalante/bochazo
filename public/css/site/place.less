@@ -167,20 +167,19 @@ body {
     line-height: 1.1;
     border-radius: 10px;
     position: relative;
-    top: 2px;
+    top: 3px;
     width: 15px;
     margin-right: 3px;
     padding: 0;
 }
 
 li.court-current-list-detail {
-    .transition(0.3s);
+    .transition(0.4s);
     padding-left: 5px;
 }
 
-
 li.court-current-list-detail .btn-court-action {
-    .transition(0.3s);
+    .transition(0.1s);
     background: transparent;
     border-width: 0;
     color: #333;
@@ -189,6 +188,10 @@ li.court-current-list-detail .btn-court-action {
 li.court-current-list-detail:hover .btn-court-action {
     border-width: 1px;
     .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+}
+
+li.court-current-list-detail .btn-court-action:hover {
+    .transition(0);
 }
   
 li.court-current-list-detail:hover {

@@ -12,7 +12,12 @@ exports.get = function(req, res) {
 				res.json(500, err);
 			}
 			else {
-				res.json(result);
+				if (result) {
+					res.json(result);
+				}
+				else {
+					res.json(500, { message: 'some error'});
+				}
 			}
 		});
 	}
@@ -22,10 +27,11 @@ exports.get = function(req, res) {
 };
 
 exports.list = function(req, res) {
-	service.place.list(function (err, result) {
+	var qs = url.parse(req.url, true).query;
+	
+	service.place.list(qs, function (err, result) {
 		if (err) {
-			res.status(500);
-			res.json(err);
+			res.json(500, err);
 		}
 		else {
 			res.json({
@@ -39,10 +45,10 @@ exports.list = function(req, res) {
 exports.insert = function(req, res) {
 	service.place.insert(req.body, function (err) {
 		if (err) {
-			res.status(500);
-			res.json(err);
+			res.json(500, err);
 		}
-
-		res.json({ status: 'OK' });
+		else {
+			res.json({ status: 'OK' });
+		}
 	});
 };

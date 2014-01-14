@@ -7,15 +7,24 @@ exports.get = function (name, callback) {
 	return Place.findOne({ name: name }, callback);
 };
 
-exports.list = function (callback) {
+exports.list = function (params, callback) {
+	params = params || {};
+
+	var init = params.init || 0,
+		limit = params.limit || 3,
+		query = params.query;
+
 	async.parallel([
 		function (task) {
-			Place.find(function (err, data) {
-				task(null, { 
-					err: err, 
-					data: data 
+			Place.find()
+				.skip(init)
+				.limit(limit)
+				.exec(function (err, data) {
+					task(null, { 
+						err: err, 
+						data: data 
+					});
 				});
-			});
 		}, 
 		function (task) {
 			Place.count(function (err, data) {
@@ -43,7 +52,6 @@ exports.list = function (callback) {
 };
 
 exports.insert = function (model, callback) {
-	console.log(model);
 	new Place(model).save(callback);
 };
 

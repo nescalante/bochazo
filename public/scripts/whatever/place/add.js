@@ -23,7 +23,7 @@ function PlaceAddCtrl($http, $scope, $location) {
             $scope.tags.push($scope.currentTag);
         }
 
-        if ($scope.currentCourt.type && $scope.currentCourt.floor) {
+        if ($scope.currentCourt && $scope.currentCourt.type && $scope.currentCourt.floor) {
             $scope.courts.push($scope.currentCourt);
         }
 
@@ -38,8 +38,10 @@ function PlaceAddCtrl($http, $scope, $location) {
             addressComponents: $scope.addressComponents,
             tags: $scope.tags,
             courts: $scope.courts
-        } }).success(function () {
+        } }).success(function (response) {
             $location.path('/canchas/' + $scope.description);
+        }).error(function (response) {
+            console.log(response);
         });
     };
 
@@ -116,12 +118,14 @@ function PlaceAddCtrl($http, $scope, $location) {
     });
 
     $scope.addCourt = function(court) {
-        $scope.courts.push({
-            type: court.type,
-            players: court.players,
-            floor: court.floor,
-            isIndoor: court.isIndoor,
-        });
+        if (court) {
+            $scope.courts.push({
+                type: court.type,
+                players: court.players,
+                floor: court.floor,
+                isIndoor: court.isIndoor,
+            });
+        }
     }
 
     $scope.removeCourt = function(court) {
