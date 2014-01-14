@@ -11,12 +11,11 @@ exports.list = function (params, callback) {
 	params = params || {};
 
 	var init = params.init || 0,
-		limit = params.limit || 3,
-		query = params.query;
+		limit = params.limit || 3;
 
 	async.parallel([
 		function (task) {
-			Place.find()
+			getListByQuery(params)
 				.skip(init)
 				.limit(limit)
 				.exec(function (err, data) {
@@ -27,12 +26,13 @@ exports.list = function (params, callback) {
 				});
 		}, 
 		function (task) {
-			Place.count(function (err, data) {
-				task(null, {
-					err: err, 
-					data: data 
+			getListByQuery(params)
+				.count(function (err, data) {
+					task(null, {
+						err: err, 
+						data: data 
+					});
 				});
-			});
 		}
 	], function (err, results) {
 		err = err || results[0].err || results[1].err;
@@ -58,3 +58,19 @@ exports.insert = function (model, callback) {
 exports.count = function (model, callback) {
 	new Place.count(callback);
 };
+
+function getListByQuery(params) {
+	var term = new RegExp(params.query || '', 'i');
+
+	return Place.find()
+		.or([
+			{ 'name': { $regex: term } },
+			{ 'description': { $regex: term } },
+			{ 'phone': { $regex: term } },
+			{ 'address': { $regex: term } },
+			{ 'addressComponents.longName': { $regex: term } },
+			{ 'tags': { $regex: term } },
+			{ 'courts.type': { $regex: term } },
+			{ 'courts.floor': { $regex: term } }
+		]);
+}

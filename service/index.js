@@ -1,8 +1,9 @@
 'use strict';
 
-var place = require('./place'),
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test',
+  	place = require('./place'),
 	mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(mongoUri);
 
 exports.place = place;
