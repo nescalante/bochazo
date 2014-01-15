@@ -15,6 +15,10 @@
     "async": "~0.2.9",
     "passport": "~0.1.18",
     "passport-google": "~0.3.0",
-    "passport-facebook": "~1.0.2"
+    "passport-facebook": "~1.0.2",
+    "bower": "~1.2.8"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }
