@@ -1,20 +1,22 @@
 .row
-  .col-md-8
-    .alert.alert-success(ng-show='count != null')
-      p
-        strong {{count}}
-        | &nbsp;complejos encontrados.
-    .place(ng-repeat='place in places')
-      .content
-        a(href='#/canchas/{{place.name}}')
-          h3 {{place.description}}
-        ul
-          li(ng-show='place.address') {{place.address}}
-          li(ng-show='place.phone') {{place.phone}}
-          li(ng-repeat='summary in place.summary') {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
-          li(ng-show='place.tags.length > 0')
-            label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
-    a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
-  .col-md-4 ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
-    a(href='#/canchas/agregar') acá
-    | .
+	.col-md-8
+		.alert.alert-success(ng-show='count != null')
+			p
+				strong {{count}}
+				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
+		.place(ng-repeat='place in places')
+			.content
+				a(href='#/canchas/{{place.name}}')
+					h3 {{place.description}}
+				ul
+					li(ng-show='place.address') {{place.address}}
+					li(ng-show='place.phone') {{place.phone}}
+					li(ng-repeat='summary in place.summary') {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
+					li(ng-show='place.tags.length > 0')
+						label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
+		a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
+	.col-md-4
+		.alert.alert-info
+			¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
+			a(href='#/canchas/agregar') acá
+			| .

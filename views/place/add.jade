@@ -2,71 +2,71 @@ h2 Agregá tu cancha
 
 p Si tenés o conoces un complejo que no está en nuestra base de datos, te damos la posibilidad de sumarlo a nuestro sitio.
 p Te pedimos que ingreses a continuación los datos correspondientes al complejo. Los campos con marcados con (*) son obligatorios.
-  form.form-horizontal
-    .form-group
-      label.control-label.col-sm-3(for='description') Ingresá el nombre del complejo (*)
-      .col-sm-6
-        input#description.form-control(type='text', placeholder='Algún nombre', ng-model='description')
-    .form-group
-      label.control-label.col-sm-3(for='info') Escribí una breve descripción
-      .col-sm-6
-        input#info.form-control(type='text', placeholder='Alguna descripción', ng-model='info')
-    .form-group.search-group
-      label.control-label.col-sm-3(for='address') Buscá la ubicación en el mapa (*)
-      .col-sm-6
-        .input-group
-          input#address.form-control(type='text', placeholder='Alguna dirección', ng-model='address', ng-enter='addressSearch()')
-          span.input-group-btn
-            button.btn.btn-primary(type='button', ng-class='{ disabled: loadingAddress }', ng-click='addressSearch()') {{loadingAddress ? 'Buscando ...' : 'Buscar'}}
-        ol(ng-show='addressResults.length > 0')
-          li(ng-repeat='result in addressResults') 
-            a(href='', ng-click='setAddress(result)') {{result.address}}
-        #map-add.map-canvas
-    .form-group
-      label.control-label.col-sm-3(for='phone') Indicanos algún teléfono
-      .col-sm-6
-        input#phone.form-control(type='tel', placeholder='Algún teléfono', ng-model='phone')        
-    .form-group.courts-list
-      label.control-label.col-sm-3(for='') Canchas del complejo
-      .col-sm-6
-        label.control-label.col-sm-3(for='sport') Deporte
-        .col-sm-9
-          select#sport.form-control(ng-model='currentCourt.sport' ng-options='t for t in sports')
-            option(value='') [Seleccione]
-      .col-sm-6.col-sm-offset-3
-        label.control-label.col-sm-3(for='players') Jugadores
-        .col-sm-9
-          input#players.form-control(type='number', placeholder='Alguna cantidad', ng-model='currentCourt.players' ng-init='null')  
-      .col-sm-6.col-sm-offset-3
-        label.control-label.col-sm-3(for='surface') Superficie
-        .col-sm-9
-          select#surface.form-control(ng-model='currentCourt.surface' ng-options='s for s in surfaces')
-            option(value='') [Seleccione]
-      .col-sm-6.col-sm-offset-3
-        label.control-label.col-sm-3 ¿Es techada?
-        .col-sm-9
-          .checkbox
-            label
-              input#isIndoor(type='checkbox' ng-model='currentCourt.isIndoor' ng-init='false')
-      .col-sm-6.col-sm-offset-3
-        a.btn.btn-primary.btn-xs.pull-right(ng-click='addCourt(currentCourt)') Agregar cancha
-      .col-sm-6.col-sm-offset-3.courts-current-list(ng-show='courts.length > 0')
-        label.control-label.col-sm-3 Listado
-        ul.col-sm-9
-          li(ng-repeat='group in groupedCourts') 
-            strong {{group.key}}
-            ul
-              li.court-current-list-detail(ng-repeat='court in group')
-                a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='addCourt(court[0])' href='') +
-                a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='removeCourt(court[0])' href='') -
-                span {{court.length}} cancha{{court.length > 1 ? 's' : null}} de {{court.key.surface}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;
-    .form-group
-      label.control-label.col-sm-3(for='tags') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
-      .col-sm-6
-        .form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, escribí lo que desees y presioná la tecla ↲' class='hint--right hint--info hint--rounded')
-          span.label.label-primary(ng-repeat='tag in tags') {{tag}}
-            button.close(type='button', ng-click='removeTag(tag)') &times;
-          input#tags(type='text', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
-    .form-group
-      .col-sm-offset-3.col-sm-6
-        button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!
+	form.form-horizontal
+		.form-group
+			label.control-label.col-sm-3(for='description') Ingresá el nombre del complejo (*)
+			.col-sm-6
+				input#description.form-control(type='text', placeholder='Algún nombre', ng-model='description')
+		.form-group
+			label.control-label.col-sm-3(for='info') Escribí una breve descripción
+			.col-sm-6
+				input#info.form-control(type='text', placeholder='Alguna descripción', ng-model='info')
+		.form-group.search-group
+			label.control-label.col-sm-3(for='address') Buscá la ubicación en el mapa (*)
+			.col-sm-6
+				.input-group
+					input#address.form-control(type='text', placeholder='Alguna dirección', ng-model='address', ng-enter='addressSearch()')
+					span.input-group-btn
+						button.btn.btn-primary(type='button', ng-class='{ disabled: loadingAddress }', ng-click='addressSearch()') {{loadingAddress ? 'Buscando ...' : 'Buscar'}}
+				ol(ng-show='addressResults.length > 0')
+					li(ng-repeat='result in addressResults') 
+						a(href='', ng-click='setAddress(result)') {{result.address}}
+				#map-add.map-canvas
+		.form-group
+			label.control-label.col-sm-3(for='phone') Indicanos algún teléfono
+			.col-sm-6
+				input#phone.form-control(type='tel', placeholder='Algún teléfono', ng-model='phone')        
+		.form-group.courts-list
+			label.control-label.col-sm-3(for='') Canchas del complejo
+			.col-sm-6
+				label.control-label.col-sm-3(for='sport') Deporte
+				.col-sm-9
+					select#sport.form-control(ng-model='currentCourt.sport' ng-options='t for t in sports')
+						option(value='') [Seleccione]
+			.col-sm-6.col-sm-offset-3
+				label.control-label.col-sm-3(for='players') Jugadores
+				.col-sm-9
+					input#players.form-control(type='number', placeholder='Alguna cantidad', ng-model='currentCourt.players' ng-init='null')  
+			.col-sm-6.col-sm-offset-3
+				label.control-label.col-sm-3(for='surface') Superficie
+				.col-sm-9
+					select#surface.form-control(ng-model='currentCourt.surface' ng-options='s for s in surfaces')
+						option(value='') [Seleccione]
+			.col-sm-6.col-sm-offset-3
+				label.control-label.col-sm-3 ¿Es techada?
+				.col-sm-9
+					.checkbox
+						label
+							input#isIndoor(type='checkbox' ng-model='currentCourt.isIndoor' ng-init='false')
+			.col-sm-6.col-sm-offset-3
+				a.btn.btn-primary.btn-xs.pull-right(ng-click='addCourt(currentCourt)') Agregar cancha
+			.col-sm-6.col-sm-offset-3.courts-current-list(ng-show='courts.length > 0')
+				label.control-label.col-sm-3 Listado
+				ul.col-sm-9
+					li(ng-repeat='group in groupedCourts') 
+						strong {{group.key}}
+						ul
+							li.court-current-list-detail(ng-repeat='court in group')
+								a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='addCourt(court[0])' href='') +
+								a.pull-right.btn.btn-primary.btn-xs.btn-court-action(ng-click='removeCourt(court[0])' href='') -
+								span {{court.length}} cancha{{court.length > 1 ? 's' : null}} de {{court.key.surface}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;
+		.form-group
+			label.control-label.col-sm-3(for='tags') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
+			.col-sm-6
+				.form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, escribí lo que desees y presioná la tecla ↲' class='hint--right hint--info hint--rounded')
+					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
+						button.close(type='button', ng-click='removeTag(tag)') &times;
+					input#tags(type='text', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
+		.form-group
+			.col-sm-offset-3.col-sm-6
+				button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!

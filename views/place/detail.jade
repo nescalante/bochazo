@@ -1,22 +1,22 @@
 h2 {{description}}
 .row
-  .col-md-8
-    div
-      p.place-info(ng-show='info') {{info}}
-      p.place-address(ng-show='address') {{fullAddress}}
-      p.place-phone(ng-show='phone') {{phone}}
-      p.place-how-to-arrive(ng-show='howToArrive') {{howToArrive}}
-      .place-tags
-        label.label.label-primary(ng-repeat='tag in tags') {{tag}}
-    div(ng-repeat='group in courts')
-      h3 {{group.key}} - {{group.length}} cancha{{group.length > 1 ? 's' : ''}}
-      div(ng-repeat='court in group')
-        dl
-          dt {{court.description}}
-          dd {{court.sport}}
-          dd(ng-show='{{court.players}}') {{court.players}} jugadores
-          dd(ng-show='court.isIndoor') Techada
-          dd(ng-show='court.isLighted') Con Luz
-  .col-md-4
-    #map-detail.map-canvas(style='height: 360px;')
+	.col-md-8
+		div
+			p.place-info(ng-show='info') {{info}}
+			p.place-address(ng-show='address') {{fullAddress}}
+			p.place-phone(ng-show='phone') {{phone}}
+			p.place-how-to-arrive(ng-show='howToArrive') {{howToArrive}}
+			.place-tags
+				label.label.label-primary(ng-repeat='tag in tags') {{tag}}
+		div(ng-repeat='group in courts')
+			h3 {{group.key}} - {{group.length}} cancha{{group.length > 1 ? 's' : ''}}
+			div(ng-repeat='court in group')
+				dl
+					dt {{court.description}}
+					dd {{court.sport}}
+					dd(ng-show='{{court.players}}') {{court.players}} jugadores
+					dd(ng-show='court.isIndoor') Techada
+					dd(ng-show='court.isLighted') Con Luz
+	.col-md-4
+		#map-detail.map-canvas(style='height: 360px;')
 a.btn.btn-default(href='#/canchas/') Volver
