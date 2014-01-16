@@ -13,7 +13,7 @@ h2 {{description}}
       div(ng-repeat='court in group')
         dl
           dt {{court.description}}
-          dd {{court.type}}
+          dd {{court.sport}}
           dd(ng-show='{{court.players}}') {{court.players}} jugadores
           dd(ng-show='court.isIndoor') Techada
           dd(ng-show='court.isLighted') Con Luz

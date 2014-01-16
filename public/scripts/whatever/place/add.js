@@ -2,8 +2,8 @@ function PlaceAddCtrl($http, $scope, $location) {
     var map = new google.maps.Map(document.getElementById('map-add')),
         indexedTypes = [];
 
-    $scope.types = ['Fútbol', 'Tenis', 'Paddle'];
-    $scope.floorTypes = ['Sintético', 'Carpeta', 'Caucho'];
+    $scope.sports = ['Fútbol', 'Tenis', 'Paddle'];
+    $scope.surfaces = ['Sintético', 'Carpeta', 'Caucho'];
     $scope.tags = [];
     $scope.courts = [];
 
@@ -21,10 +21,6 @@ function PlaceAddCtrl($http, $scope, $location) {
     $scope.save = function () {
         if ($scope.currentTag) {
             $scope.tags.push($scope.currentTag);
-        }
-
-        if ($scope.currentCourt && $scope.currentCourt.type && $scope.currentCourt.floor) {
-            $scope.courts.push($scope.currentCourt);
         }
 
         $http({ method: 'POST', url: '/api/place/insert', data: {
@@ -108,21 +104,21 @@ function PlaceAddCtrl($http, $scope, $location) {
     $scope.$watchCollection('courts', function() {
         $scope.groupedCourts = $scope.courts
             .groupBy(function (c) { return {
-                type: c.type,
+                sport: c.sport,
                 players: c.players,
-                floor: c.floor,
+                surface: c.surface,
                 isIndoor: c.isIndoor
             }; })
-            .groupBy(function (c) { return c.key.type })
+            .groupBy(function (c) { return c.key.sport })
             .orderBy(function (c) { return c.key });
     });
 
     $scope.addCourt = function(court) {
         if (court) {
             $scope.courts.push({
-                type: court.type,
+                sport: court.sport,
                 players: court.players,
-                floor: court.floor,
+                surface: court.surface,
                 isIndoor: court.isIndoor,
             });
         }

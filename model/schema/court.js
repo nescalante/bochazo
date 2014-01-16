@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
         players: { type: Number },
         isIndoor: { type: Boolean },
         isLighted: { type: Boolean },
-        type: { type: String, require: true, trim: true },
-        floor: { type: String, require: true, trim: true },
+        sport: { type: String, require: true, trim: true },
+        surface: { type: String, require: true, trim: true },
         isActive: { type: Boolean, require: true, default: true }
     }, { toObject: { getters: true }, toJSON: { getters: true } });
 

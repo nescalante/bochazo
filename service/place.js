@@ -70,7 +70,7 @@ function getListByQuery(params) {
 			{ 'address': { $regex: term } },
 			{ 'addressComponents.longName': { $regex: term } },
 			{ 'tags': { $regex: term } },
-			{ 'courts.type': { $regex: term } },
-			{ 'courts.floor': { $regex: term } }
+			{ 'courts.sport': { $regex: term } },
+			{ 'courts.surface': { $regex: term } }
 		]);
 }

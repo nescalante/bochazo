@@ -10,7 +10,7 @@ function PlaceListCtrl($http, $scope, $location, $routeParams) {
 
                 data.list.each(function (ix, item) {
                     item.summary = item.courts
-                        .groupBy(function (c) { return c.type })
+                        .groupBy(function (c) { return c.sport })
                         .orderBy(function (c) { return c.key });
                     $scope.places.push(item);
                 });
