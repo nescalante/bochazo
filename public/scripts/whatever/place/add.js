@@ -1,9 +1,9 @@
+var x;
+
 function PlaceAddCtrl($http, $scope, $location) {
     var map = new google.maps.Map(document.getElementById('map-add')),
         indexedTypes = [];
 
-    $scope.sports = ['Fútbol', 'Tenis', 'Paddle'];
-    $scope.surfaces = ['Sintético', 'Carpeta', 'Caucho'];
     $scope.tags = [];
     $scope.courts = [];
 
@@ -16,6 +16,12 @@ function PlaceAddCtrl($http, $scope, $location) {
             
             $scope.$apply();
         }
+    });
+
+    $http({ method: 'GET', url: '/api/sport/list' }).success(function (data, status, xhr) {
+        $scope.sports = data;
+    }).error(function () {
+        $location.path('/canchas/');
     });
 
     $scope.save = function () {
@@ -116,7 +122,7 @@ function PlaceAddCtrl($http, $scope, $location) {
     $scope.addCourt = function(court) {
         if (court) {
             $scope.courts.push({
-                sport: court.sport,
+                sport: court.sport.name,
                 players: court.players,
                 surface: court.surface,
                 isIndoor: court.isIndoor,

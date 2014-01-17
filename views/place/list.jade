@@ -16,7 +16,6 @@
 						label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
 		a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
 	.col-md-4
-		.alert.alert-info
-			¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
+		.alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
 			a(href='#/canchas/agregar') acá
 			| .

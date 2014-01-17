@@ -67,6 +67,8 @@ app.get('/api/place/get', routes.place.get);
 app.get('/api/place/list', routes.place.list);
 app.post('/api/place/insert', routes.place.insert);
 
+app.get('/api/sport/list', routes.sport.list);
+
 app.get('/logout', routes.logout);
 app.get('/auth/google', passport.authenticate('google', { failureRedirect: '/' }));
 app.get('/auth/google/return', passport.authenticate('google', { failureRedirect: '/' }), routes.loggedIn);

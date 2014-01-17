@@ -2,10 +2,11 @@
 
 var service = require('../service');
 var place = require('./place');
+var sport = require('./sport');
 var partial = require('./partial');
 
 exports.index = function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'BCHZ' });
 };
 
 exports.loggedIn = function(req, res) {
@@ -19,3 +20,4 @@ exports.logout = function(req, res) {
 
 exports.place = place;
 exports.partial = partial;
+exports.sport = sport;
