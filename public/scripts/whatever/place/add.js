@@ -120,7 +120,7 @@ function PlaceAddCtrl($http, $scope, $location) {
     });
 
     $scope.addCourt = function(court) {
-        if (court) {
+        if (court && court.sport) {
             $scope.courts.push({
                 sport: court.sport.name,
                 players: court.players,
