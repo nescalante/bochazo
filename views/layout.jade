@@ -21,11 +21,11 @@ html(ng-app='bchz')
 				.navbar-collapse.collapse
 					ul.nav.navbar-nav
 						li
-							a casa
+							a(href='#/canchas') Canchas
 						li
-							a lala
+							a Búsqueda
 						li
-							a otro link
+							a Mapa
 					form.navbar-form.navbar-left(role='search', ng-controller='SearchCtrl')
 						.form-group
 							input.form-control(type='search', ng-model='query', ng-enter='search()', placeholder='Buscar')
