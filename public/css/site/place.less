@@ -2,189 +2,192 @@
 @import "../bootstrap/variables.less";
 
 .place.ng-enter, .place.ng-leave {
-    .transition(0.5s);
-    top: -50px;
-    opacity: 0;
-    .box-shadow(1px 1px 6px #aaa);
+	.transition(0.5s);
+	top: -50px;
+	opacity: 0;
+	.box-shadow(1px 1px 6px #aaa);
 }
 
 .place.ng-enter-active, .place.ng-leave-active {
-    opacity: 1;
-    top: 0px;
-    .box-shadow(none);
+	opacity: 1;
+	top: 0px;
+	.box-shadow(none);
 }
 
 .place-info {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .place {
-    position: relative;
-    .transition(0.2s);
-    border-left: 10px solid transparent;
-    padding: 10px;
-    margin-bottom: 10px;
-    opacity: 1;
+	position: relative;
+	.transition(0.2s);
+	border-left: 10px solid transparent;
+	padding: 10px;
+	margin-bottom: 10px;
+	opacity: 1;
 }
 
 .place h3 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .place h3 {
-    .transition(0.3s);
-    font-weight: 100;
-    padding: 5px;
-    text-decoration: none;
+	.transition(0.3s);
+	font-weight: 100;
+	padding: 5px;
+	text-decoration: none;
 }
 
 .place a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .place h3:hover {
-    background-color: lighten(average(@brand-primary, @body-bg), 15%);
-    color: #333;
-    text-decoration: none;
-    .box-shadow(1px 1px 4px #ccc);
+	background-color: lighten(average(@brand-primary, @body-bg), 15%);
+	color: #333;
+	text-decoration: none;
+	.box-shadow(1px 1px 4px #ccc);
 }
 
 .place:hover {
-    border-left: 10px solid @brand-primary;
-    background-color: darken(@body-bg, 10%);
-    .transition(0.3s);
-    .box-shadow(1px 1px 6px #aaa);
+	border-left: 10px solid @brand-primary;
+	background-color: darken(@body-bg, 10%);
+	.transition(0.3s);
+	.box-shadow(1px 1px 6px #aaa);
 }
 
 .place .label {
-    margin-right: 2px;
+	margin-right: 2px;
 }
 
 .search-group #map-add {
-    height: 300px; 
-    width: 100%;
-    margin-top: 10px;
+	height: 300px; 
+	width: 100%;
+	margin-top: 10px;
 }
 
 .search-group li {
-    margin-top: 5px;
+	margin-top: 5px;
 }
 
 .map-canvas {
-    border: 4px solid @brand-primary;
-    box-shadow: 1px 1px 4px #666;
+	border: 4px solid @brand-primary;
+	box-shadow: 1px 1px 4px #666;
 }
 
 .tag-search {
-    padding: 5px 12px;
-    height: auto;
-    cursor: text;
+	padding: 5px 12px;
+	height: auto;
+	cursor: text;
 }
 
 .tag-search input[type=text] {
-    border: 0;
-    outline: none;
-    color: @input-color;
+	border: 0;
+	outline: none;
+	color: @input-color;
+	text-transform: lowercase;
+	.placeholderTransform(none);
 }
 
 .tag-search input[type=text].text-danger {
-    color: @state-danger-text;
-    &:hover {
-        color: darken(@state-danger-text, 10%);
-    }
+	color: @state-danger-text;
+	&:hover {
+		color: darken(@state-danger-text, 10%);
+	}
 }
 
 .tag-search.focused {
-    @color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
-    border-color: @input-border-focus;
-    outline: 0;
-    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
+	@color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
+	border-color: @input-border-focus;
+	outline: 0;
+	.box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
 }
 
 .tag-search span.label {
-    font-weight: normal;
-    padding: .2em .3em .3em .6em;
-    font-size: 100%;
-    margin-right: 5px;
-    float: left;
-    margin-bottom: 4px;
-    text-transform: lowercase;
+	font-weight: normal;
+	padding: .2em .3em .3em .6em;
+	font-size: 100%;
+	margin-right: 5px;
+	float: left;
+	margin-bottom: 4px;
+	text-transform: lowercase;
 }
 
 .tag-search button.close {
-    position: relative;
-    top: 1px;
-    float: none;
-    background-color: #fff;
-    padding: 0 .1em;
-    font-size: 18px;
-    margin-left: 5px;
-    line-height: 0.8em;
-    border-radius: 15px;
+	position: relative;
+	top: 1px;
+	float: none;
+	background-color: #fff;
+	padding: 0 .1em;
+	font-size: 18px;
+	margin-left: 5px;
+	line-height: 0.8em;
+	border-radius: 15px;
 }
 
 .form-control[data-hint]:before {
-    margin-left: 0px !important;
+	margin-left: 0px !important;
 }
 
 .form-control[data-hint]:after {
-    font-size: 14px;
-    margin-left: 12px !important;
-    width: 200px;
-    white-space: pre-wrap;
-    line-height: @line-height-base;
+	font-size: 14px;
+	margin-left: 12px !important;
+	width: 200px;
+	white-space: pre-wrap;
+	line-height: @line-height-base;
 }
 
 .form-control[data-hint]:before, .form-control[data-hint]:after {
-    visibility: hidden;
-    opacity: 0; 
+	visibility: hidden;
+	opacity: 0; 
+	-webkit-transform: translateX(8px);
 }
 
 .form-control.focused.has-no-tags[data-hint]:before, .form-control.focused.has-no-tags[data-hint]:after {
-    visibility: visible;
-    opacity: 1; 
+	visibility: visible;
+	opacity: 1; 
 }
 
 .courts-list > div > label {
-    font-weight: normal;
+	font-weight: normal;
 }
 
 .courts-list > div > div > select, .courts-list > div > div > input {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .courts-list .btn-court-action {
-    line-height: 1.1;
-    border-radius: 10px;
-    position: relative;
-    top: 3px;
-    width: 15px;
-    margin-right: 3px;
-    padding: 0;
+	line-height: 1.1;
+	border-radius: 10px;
+	position: relative;
+	top: 3px;
+	width: 15px;
+	margin-right: 3px;
+	padding: 0;
 }
 
 li.court-current-list-detail {
-    .transition(0.4s);
-    padding-left: 5px;
+	.transition(0.4s);
+	padding-left: 5px;
 }
 
 li.court-current-list-detail .btn-court-action {
-    .transition(0.1s);
-    background: transparent;
-    border-width: 0;
-    color: #333;
+	.transition(0.1s);
+	background: transparent;
+	border-width: 0;
+	color: #333;
 }
 
 li.court-current-list-detail:hover .btn-court-action {
-    border-width: 1px;
-    .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+	border-width: 1px;
+	.button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
 }
 
 li.court-current-list-detail .btn-court-action:hover {
-    .transition(0);
+	.transition(0);
 }
-  
+
 li.court-current-list-detail:hover {
-    background-color: lighten(average(@brand-primary, @body-bg), 15%);
-    border: 1px;
+	background-color: lighten(average(@brand-primary, @body-bg), 15%);
+	border: 1px;
 }

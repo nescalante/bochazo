@@ -6,16 +6,16 @@ var sport = require('./sport');
 var partial = require('./partial');
 
 exports.index = function(req, res) {
-  res.render('index', { title: 'BCHZ' });
+	res.render('index', { title: 'BCHZ' });
 };
 
 exports.loggedIn = function(req, res) {
-  res.render('index', { title: 'Logeado' });
+	res.render('index', { title: 'Logeado' });
 };
 
 exports.logout = function(req, res) {
-  req.logout();
-  res.redirect('/');
+	req.logout();
+	res.redirect('/');
 };
 
 exports.place = place;

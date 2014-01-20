@@ -7,7 +7,7 @@
 						element.find('input')[0].focus();
 					});
 				});
-    		}
-  		};
+			}
+		};
 	});
 }(bchz);

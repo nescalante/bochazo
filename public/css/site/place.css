@@ -78,6 +78,19 @@
   border: 0;
   outline: none;
   color: #555555;
+  text-transform: lowercase;
+}
+.tag-search input[type=text]:-moz-placeholder {
+  text-transform: none;
+}
+.tag-search input[type=text]::-moz-placeholder {
+  text-transform: none;
+}
+.tag-search input[type=text]:-ms-input-placeholder {
+  text-transform: none;
+}
+.tag-search input[type=text]::-webkit-input-placeholder {
+  text-transform: none;
 }
 .tag-search input[type=text].text-danger {
   color: #b94a48;
@@ -125,6 +138,7 @@
 .form-control[data-hint]:after {
   visibility: hidden;
   opacity: 0;
+  -webkit-transform: translateX(8px);
 }
 .form-control.focused.has-no-tags[data-hint]:before,
 .form-control.focused.has-no-tags[data-hint]:after {

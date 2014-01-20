@@ -60,6 +60,14 @@
   &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
 }
 
+// Placeholder transform
+.placeholderTransform(@transform) {
+  &:-moz-placeholder            { text-transform: @transform; } // Firefox 4-18
+  &::-moz-placeholder           { text-transform: @transform; } // Firefox 19+
+  &:-ms-input-placeholder       { text-transform: @transform; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { text-transform: @transform; } // Safari and Chrome
+}
+
 // Text overflow
 // Requires inline-block or block for proper styling
 .text-overflow() {
