@@ -1,5 +1,3 @@
-var x;
-
 function PlaceAddCtrl($http, $scope, $location) {
 	var map = new google.maps.Map(document.getElementById('map-add')),
 		indexedTypes = [];
@@ -16,12 +14,6 @@ function PlaceAddCtrl($http, $scope, $location) {
 			
 			$scope.$apply();
 		}
-	});
-
-	$http({ method: 'GET', url: '/api/sport/list' }).success(function (data, status, xhr) {
-		$scope.sports = data;
-	}).error(function () {
-		$location.path('/canchas/');
 	});
 
 	$scope.save = function () {

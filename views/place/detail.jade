@@ -1,22 +1,18 @@
-h2 {{description}}
 .row
 	.col-md-8
-		div
-			p.place-info(ng-show='info') {{info}}
-			p.place-address(ng-show='address') {{fullAddress}}
-			p.place-phone(ng-show='phone') {{phone}}
-			p.place-how-to-arrive(ng-show='howToArrive') {{howToArrive}}
-			.place-tags
-				label.label.label-primary(ng-repeat='tag in tags') {{tag}}
+		h2 {{description}}
+
+		p(ng-show='info') {{info}}
+		p(ng-show='address') {{fullAddress}}
+		p(ng-show='phone') {{phone}}
+		p(ng-show='howToArrive') {{howToArrive}}
+		.tags
+			label.label.label-primary(ng-repeat='tag in tags') {{tag}}
 		div(ng-repeat='group in courts')
-			h3 {{group.key}} - {{group.length}} cancha{{group.length > 1 ? 's' : ''}}
-			div(ng-repeat='court in group')
-				dl
-					dt {{court.description}}
-					dd {{court.sport}}
-					dd(ng-show='{{court.players}}') {{court.players}} jugadores
-					dd(ng-show='court.isIndoor') Techada
-					dd(ng-show='court.isLighted') Con Luz
+			h3 {{group.key}} - {{group.count}} cancha{{group.count > 1 ? 's' : ''}}
+			ul
+				li(ng-repeat='court in group')
+					{{court.length}} cancha{{court.length > 1 ? 's' : null}} de {{court.key.surface}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;
 	.col-md-4
 		#map-detail.map-canvas(style='height: 360px;')
-a.btn.btn-default(href='#/canchas/') Volver
+a.btn.btn-default(href='#/canchas/listado') Volver
