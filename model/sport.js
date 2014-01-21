@@ -1,5 +1,4 @@
 'use strict';
-
 var mongoose = require('mongoose'),
 	schema = new mongoose.Schema({
 		name: { type: String, required: true, trim: true },
@@ -12,5 +11,9 @@ var mongoose = require('mongoose'),
 		}],
 		isActive: { type: Boolean, require: true, default: true }
 	}, { toObject: { getters: true }, toJSON: { getters: true } });
+
+schema.virtual('url').get(function () {
+	return this.name.latinize().toLowerCase();
+});
 
 module.exports = mongoose.model('sport', schema);

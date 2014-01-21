@@ -1,6 +1,7 @@
 'use strict';
 
 var Place = require('../model/place'),
+	Sport = require('../model/sport'),
 	async = require('async');
 
 exports.get = function (name, callback) {
@@ -60,17 +61,26 @@ exports.count = function (model, callback) {
 };
 
 function getListByQuery(params) {
-	var term = new RegExp(params.query || '', 'i');
+	var query = Place.find({});
 
-	return Place.find()
-		.or([
-			{ 'name': { $regex: term } },
-			{ 'description': { $regex: term } },
-			{ 'phone': { $regex: term } },
-			{ 'address': { $regex: term } },
-			{ 'addressComponents.longName': { $regex: term } },
-			{ 'tags': { $regex: term } },
-			{ 'courts.sport': { $regex: term } },
-			{ 'courts.surface': { $regex: term } }
-		]);
+	if (params.sport) {
+		query = query.where('courts.sport', params.sport.getAIRegex());
+	}
+	else if (params.query) {
+		var term = (params.query || '').getAIRegex();
+
+		query = query
+			.or([
+				{ 'name': { $regex: term } },
+				{ 'description': { $regex: term } },
+				{ 'phone': { $regex: term } },
+				{ 'address': { $regex: term } },
+				{ 'addressComponents.longName': { $regex: term } },
+				{ 'tags': { $regex: term } },
+				{ 'courts.sport': { $regex: term } },
+				{ 'courts.surface': { $regex: term } }
+			]);
+	}
+
+	return query;
 }
