@@ -6,6 +6,11 @@ body {
   margin-top: 70px;
   margin-bottom: 20px;
 }
+::selection {
+  background-color: #6e6f00;
+  color: #fff;
+  text-shadow: 0 1px #000;
+}
 .navbar-form .btn {
   margin-left: 5px;
 }

@@ -19,14 +19,14 @@ p Ingresá a continuación los parámetros para tu búsqueda
 			.col-sm-9
 				.checkbox(ng-repeat='player in sport.allowedPlayers')
 					label
-						input(type='checkbox', ng-init='players[player] = true', ng-model='players[player]')
+						input(type='checkbox', ng-model='players[player]')
 						| {{player}} jugadores
 		.form-group(ng-show='sport.surfaces')
 			label.control-label.col-sm-3(for='surfaces') Superficies
 			.col-sm-9
 				.checkbox(ng-repeat='surface in sport.surfaces')
 					label
-						input(type='checkbox', ng-init='surfaces[surface] = true', ng-model='surfaces[surface]')
+						input(type='checkbox', ng-model='surfaces[surface]')
 						| {{surface}}
 		.form-group
 			label.control-label.col-sm-3(for='tags') Servicios requeridos
