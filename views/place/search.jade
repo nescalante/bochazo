@@ -1,30 +1,40 @@
-h2 Vale por una Home
-.row
-	.col-md-8
-		p Para realizar una búsqueda rápida ingresá a continuación el nombre de algún
-			b &nbsp;barrio
-			| ,
-			b &nbsp;ciudad
-			| ,
-			b &nbsp;calle
-			| , o bien el nombre de alguna
-			b &nbsp;cancha
-			| &nbsp;que ya conozcas:
-		.input-group
-			.input-group-btn
-				button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown') Todo
-					span.caret
-				ul.dropdown-menu
-					li
-						a(href='#') Action
-					li
-						a(href='#') Another action
-					li
-						a(href='#') Something else here
-					li.divider
-					li
-						a(href='#') Separated link
-			input#term.form-control(ng-model='query', name='term', type='text', autocomplete='off')
-			span.input-group-btn
-				button.btn.btn-primary(ng-click='search()', type='submit') Buscar
-	.col-md-4
+h2 Búsqueda de canchas
+
+p Ingresá a continuación los parámetros para tu búsqueda
+	form.form-horizontal(name='search')
+		.form-group
+			label.control-label.col-sm-3(for='') Deporte
+			.col-sm-6
+				select#sport.form-control(name='sport', ng-model='sport', ng-options='t.name for t in sports')
+					option(value='') [Seleccioná un deporte]
+		.form-group
+			label.control-label.col-sm-3(for='locations') Ubicación de la cancha
+			.col-sm-6
+				.form-control.tag-search.capitalized-search(ng-class='{ focused: locationFocused, "has-no-tags": locations.length == 0 }', ng-focus-input='', data-hint='Para agregar más de una ubicación, separalas por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
+					span.label.label-primary(ng-repeat='location in locations') {{location}}
+						button.close(type='button', ng-click='$parent.locations = removeTag(location, $parent.locations)') &times;
+					input#locations(type='text', name='locations', maxlength='18', placeholder='{{locations.length == 0 ? "Alguna ubicación" : null}}' ng-model='currentLocation' ng-class='{ "text-danger": validateTag(currentLocation, locations) }' ng-enter='currentLocation = addTag(currentLocation, locations)' ng-focus='locationFocused = true', ng-blur='locationFocused = false')
+		.form-group(ng-show='sport.allowPlayers')
+			label.control-label.col-sm-3(for='players') Cantidad de jugadores
+			.col-sm-9
+				.checkbox(ng-repeat='player in sport.allowedPlayers')
+					label
+						input(type='checkbox', ng-init='players[player] = true', ng-model='players[player]')
+						| {{player}} jugadores
+		.form-group(ng-show='sport.surfaces')
+			label.control-label.col-sm-3(for='surfaces') Superficies
+			.col-sm-9
+				.checkbox(ng-repeat='surface in sport.surfaces')
+					label
+						input(type='checkbox', ng-init='surfaces[surface] = true', ng-model='surfaces[surface]')
+						| {{surface}}
+		.form-group
+			label.control-label.col-sm-3(for='tags') Servicios requeridos
+			.col-sm-6
+				.form-control.tag-search(ng-class='{ focused: tagFocused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
+					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
+						button.close(type='button', ng-click='$parent.tags = removeTag(tag, $parent.tags)') &times;
+					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag, tags) }' ng-enter='currentTag = addTag(currentTag, tags)' ng-focus='tagFocused = true', ng-blur='tagFocused = false')
+		.form-group
+			.col-sm-offset-3.col-sm-6
+				button.btn.btn-primary(type='submit', ng-click='submit()') ¡Buscar!

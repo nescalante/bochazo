@@ -35,8 +35,8 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
 			.col-sm-6
 				label.control-label.col-sm-3(for='sport') Deporte
 				.col-sm-9
-					select#sport.form-control(name='sport', ng-model='currentCourt.sport' ng-options='t.name for t in sports')
-						option(value='') [Seleccione]
+					select#sport.form-control(name='sport', ng-model='currentCourt.sport', ng-options='t.name for t in sports')
+						option(value='') [Seleccioná un deporte]
 			.col-sm-6.col-sm-offset-3(ng-show='currentCourt.sport.allowPlayers')
 				label.control-label.col-sm-3(for='players') Jugadores
 				.col-sm-9
@@ -45,7 +45,7 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
 				label.control-label.col-sm-3(for='surface') Superficie
 				.col-sm-9
 					select#surface.form-control(name='surface', ng-disabled='currentCourt.sport == null', ng-model='currentCourt.surface', ng-options='s for s in currentCourt.sport.surfaces')
-						option(value='') [Seleccione]
+						option(value='') [Seleccioná una superficie]
 			.col-sm-6.col-sm-offset-3
 				label.control-label.col-sm-3 ¿Es techada?
 				.col-sm-9
@@ -69,8 +69,8 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
 			.col-sm-6
 				.form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
 					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
-						button.close(type='button', ng-click='removeTag(tag)') &times;
-					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag) }' ng-enter='addTag(currentTag)' ng-focus='focused = true', ng-blur='focused = false')
+						button.close(type='button', ng-click='$parent.tags = removeTag(tag, $parent.tags)') &times;
+					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag, tags) }' ng-enter='currentTag = addTag(currentTag, tags)' ng-focus='focused = true', ng-blur='focused = false')
 		.form-group
 			.col-sm-offset-3.col-sm-6
 				button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!

@@ -92,6 +92,9 @@
 .tag-search input[type=text]::-webkit-input-placeholder {
   text-transform: none;
 }
+.tag-search.capitalized-search input[type=text] {
+  text-transform: capitalize;
+}
 .tag-search input[type=text].text-danger {
   color: #b94a48;
 }
@@ -112,6 +115,9 @@
   float: left;
   margin-bottom: 4px;
   text-transform: lowercase;
+}
+.tag-search.capitalized-search span.label {
+  text-transform: capitalize;
 }
 .tag-search button.close {
   position: relative;

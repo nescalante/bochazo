@@ -89,6 +89,10 @@
 	.placeholderTransform(none);
 }
 
+.tag-search.capitalized-search input[type=text] {
+	text-transform: capitalize;
+}
+
 .tag-search input[type=text].text-danger {
 	color: @state-danger-text;
 	&:hover {
@@ -111,6 +115,10 @@
 	float: left;
 	margin-bottom: 4px;
 	text-transform: lowercase;
+}
+
+.tag-search.capitalized-search span.label {
+	text-transform: capitalize;
 }
 
 .tag-search button.close {

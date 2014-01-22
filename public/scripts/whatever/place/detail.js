@@ -24,8 +24,6 @@ function PlaceDetailCtrl($http, $scope, $location, $routeParams) {
 					return c;
 				});
 
-			console.log($scope.courts);
-
 			$scope.description = data.description;
 			$scope.info = data.info;
 			$scope.address = data.address;

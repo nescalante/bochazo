@@ -27,7 +27,7 @@ html(ng-app='bchz')
 								li(ng-repeat='sport in sports')
 									a(href='#/canchas/listado/{{sport.url}}') {{sport.name}}
 						li
-							a Búsqueda
+							a(href='#/busqueda') Búsqueda
 						li
 							a Mapa
 					form.navbar-form.navbar-left(role='search')
@@ -53,8 +53,9 @@ html(ng-app='bchz')
 	script(src='components/angular-route/angular-route.js')
 	script(src='components/angular-resource/angular-resource.js')
 	script(src='http://maps.google.com/maps/api/js?sensor=true&language=es')
-	script(src='scripts/whatever/home.js')
 	script(src='scripts/whatever/layout.js')
+	script(src='scripts/whatever/home.js')
+	script(src='scripts/whatever/search.js')
 	script(src='scripts/whatever/place/list.js')
 	script(src='scripts/whatever/place/add.js')
 	script(src='scripts/whatever/place/detail.js')

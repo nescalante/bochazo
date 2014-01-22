@@ -34,10 +34,7 @@ exports.list = function(req, res) {
 			res.json(500, err);
 		}
 		else {
-			res.json({
-				list: result.list,
-				count: result.count
-			});
+			res.json(result);
 		}
 	});
 };

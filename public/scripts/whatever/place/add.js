@@ -1,4 +1,4 @@
-function PlaceAddCtrl($http, $scope, $location) {
+function PlaceAddCtrl($http, $scope, $rootScope, $location) {
 	var map = new google.maps.Map(document.getElementById('map-add')),
 		indexedTypes = [];
 
@@ -18,7 +18,9 @@ function PlaceAddCtrl($http, $scope, $location) {
 
 	$scope.save = function () {
 		if ($scope.currentTag) {
-			$scope.addTag($scope.currentTag);
+			$rootScope.addTag($scope.currentTag, $scope.tags);
+
+			$scope.currentTag = "";
 		}
 
 		$http({ method: 'POST', url: '/api/place/insert', data: {
@@ -82,38 +84,6 @@ function PlaceAddCtrl($http, $scope, $location) {
 		}
 	};
 
-	$scope.addTag = function (tag) {
-		var tags,
-			invalidTags = [];
-
-		if (tag) {
-			tags = tag.split(',');
-
-			for (var i = 0; i < tags.length; i++) {
-				var currentTag = tags[i].trim().toLowerCase();
-
-				if (!$scope.tags.contains(currentTag)) {
-					$scope.tags.push(currentTag);
-				}
-				else {
-					invalidTags.push(currentTag);
-				}
-			}
-
-			$scope.currentTag = invalidTags.join(', ');
-		}
-	};
-
-	$scope.removeTag = function (tag) {
-		$scope.tags = $scope.tags.where(function (t) { return t != tag });
-	};
-
-	$scope.validateTag = function (tag) {
-		return $scope.tags
-			.select(function (t) { return t.toLowerCase(); })
-			.contains(tag && tag.toLowerCase());
-	};
-
 	$scope.$watchCollection('courts', function() {
 		$scope.groupedCourts = $scope.courts
 			.groupBy(function (c) { return {
@@ -129,7 +99,7 @@ function PlaceAddCtrl($http, $scope, $location) {
 	$scope.addCourt = function(court) {
 		if (court && court.sport) {
 			$scope.courts.push({
-				sport: court.sport.name,
+				sport: court.sport.name || court.sport,
 				players: court.players,
 				surface: court.surface,
 				isIndoor: court.isIndoor,

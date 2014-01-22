@@ -9,3 +9,7 @@ body {
 .navbar-form .btn {
   margin-left: 5px;
 }
+.body-content h2:first-child {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
