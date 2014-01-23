@@ -12,8 +12,7 @@ var mongoose = require('mongoose'),
 			types: [{ type: String }]
 		}],
 		address: { type: String, trim: true },
-		latitude: { type: Number, required: true },
-		longitude: { type: Number, required: true },
+		location: { type: [Number], index: '2d', required: true },
 		geometry: {
 			lat: { type: Number },
 			lng: { type: Number }
@@ -25,5 +24,31 @@ var mongoose = require('mongoose'),
 		dateFrom: { type: Date, require: true, default: Date.now },
 		isActive: { type: Boolean, require: true, default: true }
 	}, { toObject: { getters: true }, toJSON: { getters: true } });
+
+schema
+	.virtual('latitude')
+	.get(function () {
+		return this.location[0];
+	})
+	.set(function (latitude) {
+		if (!this.location || this.location.length == 0) {
+			this.location = [0, 0];
+		}
+
+		this.location[0] = latitude;
+	});
+
+schema
+	.virtual('longitude')
+	.get(function () {
+		return this.location[1];
+	})
+	.set(function (longitude) {
+		if (!this.location || this.location.length == 0) {
+			this.location = [0, 0];
+		}
+
+		this.location[1] = longitude;
+	});
 
 module.exports = mongoose.model('place', schema);

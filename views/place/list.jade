@@ -4,7 +4,7 @@
 			p
 				strong {{count}}
 				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
-		.place(ng-repeat='place in places')
+		article.place(ng-repeat='place in places')
 			.content
 				a(href='#/canchas/{{place.name}}')
 					h3 {{place.description}}
