@@ -13,10 +13,6 @@ var mongoose = require('mongoose'),
 		}],
 		address: { type: String, trim: true },
 		location: { type: [Number], index: '2d', required: true },
-		geometry: {
-			lat: { type: Number },
-			lng: { type: Number }
-		},
 		phone: { type: String, trim: true },
 		howToArrive: { type: String, trim: true },
 		courts: [court],
