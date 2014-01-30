@@ -11,13 +11,13 @@ exports.get = function (name, callback) {
 exports.list = function (params, callback) {
 	params = params || {};
 
-	var init = params.init || 0,
+	var skip = params.skip || 0,
 		limit = params.limit || 10;
 
 	async.parallel([
 		function (task) {
 			getListByQuery(params)
-				.skip(init)
+				.skip(skip)
 				.limit(limit)
 				.exec(function (err, data) {
 					task(null, { 

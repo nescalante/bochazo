@@ -1,4 +1,4 @@
-var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate'])
+var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 	.run(function ($rootScope, $http) {
         $rootScope.sports = [];
 
@@ -48,7 +48,34 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate'])
 				return false;
 			}
 		};
-    })
+	})
+	.value('geolocation', {
+		get: function get(callback) { 
+			if (bchz.coords) {
+				callback(bchz.coords);
+			}
+			else if (navigator && navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					bchz.coords = position.coords;
+
+					callback({ 
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+						accuracy: position.coords.accuracy
+					 });
+				});
+			} 
+			else {
+				callback();
+			}
+		}
+	})
+	.factory('Place', ['$resource', function($resource) {
+		return $resource('/api/place', null, {
+			get: { url: '/api/place/get/:name', method: 'GET' },
+			list: { url: '/api/place/list', method: 'GET' }
+		});
+	}])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', { controller: HomeCtrl, templateUrl: 'place/search.html' })

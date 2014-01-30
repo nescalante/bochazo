@@ -20,7 +20,7 @@ function PlaceSearchCtrl($http, $scope, $location, $routeParams) {
 			$scope.currentTag = "";
 		}
 
-		if ($scope.sport.allowPlayers) {
+		if ($scope.sport && $scope.sport.allowPlayers) {
 			for (var p in $scope.players) {
 				if ($scope.players.hasOwnProperty(p)) {
 					$scope.players[p] && players.push(p);
@@ -34,14 +34,14 @@ function PlaceSearchCtrl($http, $scope, $location, $routeParams) {
 			}
 		}
 
-		var search = {
+		var query = {
 			locations: $scope.locations,
 			tags: $scope.tags,
-			sport: $scope.sport.name,
+			sport: ($scope.sport && $scope.sport.url) || '',
 			surfaces: surfaces,
 			players: players
 		};
 
-		console.log(search);
+		$location.path('/canchas/listado').search(query);
 	};
 }

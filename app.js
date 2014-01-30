@@ -89,7 +89,7 @@ var routes = require('./routes');
 app.get('/', routes.index);
 app.get('/:partial/:name.html', routes.partial.get);
 
-app.get('/api/place/get', routes.place.get);
+app.get('/api/place/get/:name', routes.place.get);
 app.get('/api/place/list', routes.place.list);
 app.post('/api/place/insert', routes.place.insert);
 
