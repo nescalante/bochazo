@@ -37,7 +37,7 @@ exports.list = function(req, res) {
 	});
 };
 
-exports.insert = function(req, res) {
+exports.save = function(req, res) {
 	service.place.insert(req.body, function (err) {
 		if (err) {
 			res.json(500, err);

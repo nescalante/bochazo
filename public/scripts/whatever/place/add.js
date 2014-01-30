@@ -1,4 +1,4 @@
-function PlaceAddCtrl($http, $scope, $rootScope, $location) {
+function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
 	var map = new google.maps.Map(document.getElementById('map-add')),
 		indexedTypes = [];
 
@@ -23,7 +23,7 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location) {
 			$scope.currentTag = "";
 		}
 
-		$http({ method: 'POST', url: '/api/place/insert', data: {
+		var place = new Place({
 			name: $scope.description,
 			description: $scope.description,
 			info: $scope.info,
@@ -34,9 +34,11 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location) {
 			addressComponents: $scope.addressComponents,
 			tags: $scope.tags,
 			courts: $scope.courts
-		} }).success(function (response) {
+		});
+
+		place.$save(function () {
 			$location.path('/canchas/' + $scope.description);
-		}).error(function (response) {
+		}, function (response) {
 			console.log(response);
 		});
 	};

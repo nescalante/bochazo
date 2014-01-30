@@ -91,7 +91,7 @@ app.get('/:partial/:name.html', routes.partial.get);
 
 app.get('/api/place/get/:name', routes.place.get);
 app.get('/api/place/list', routes.place.list);
-app.post('/api/place/insert', routes.place.insert);
+app.post('/api/place', routes.place.save);
 
 app.get('/api/sport/list', routes.sport.list);
 
