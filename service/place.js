@@ -83,25 +83,25 @@ function getListByQuery(params) {
 			]);
 	}
 
-	if (params.locations typeof Array)
+	if (params.locations)
 	{
-		var regexMap = params.locations.map(function (l) { 
-			return l.getAIRegex();
-		});
-		
-		query = query.in('addressComponents.longName', regexMap)
-	}
-	else if (params.locations) {
-		var term = (params.locations || '').getAIRegex();
-
-		query = query.where('addressComponents.longName', regexMap)	
+		query = query.in('addressComponents.longName', createRegexArray(params.locations));
 	}
 
-	locations: $scope.locations,
-			tags: $scope.tags,
-			sport: ($scope.sport && $scope.sport.url) || '',
-			surfaces: surfaces,
-			players: players
+	if (params.tags)
+	{
+		query = query.in('tags', createRegexArray(params.tags));
+	}
+
+	if (params.players)
+	{
+		query = query.in('courts.players', createRegexArray(params.players));
+	}
+
+	if (params.surfaces)
+	{
+		query = query.in('courts.surface', createRegexArray(params.surfaces));
+	}
 
 	if (params.latitude && params.longitude) {
 		query = query
@@ -112,4 +112,15 @@ function getListByQuery(params) {
 	}
 
 	return query;
+}
+
+function createRegexArray(param) {
+	if (!(param instanceof Array))
+	{
+		param = [param];
+	}
+
+	return param.map(function (l) { 
+		return l.getAIRegex();
+	});
 }
