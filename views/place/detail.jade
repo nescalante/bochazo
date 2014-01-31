@@ -4,7 +4,8 @@
 
 		p(ng-show='info') {{info}}
 		p(ng-show='address') {{fullAddress}}
-		p(ng-show='phone') {{phone}}
+		p(ng-show='phone') 
+			a(href='tel:{{phone}}') {{phone}}
 		p(ng-show='howToArrive') {{howToArrive}}
 		.tags
 			label.label.label-primary(ng-repeat='tag in tags') {{tag}}

@@ -29,6 +29,8 @@ exports.list = function(req, res) {
 	
 	service.place.list(qs, function (err, result) {
 		if (err) {
+			console.log(err);
+
 			res.json(500, err);
 		}
 		else {

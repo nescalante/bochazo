@@ -36,7 +36,7 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
 			courts: $scope.courts
 		});
 
-		place.$save(function () {
+		place.$save(function (result) {
 			$location.path('/canchas/' + $scope.description);
 		}, function (response) {
 			console.log(response);

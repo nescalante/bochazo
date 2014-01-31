@@ -32,7 +32,6 @@
 				title: options.description, 
 				position: latLng 
 			});
-			map.marker.setDraggable(true);
 			map.setCenter(latLng);
 
 			if (options.zoom) {
@@ -40,6 +39,8 @@
 			}
 
 			if (options.drag) {
+				map.marker.setDraggable(true);
+				
 				google.maps.event.addListener(map.marker, 'position_changed', function () {
 					geocoder.geocode({ latLng: map.marker.getPosition() }, function (results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {

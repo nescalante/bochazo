@@ -80,6 +80,7 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 		$routeProvider
 			.when('/', { controller: HomeCtrl, templateUrl: 'place/search.html' })
 			.when('/busqueda', { controller: PlaceSearchCtrl, templateUrl: 'place/search.html' })
+			.when('/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
 			.when('/canchas/agregar', { controller: PlaceAddCtrl, templateUrl: 'place/add.html' })
 			.when('/canchas/listado/:sport', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
 			.when('/canchas/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
