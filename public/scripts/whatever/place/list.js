@@ -9,8 +9,10 @@ function PlaceListCtrl($http, $scope, $location, $routeParams, geolocation, Plac
 				params.skip = params.skip || $scope.places.length;
 
 			geolocation.get(function (coords) {
-				params.latitude = coords.latitude;
-				params.longitude = coords.longitude;
+				if (coords) {
+					params.latitude = coords.latitude;
+					params.longitude = coords.longitude;
+				}
 
 				var data = Place.list(params, function () {
 					$scope.count = data.count;
@@ -22,7 +24,7 @@ function PlaceListCtrl($http, $scope, $location, $routeParams, geolocation, Plac
 							.orderBy(function (c) { return c.key });
 						$scope.places.push(item);
 					});
-				});
+				}, function (err) { console.log(err) ;});
 			});
 		}
 	};

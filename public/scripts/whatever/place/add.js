@@ -24,7 +24,6 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
 		}
 
 		var place = new Place({
-			name: $scope.description,
 			description: $scope.description,
 			info: $scope.info,
 			phone: $scope.phone,
@@ -37,7 +36,7 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
 		});
 
 		place.$save(function (result) {
-			$location.path('/canchas/' + $scope.description);
+			$location.path('/canchas/' + result.name);
 		}, function (response) {
 			console.log(response);
 		});

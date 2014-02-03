@@ -29,8 +29,6 @@ exports.list = function(req, res) {
 	
 	service.place.list(qs, function (err, result) {
 		if (err) {
-			console.log(err);
-
 			res.json(500, err);
 		}
 		else {
@@ -40,12 +38,12 @@ exports.list = function(req, res) {
 };
 
 exports.save = function(req, res) {
-	service.place.insert(req.body, function (err) {
+	service.place.insert(req.body, function (err, result) {
 		if (err) {
 			res.json(500, err);
 		}
 		else {
-			res.json({ status: 'OK' });
+			res.json(result);
 		}
 	});
 };

@@ -1,10 +1,15 @@
 var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
-	.run(function ($rootScope, $http) {
+	.run(function ($rootScope, $http, $window) {
         $rootScope.sports = [];
 
         $http({ method: 'GET', url: 'api/sport/list' }).success(function (data, status, xhr) {
             $rootScope.sports = data;
         });
+
+
+		$rootScope.back = function () {
+			$window.history.back();
+		};
 
         $rootScope.addTag = function (tag, target) {
 			var tags,
@@ -63,7 +68,7 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 						longitude: position.coords.longitude,
 						accuracy: position.coords.accuracy
 					 });
-				});
+				}, callback);
 			} 
 			else {
 				callback();

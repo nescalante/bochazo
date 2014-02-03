@@ -1,12 +1,20 @@
-.row
+.row.place-detail
 	.col-md-8
 		h2 {{description}}
 
-		p(ng-show='info') {{info}}
-		p(ng-show='address') {{fullAddress}}
+		p(ng-show='info')
+			span.glyphicon.glyphicon-info-sign
+			{{info}}
+		p(ng-show='address')
+			span.glyphicon.glyphicon-map-marker
+			{{info}}{{address}}
 		p(ng-show='phone') 
-			a(href='tel:{{phone}}') {{phone}}
-		p(ng-show='howToArrive') {{howToArrive}}
+			span.glyphicon.glyphicon-phone-alt
+			a(href='tel:{{phone}}')
+				{{phone}}
+		p(ng-show='howToArrive') 
+			span.glyphicon.glyphicon-road
+			{{howToArrive}}
 		.tags
 			label.label.label-primary(ng-repeat='tag in tags') {{tag}}
 		div(ng-repeat='group in courts')
@@ -15,4 +23,4 @@
 				li(ng-repeat='court in group') {{court.length}} cancha{{court.length > 1 ? 's' : null}} de {{court.key.surface}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;
 	.col-md-4
 		#map-detail.map-canvas(style='height: 360px;')
-a.btn.btn-default(href='#/canchas/listado') Volver
+a.btn.btn-default(ng-click='back()') Volver

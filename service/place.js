@@ -53,6 +53,12 @@ exports.list = function (params, callback) {
 };
 
 exports.insert = function (model, callback) {
+    var permalink = model.description
+    	.replace(/\s/g, '')
+    	.replace(/\W/g, '');
+
+    model.name = permalink;
+
 	new Place(model).save(callback);
 };
 
@@ -95,7 +101,7 @@ function getListByQuery(params) {
 
 	if (params.players)
 	{
-		query = query.in('courts.players', createRegexArray(params.players));
+		query = query.in('courts.players', createArray(params.players));
 	}
 
 	if (params.surfaces)
@@ -123,4 +129,13 @@ function createRegexArray(param) {
 	return param.map(function (l) { 
 		return l.getAIRegex();
 	});
+}
+
+function createArray(param) {
+	if (!(param instanceof Array))
+	{
+		param = [param];
+	}
+
+	return param;
 }

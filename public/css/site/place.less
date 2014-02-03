@@ -38,7 +38,7 @@
 	text-decoration: none;
 }
 
-.place a {
+.place .content > a {
 	text-decoration: none;
 }
 
@@ -54,6 +54,14 @@
 	background-color: darken(@body-bg, 10%);
 	.transition(0.3s);
 	.box-shadow(1px 1px 6px #aaa);
+}
+
+.place ul {
+	padding: 5px;
+}
+
+.place li {
+	list-style-type: none;
 }
 
 .tags .label {
@@ -198,4 +206,8 @@ li.court-current-list-detail .btn-court-action:hover {
 li.court-current-list-detail:hover {
 	background-color: lighten(average(@brand-primary, @body-bg), 15%);
 	border: 1px;
+}
+
+.place-detail p .glyphicon, .place li .glyphicon {
+	margin-right: 5px;
 }

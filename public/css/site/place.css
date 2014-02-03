@@ -36,7 +36,7 @@
   padding: 5px;
   text-decoration: none;
 }
-.place a {
+.place .content > a {
   text-decoration: none;
 }
 .place h3:hover {
@@ -53,6 +53,12 @@
   transition: 0.3s;
   -webkit-box-shadow: 1px 1px 6px #aaaaaa;
   box-shadow: 1px 1px 6px #aaaaaa;
+}
+.place ul {
+  padding: 5px;
+}
+.place li {
+  list-style-type: none;
 }
 .tags .label {
   margin-right: 2px;
@@ -224,4 +230,8 @@ li.court-current-list-detail .btn-court-action:hover {
 li.court-current-list-detail:hover {
   background-color: #c2da9a;
   border: 1px;
+}
+.place-detail p .glyphicon,
+.place li .glyphicon {
+  margin-right: 5px;
 }
