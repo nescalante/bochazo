@@ -23,10 +23,18 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
 			$scope.currentTag = "";
 		}
 
+		var phones = $scope.phone ? $scope.phone
+			.split(',')
+			.select(function (p) { return p.trim() })
+			.where(function (p) { return p != '' })
+			.distinct() : [];
+
+		console.log(phones)
+
 		var place = new Place({
 			description: $scope.description,
 			info: $scope.info,
-			phone: $scope.phone,
+			phones: phones,
 			address: $scope.address,
 			latitude: $scope.latitude,
 			longitude: $scope.longitude,

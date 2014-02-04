@@ -26,7 +26,7 @@ function PlaceDetailCtrl($http, $scope, $location, $routeParams, Place) {
 		$scope.description = data.description;
 		$scope.info = data.info;
 		$scope.address = data.address;
-		$scope.phone = data.phone;
+		$scope.phones = data.phones;
 		$scope.howToArrive = data.howToArrive;
 		$scope.tags = data.tags;
 	});

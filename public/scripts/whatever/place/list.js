@@ -24,6 +24,8 @@ function PlaceListCtrl($http, $scope, $location, $routeParams, geolocation, Plac
 							.orderBy(function (c) { return c.key });
 						$scope.places.push(item);
 					});
+
+					console.log($scope.places)
 				}, function (err) { console.log(err) ;});
 			});
 		}

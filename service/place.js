@@ -80,7 +80,7 @@ function getListByQuery(params) {
 			.or([
 				{ 'name': { $regex: term } },
 				{ 'description': { $regex: term } },
-				{ 'phone': { $regex: term } },
+				{ 'phones': { $regex: term } },
 				{ 'address': { $regex: term } },
 				{ 'addressComponents.longName': { $regex: term } },
 				{ 'tags': { $regex: term } },

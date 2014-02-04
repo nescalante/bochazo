@@ -8,11 +8,12 @@
 		p(ng-show='address')
 			span.glyphicon.glyphicon-map-marker
 			| {{address}}
-		p(ng-show='phone') 
+		p.comma-list(ng-show='phones')
 			span.glyphicon.glyphicon-phone-alt
-			a(href='tel:{{phone}}')
-				| {{phone}}
-		p(ng-show='howToArrive') 
+			.comma-list(ng-repeat='phone in phones')
+				a(href='tel:{{phone}}') {{phone}}
+				| {{$last ? '' : ', '}}
+		p(ng-show='howToArrive')
 			span.glyphicon.glyphicon-road
 			| {{howToArrive}}
 		.tags

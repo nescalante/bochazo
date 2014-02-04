@@ -12,10 +12,11 @@
 					li(ng-show='place.address')
 						span.glyphicon.glyphicon-map-marker
 						| {{place.address}}
-					li(ng-show='place.phone')
+					li(ng-show='place.phones')
 						span.glyphicon.glyphicon-phone-alt
-						a(href='tel:{{place.phone}}')
-							| {{place.phone}}
+						.comma-list(ng-repeat='phone in place.phones')
+							a(href='tel:{{phone}}') {{phone}}
+							| {{$last ? '' : ', '}}
 					li(ng-repeat='summary in place.summary') 
 						span.glyphicon.glyphicon-asterisk
 						| {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
