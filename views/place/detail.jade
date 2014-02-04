@@ -4,17 +4,17 @@
 
 		p(ng-show='info')
 			span.glyphicon.glyphicon-info-sign
-			{{info}}
+			| {{info}}
 		p(ng-show='address')
 			span.glyphicon.glyphicon-map-marker
-			{{info}}{{address}}
+			| {{address}}
 		p(ng-show='phone') 
 			span.glyphicon.glyphicon-phone-alt
 			a(href='tel:{{phone}}')
-				{{phone}}
+				| {{phone}}
 		p(ng-show='howToArrive') 
 			span.glyphicon.glyphicon-road
-			{{howToArrive}}
+			| {{howToArrive}}
 		.tags
 			label.label.label-primary(ng-repeat='tag in tags') {{tag}}
 		div(ng-repeat='group in courts')
