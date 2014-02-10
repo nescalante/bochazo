@@ -6,7 +6,7 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 	$scope.places = [];
 
 	['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
-		if (typeof($scope.params[item]) == "string") {
+		if (typeof($scope.params[item]) == 'string') {
 			$scope.params[item] = [$scope.params[item]];
 		}
 	});
@@ -25,7 +25,11 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 	}
 
 	$scope.newSearch = function () {
+		['any', 'skip', 'latitude', 'longitude'].forEach(function (item) {
+			delete $routeParams[item];
+		});
 
+		$location.path('/busqueda').search($routeParams);
 	};
 
 	$scope.showMore = function () {

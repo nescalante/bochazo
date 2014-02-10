@@ -19,14 +19,14 @@ p Ingresá a continuación los parámetros para tu búsqueda
 			.col-sm-9
 				.checkbox(ng-repeat='player in sport.allowedPlayers')
 					label
-						input(type='checkbox', ng-init='players[player] = false', ng-model='players[player]')
+						input(type='checkbox', ng-init='players[player] = players[player] || false', ng-model='players[player]')
 						| {{player}} jugadores
 		.form-group(ng-show='sport.surfaces')
 			label.control-label.col-sm-3(for='surfaces') Superficies
 			.col-sm-9
 				.checkbox(ng-repeat='surface in sport.surfaces')
 					label
-						input(type='checkbox', ng-init='surfaces[surface] = false', ng-model='surfaces[surface]')
+						input(type='checkbox', ng-init='surfaces[surface] = surfaces[surface] || false', ng-model='surfaces[surface]')
 						| {{surface}}
 		.form-group
 			label.control-label.col-sm-3(for='tags') Servicios requeridos
@@ -38,3 +38,4 @@ p Ingresá a continuación los parámetros para tu búsqueda
 		.form-group
 			.col-sm-offset-3.col-sm-6
 				button.btn.btn-primary(type='submit', ng-click='submit()') ¡Buscar!
+				button.btn.btn-default(ng-click='back()') Volver

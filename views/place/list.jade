@@ -22,10 +22,10 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 				li(ng-show='params.tags.length') Con 
 					label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }', ng-repeat-start='tag in params.tags') {{tag}}
 					span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
-			p.new-search(ng-show='params.any') 
+			p.new-search
 				| Hacé click 
 				a.alert-link(href='', ng-click='newSearch()') acá
-				| &nbsp;para realizar una nueva búsqueda.	
+				| &nbsp;para realizar una {{params.any ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
 		.alert.alert-info(ng-show='userAddress && count > 0') 
 			| Los complejos se listarán mostrando primero los más cercanos a 
 			a.alert-link.hint--top.hint--rounded(href='', data-hint='{{userAddress}}') tú posición
@@ -48,7 +48,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 						| {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
 					li.tags(ng-show='place.tags.length > 0')
 						label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
-		a.center-block.btn.btn-primary(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
+		a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
 	.col-md-4
 		.alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
 			a.alert-link(href='#/canchas/agregar') acá

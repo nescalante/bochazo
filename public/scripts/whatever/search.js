@@ -1,10 +1,32 @@
-function PlaceSearchCtrl($http, $scope, $location, $routeParams, $window) {
+function PlaceSearchCtrl($http, $scope, $rootScope, $location, $routeParams, $window) {
 	$window.document.title = 'Búsqueda de canchas';
+	var params = {};
 
-	$scope.locations = [];
-	$scope.tags = [];
-	$scope.players = [];
+	['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
+		if (typeof($routeParams[item]) == 'string') {
+			params[item] = [$routeParams[item]];
+		}
+		else {
+			params[item] = $routeParams[item] || [];
+		}
+	});
+
+	$scope.locations = params.locations;
+	$scope.tags = params.tags;
 	$scope.surfaces = [];
+	$scope.players = [];
+
+	if ($routeParams.sport && $rootScope.sports) {
+		$scope.sport = getSport($rootScope.sports);
+	}
+	else if ($rootScope.sport) {
+		$rootScope.sportsPromise.then(function(sports) {
+			$scope.sport = getSport(sports);
+		});
+	}
+
+	params.surfaces.forEach(function (item) { $scope.surfaces[item] = true; });
+	params.players.forEach(function (item) { $scope.players[item] = true; });
 
 	$scope.submit = function () {
 		var surfaces = [],
@@ -46,4 +68,8 @@ function PlaceSearchCtrl($http, $scope, $location, $routeParams, $window) {
 
 		$location.path('/canchas/listado').search(query);
 	};
+
+	function getSport(source) {
+		return source.first(function (s) { return s.url == $routeParams.sport || s.name == $routeParams.sport });
+	}
 }
