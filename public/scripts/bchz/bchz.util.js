@@ -1,4 +1,6 @@
-﻿~function (b) {
+﻿var bchz = bchz || {};
+
+~function (b) {
 	b.util = {
 		getFunctionName: function (f) {
 			var result = f
@@ -43,4 +45,8 @@
 			return true;
 		}
 	};
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = b.util;
+	} 
 }(bchz);

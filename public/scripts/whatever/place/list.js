@@ -24,6 +24,10 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 		});
 	}
 
+	$scope.newSearch = function () {
+
+	};
+
 	$scope.showMore = function () {
 		if ($scope.count != $scope.places.length) {
 			$scope.loading = true;

@@ -2,7 +2,8 @@
 
 var Place = require('../model/place'),
 	Sport = require('../model/sport'),
-	async = require('async');
+	async = require('async'),
+	regex = require('../public/scripts/bchz').regex;
 
 exports.get = function (name, callback) {
 	return Place.findOne({ name: name }, callback);
@@ -72,11 +73,11 @@ exports.count = function (model, callback) {
 
 function applyFilters(query, params) {
 	if (params.sport) {
-		query = query.where('courts.sport', params.sport.getAIRegex());
+		query = query.where('courts.sport', regex.getAI(params.sport));
 	}
 	
 	if (params.query) {
-		var term = (params.query || '').getAIRegex();
+		var term = regex.getAI(params.query);
 
 		query = query
 			.or([
@@ -129,7 +130,7 @@ function createRegexArray(param) {
 	}
 
 	return param.map(function (l) { 
-		return l.getAIRegex();
+		return regex.getAI(l);
 	});
 }
 

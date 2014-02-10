@@ -1,23 +1,26 @@
 'use strict';
 
-var service = require('../service');
-var place = require('./place');
-var sport = require('./sport');
-var partial = require('./partial');
+var service = require('../service'),
+	express = require('express'),
+	place = require('./place'),
+	sport = require('./sport'),
+	partial = require('./partial'),
+	authentication = require('./authentication');
 
-exports.index = function(req, res) {
-	res.render('index', { title: 'BCHZ' });
+module.exports = exports = function (app) {
+	// root source
+	app.get('/', function(req, res) {
+		res.render('index', { title: 'BCHZ' });
+	});
+
+	// partial views
+	app.get('/:partial/:name.html', partial.get);
+
+	// api reference
+	app.get('/api/place/get/:name', place.get);
+	app.get('/api/place/list', place.list);
+	app.post('/api/place', place.save);
+	app.get('/api/sport/list', sport.list);
+
+	authentication(app);
 };
-
-exports.loggedIn = function(req, res) {
-	res.render('index', { title: 'Logeado' });
-};
-
-exports.logout = function(req, res) {
-	req.logout();
-	res.redirect('/');
-};
-
-exports.place = place;
-exports.partial = partial;
-exports.sport = sport;
