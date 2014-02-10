@@ -22,7 +22,7 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Place) {
 		if ($scope.currentTag) {
 			$rootScope.addTag($scope.currentTag, $scope.tags);
 
-			$scope.currentTag = "";
+			$scope.currentTag = '';
 		}
 
 		var phones = $scope.phone ? $scope.phone
