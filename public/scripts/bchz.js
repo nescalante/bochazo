@@ -1,11 +1,15 @@
 var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
-	.run(function ($rootScope, $http, $window) {
+	.run(function ($rootScope, $http, $window, $q) {
         $rootScope.sports = [];
+        var deferredSports = $q.defer();
 
         $http({ method: 'GET', url: 'api/sport/list' }).success(function (data, status, xhr) {
             $rootScope.sports = data;
+
+            deferredSports.notify(data);
         });
 
+        $rootScope.sportsPromise = deferredSports.promise;
 
 		$rootScope.back = function () {
 			$window.history.back();
@@ -54,24 +58,38 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 			}
 		};
 	})
-	.value('geolocation', {
-		get: function get(callback) { 
-			if (bchz.coords) {
-				callback(bchz.coords);
-			}
-			else if (navigator && navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					bchz.coords = position.coords;
+	.factory('Geolocation', function ($rootScope) {
+		return { 
+			get: function get(callback) {
+				var geocoder = new google.maps.Geocoder();
 
-					callback({ 
-						latitude: position.coords.latitude,
-						longitude: position.coords.longitude,
-						accuracy: position.coords.accuracy
-					 });
-				}, callback);
-			} 
-			else {
-				callback();
+				if ($rootScope.coords) {
+					callback($rootScope.coords);
+				}
+				else if (navigator && navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						$rootScope.coords = position.coords;
+
+						callback({ 
+							latitude: position.coords.latitude,
+							longitude: position.coords.longitude,
+							accuracy: position.coords.accuracy
+						 });
+
+						var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+						geocoder.geocode({ latLng : latLng }, function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								var components = results[1] ? results[1].address_components : results[0].address_components;
+									
+								$rootScope.userAddress = components[0].long_name + (components[1] ? ', ' + components[1].long_name : '');
+								$rootScope.$apply();
+							}
+						});
+					}, callback);
+				} 
+				else {
+					callback();
+				}
 			}
 		}
 	})

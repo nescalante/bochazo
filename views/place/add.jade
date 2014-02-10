@@ -67,10 +67,10 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
 		.form-group
 			label.control-label.col-sm-3(for='tags') Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)
 			.col-sm-6
-				.form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
+				.form-control.tag-search(ng-class='{ focused: focused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲', class='hint--right hint--rounded')
 					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
 						button.close(type='button', ng-click='$parent.tags = removeTag(tag, $parent.tags)') &times;
-					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag, tags) }' ng-enter='currentTag = addTag(currentTag, tags)' ng-focus='focused = true', ng-blur='focused = false')
+					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}', ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag, tags) }', ng-comma='currentTag = addTag(currentTag, tags)', ng-enter='currentTag = addTag(currentTag, tags)', ng-focus='focused = true', ng-blur='focused = false')
 		.form-group
 			.col-sm-offset-3.col-sm-6
 				button.btn.btn-primary(type='submit', ng-click='save()') ¡Agregar complejo!

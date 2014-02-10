@@ -19,7 +19,7 @@ var mongoose = require('mongoose'),
 		tags: [{ type: String }],
 		dateFrom: { type: Date, require: true, default: Date.now },
 		isActive: { type: Boolean, require: true, default: true }
-	}, { toObject: { getters: true }, toJSON: { getters: true } });
+	}, { toObject: { getters: true }, toJSON: { getters: true }, versionKey: false });
 
 schema
 	.virtual('latitude')

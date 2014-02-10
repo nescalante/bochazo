@@ -1,4 +1,6 @@
-function PlaceSearchCtrl($http, $scope, $location, $routeParams) {
+function PlaceSearchCtrl($http, $scope, $location, $routeParams, $window) {
+	$window.document.title = 'Búsqueda de canchas';
+
 	$scope.locations = [];
 	$scope.tags = [];
 	$scope.players = [];

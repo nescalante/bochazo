@@ -16,7 +16,9 @@ exports.list = function (params, callback) {
 
 	async.parallel([
 		function (task) {
-			getListByQuery(params)
+			var query = Place.find({}, { 'addressComponents': 0, '_id': 0, 'courts.isActive': 0 });
+
+			applyFilters(query, params)
 				.skip(skip)
 				.limit(limit)
 				.exec(function (err, data) {
@@ -27,7 +29,9 @@ exports.list = function (params, callback) {
 				});
 		}, 
 		function (task) {
-			getListByQuery(params)
+			var query = Place.find({});
+
+			applyFilters(query, params)
 				.count(function (err, data) {
 					task(null, {
 						err: err, 
@@ -66,9 +70,7 @@ exports.count = function (model, callback) {
 	new Place.count(callback);
 };
 
-function getListByQuery(params) {
-	var query = Place.find({});
-
+function applyFilters(query, params) {
 	if (params.sport) {
 		query = query.where('courts.sport', params.sport.getAIRegex());
 	}

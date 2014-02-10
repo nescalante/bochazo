@@ -78,6 +78,4 @@
 			});
 		}
 	};
-
-
 }(google.maps.Map.prototype);

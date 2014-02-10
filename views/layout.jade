@@ -6,10 +6,10 @@ html(ng-app='bchz')
 		meta(name='DESCRIPTION' content='SportHub')
 		title= title
 		link(rel='stylesheet', href='/components/hint.css/hint.css')
-		link(rel='stylesheet', href='/css/bootstrap/bootstrap.css')
-		link(rel='stylesheet', href='/css/site/layout.css')
-		link(rel='stylesheet', href='/css/site/place.css')
-		link(rel='search', type='application/opensearchdescription+xml' title='BCHZ' href='/opensearch.xml')
+		link(rel='stylesheet', href='/styles/bootstrap/bootstrap.css')
+		link(rel='stylesheet', href='/styles/site/layout.css')
+		link(rel='stylesheet', href='/styles/site/place.css')
+		link(rel='search', type='application/opensearchdescription+xml' title=title href='/opensearch.xml')
 	body
 		.navbar.navbar-inverse.navbar-fixed-top(ng-controller='LayoutCtrl')
 			.container
@@ -18,7 +18,7 @@ html(ng-app='bchz')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='#') BCHZ
+					a.navbar-brand(href='#')= title
 				.navbar-collapse.collapse
 					ul.nav.navbar-nav
 						li.dropdown
@@ -41,7 +41,8 @@ html(ng-app='bchz')
 			div(ng-view)
 				block content
 			hr
-			footer &copy; 2013 - BCHZ
+			footer &copy; 2013 - 
+				= title
 	script(src='components/jquery/jquery.js')
 	script(src='components/bootstrap/js/collapse.js')
 	script(src='components/bootstrap/js/dropdown.js')
@@ -61,4 +62,5 @@ html(ng-app='bchz')
 	script(src='scripts/bchz/bchz.util.js')
 	script(src='scripts/bchz/bchz.maps.js')
 	script(src='scripts/directives/ngEnter.js')
+	script(src='scripts/directives/ngComma.js')
 	script(src='scripts/directives/ngFocusInput.js')

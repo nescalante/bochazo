@@ -10,10 +10,10 @@ p Ingresá a continuación los parámetros para tu búsqueda
 		.form-group
 			label.control-label.col-sm-3(for='locations') Ubicación de la cancha
 			.col-sm-6
-				.form-control.tag-search.capitalized-search(ng-class='{ focused: locationFocused, "has-no-tags": locations.length == 0 }', ng-focus-input='', data-hint='Para agregar más de una ubicación, separalas por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
+				.form-control.tag-search.capitalized-search(ng-class='{ focused: locationFocused, "has-no-tags": locations.length == 0 }', ng-focus-input='', data-hint='Para agregar más de una ubicación, separalas por coma, o bien escribí lo que desees y presioná la tecla ↲', class='hint--right hint--rounded')
 					span.label.label-primary(ng-repeat='location in locations') {{location}}
 						button.close(type='button', ng-click='$parent.locations = removeTag(location, $parent.locations)') &times;
-					input#locations(type='text', name='locations', maxlength='18', placeholder='{{locations.length == 0 ? "Alguna ubicación" : null}}' ng-model='currentLocation' ng-class='{ "text-danger": validateTag(currentLocation, locations) }' ng-enter='currentLocation = addTag(currentLocation, locations)' ng-focus='locationFocused = true', ng-blur='locationFocused = false')
+					input#locations(type='text', name='locations', maxlength='18', placeholder='{{locations.length == 0 ? "Alguna ubicación" : null}}', ng-model='currentLocation', ng-class='{ "text-danger": validateTag(currentLocation, locations) }', ng-enter='currentLocation = addTag(currentLocation, locations)', ng-comma='currentLocation = addTag(currentLocation, locations)', ng-focus='locationFocused = true', ng-blur='locationFocused = false')
 		.form-group(ng-show='sport.allowPlayers')
 			label.control-label.col-sm-3(for='players') Cantidad de jugadores
 			.col-sm-9
@@ -31,10 +31,10 @@ p Ingresá a continuación los parámetros para tu búsqueda
 		.form-group
 			label.control-label.col-sm-3(for='tags') Servicios requeridos
 			.col-sm-6
-				.form-control.tag-search(ng-class='{ focused: tagFocused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲' class='hint--right hint--rounded')
+				.form-control.tag-search(ng-class='{ focused: tagFocused, "has-no-tags": tags.length == 0 }', ng-focus-input='', data-hint='Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲', class='hint--right hint--rounded')
 					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
 						button.close(type='button', ng-click='$parent.tags = removeTag(tag, $parent.tags)') &times;
-					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}' ng-model='currentTag' ng-class='{ "text-danger": validateTag(currentTag, tags) }' ng-enter='currentTag = addTag(currentTag, tags)' ng-focus='tagFocused = true', ng-blur='tagFocused = false')
+					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}', ng-model='currentTag', ng-class='{ "text-danger": validateTag(currentTag, tags) }', ng-enter='currentTag = addTag(currentTag, tags)', ng-comma='currentTag = addTag(currentTag, tags)', ng-focus='tagFocused = true', ng-blur='tagFocused = false')
 		.form-group
 			.col-sm-offset-3.col-sm-6
 				button.btn.btn-primary(type='submit', ng-click='submit()') ¡Buscar!

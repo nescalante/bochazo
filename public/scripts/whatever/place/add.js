@@ -1,4 +1,6 @@
-function PlaceAddCtrl($http, $scope, $rootScope, $location, Place) {
+function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Place) {
+	$window.document.title = 'Agregá tu cancha';
+
 	var map = new google.maps.Map(document.getElementById('map-add')),
 		indexedTypes = [];
 
