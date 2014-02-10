@@ -13,13 +13,13 @@ function PlaceSearchCtrl($http, $scope, $location, $routeParams, $window) {
 		if ($scope.currentLocation) {
 			$rootScope.addTag($scope.currentLocation, $scope.locations);
 
-			$scope.currentLocation = "";
+			$scope.currentLocation = '';
 		}
 
 		if ($scope.currentTag) {
 			$rootScope.addTag($scope.currentTag, $scope.tags);
 
-			$scope.currentTag = "";
+			$scope.currentTag = '';
 		}
 
 		if ($scope.sport && $scope.sport.allowPlayers) {
