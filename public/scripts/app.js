@@ -105,13 +105,13 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 	}])
 	.config(function ($routeProvider) {
 		$routeProvider
-			.when('/', { controller: HomeCtrl, templateUrl: 'place/search.html' })
-			.when('/busqueda', { controller: PlaceSearchCtrl, templateUrl: 'place/search.html' })
-			.when('/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
-			.when('/mapa', { controller: MapCtrl, templateUrl: 'site/map.html' })
-			.when('/canchas/agregar', { controller: PlaceAddCtrl, templateUrl: 'place/add.html' })
-			.when('/canchas/listado/:sport', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
-			.when('/canchas/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
-			.when('/canchas/:name', { controller: PlaceDetailCtrl, templateUrl: 'place/detail.html' })
+			.when('/', { controller: 'HomeCtrl', templateUrl: 'place/search.html' })
+			.when('/busqueda', { controller: 'PlaceSearchCtrl', templateUrl: 'place/search.html' })
+			.when('/listado', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
+			.when('/mapa', { controller: 'MapCtrl', templateUrl: 'site/map.html' })
+			.when('/canchas/agregar', { controller: 'PlaceAddCtrl', templateUrl: 'place/add.html' })
+			.when('/canchas/listado/:sport', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
+			.when('/canchas/listado', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
+			.when('/canchas/:name', { controller: 'PlaceDetailCtrl', templateUrl: 'place/detail.html' })
 			.otherwise({ redirectTo: '/' });
 	});

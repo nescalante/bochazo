@@ -1,4 +1,4 @@
-function MapCtrl($scope, $rootScope, $location, $window, Geolocation, Place) {
+bchz.controller('MapCtrl', ['$scope', '$rootScope', '$location', '$window', 'Geolocation', 'Place', function ($scope, $rootScope, $location, $window, Geolocation, Place) {
 	var map = new google.maps.Map($window.document.getElementById('map-general'));
 
 	$window.document.title = 'Mapa de canchas';
@@ -17,4 +17,4 @@ function MapCtrl($scope, $rootScope, $location, $window, Geolocation, Place) {
 			zoom: 6
 		});
 	});
-}
+}]);

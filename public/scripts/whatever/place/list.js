@@ -1,4 +1,4 @@
-function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $window, Geolocation, Place) {
+bchz.controller('PlaceListCtrl', ['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 'Geolocation', 'Place', function ($http, $scope, $rootScope, $location, $routeParams, $window, Geolocation, Place) {
 	$window.document.title = 'Búsqueda de canchas';
 
 	$scope.params = $routeParams;
@@ -68,4 +68,4 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 			source.first(function (s) { return s.url == $scope.params.sport }).name :
 		 	$scope.params.sport;
 	}
-}
+}]);

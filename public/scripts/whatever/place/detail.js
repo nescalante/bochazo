@@ -1,4 +1,4 @@
-function PlaceDetailCtrl($http, $scope, $location, $routeParams, $window, Place) {
+bchz.controller('PlaceDetailCtrl', ['$http', '$scope', '$location', '$routeParams', '$window', 'Place', function ($http, $scope, $location, $routeParams, $window, Place) {
 	var map = new google.maps.Map($window.document.getElementById('map-detail'));
 
 	var data = Place.get($routeParams, function () {
@@ -32,4 +32,4 @@ function PlaceDetailCtrl($http, $scope, $location, $routeParams, $window, Place)
 		$scope.howToArrive = data.howToArrive;
 		$scope.tags = data.tags;
 	});
-}
+}]);

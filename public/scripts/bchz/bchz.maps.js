@@ -29,8 +29,10 @@
 				});
 			
 			// fixes map size bugs
-			google.maps.event.trigger(map, 'resize');	
-			map.setCenter(latLng);
+			setTimeout(function () { 
+				google.maps.event.trigger(map, 'resize');
+				map.setCenter(latLng); 
+			}, 0);
 
 			if (options.zoom) {
 				map.setZoom(options.zoom);

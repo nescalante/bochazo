@@ -1,4 +1,4 @@
-function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Geolocation, Place) {
+bchz.controller('PlaceAddCtrl', ['$http', '$scope', '$rootScope', '$location', '$window', 'Geolocation', 'Place', function ($http, $scope, $rootScope, $location, $window, Geolocation, Place) {
 	var map = new google.maps.Map($window.document.getElementById('map-add'));
 
 	$window.document.title = 'Agregá tu cancha';
@@ -133,4 +133,4 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Geolocation
 		$scope.latitude = result.latitude;
 		$scope.longitude = result.longitude;
 	}
-}
+}]);

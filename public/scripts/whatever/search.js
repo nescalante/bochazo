@@ -1,4 +1,4 @@
-function PlaceSearchCtrl($http, $scope, $rootScope, $location, $routeParams, $window) {
+bchz.controller('PlaceSearchCtrl', ['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', function ($http, $scope, $rootScope, $location, $routeParams, $window) {
 	$window.document.title = 'Búsqueda de canchas';
 	var params = {};
 
@@ -72,4 +72,4 @@ function PlaceSearchCtrl($http, $scope, $rootScope, $location, $routeParams, $wi
 	function getSport(source) {
 		return source.first(function (s) { return s.url == $routeParams.sport || s.name == $routeParams.sport });
 	}
-}
+}]);
