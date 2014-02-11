@@ -21,17 +21,15 @@
 		var map = this;
 
 		if (options.latLng || (options.latitude != null && options.longitude != null)) {
-			var latLng = options.latLng || new google.maps.LatLng(options.latitude, options.longitude);
-
-			if (map.marker) {
-				map.marker.setMap(null);
-			}
-
-			map.marker = new google.maps.Marker({ 
-				map: map,
-				title: options.description, 
-				position: latLng 
-			});
+			var latLng = options.latLng || new google.maps.LatLng(options.latitude, options.longitude),
+				marker = new google.maps.Marker({ 
+					map: map,
+					title: options.description, 
+					position: latLng 
+				});
+			
+			// fixes map size bugs
+			google.maps.event.trigger(map, 'resize');	
 			map.setCenter(latLng);
 
 			if (options.zoom) {
@@ -39,10 +37,10 @@
 			}
 
 			if (options.drag) {
-				map.marker.setDraggable(true);
+				marker.setDraggable(true);
 				
-				google.maps.event.addListener(map.marker, 'position_changed', function () {
-					geocoder.geocode({ latLng: map.marker.getPosition() }, function (results, status) {
+				google.maps.event.addListener(marker, 'position_changed', function () {
+					geocoder.geocode({ latLng: marker.getPosition() }, function (results, status) {
 						if (status == google.maps.GeocoderStatus.OK) {
 							var mappedResults = mapResults(results);
 
@@ -51,6 +49,12 @@
 					});
 				});
 			}
+
+			if ((options.cleanLast === undefined || options.cleanLast === false) && map.marker) {
+				map.marker.setMap(null);
+			}
+
+			map.marker = marker;
 		}
 		else if (options.address) {
 			geocoder.geocode({ address: options.address }, function (results, status) {

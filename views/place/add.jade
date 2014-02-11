@@ -47,11 +47,11 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
 					select#surface.form-control(name='surface', ng-disabled='currentCourt.sport == null', ng-model='currentCourt.surface', ng-options='s for s in currentCourt.sport.surfaces')
 						option(value='') [Seleccioná una superficie]
 			.col-sm-6.col-sm-offset-3
-				label.control-label.col-sm-3 ¿Es techada?
+				label.control-label.col-sm-3(for='is-indoor') ¿Es techada?
 				.col-sm-9
 					.checkbox
 						label
-							input#isIndoor(type='checkbox', name='isIndoor', ng-disabled='currentCourt.sport == null', ng-model='currentCourt.isIndoor', ng-init='false')
+							input#is-indoor(type='checkbox', name='is-indoor', ng-disabled='currentCourt.sport == null', ng-model='currentCourt.isIndoor', ng-init='false')
 			.col-sm-6.col-sm-offset-3
 				a.btn.btn-primary.btn-xs.pull-right(ng-click='addCourt(currentCourt)') Agregar cancha
 			.col-sm-6.col-sm-offset-3.courts-current-list(ng-show='courts.length > 0')

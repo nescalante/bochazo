@@ -1,21 +1,24 @@
-function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Place) {
+function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Geolocation, Place) {
+	var map = new google.maps.Map($window.document.getElementById('map-add'));
+
 	$window.document.title = 'Agregá tu cancha';
-
-	var map = new google.maps.Map(document.getElementById('map-add')),
-		indexedTypes = [];
-
 	$scope.tags = [];
 	$scope.courts = [];
 
-	map.addMarker({
-		latitude: -38,
-		longitude: -63,
-		zoom: 4,
-		drag: function (results) {
-			assignResult(results[0]);
-			
-			$scope.$apply();
-		}
+	Geolocation.get(function (err, coords) {
+		var latitude = (coords && coords.latitude) || Geolocation.default.latitude,
+			longitude = (coords && coords.longitude) || Geolocation.default.longitude;
+
+		map.addMarker({
+			latitude: latitude,
+			longitude: longitude,
+			zoom: 5,
+			drag: function (results) {
+				assignResult(results[0]);
+				
+				$scope.$apply();
+			}
+		});
 	});
 
 	$scope.save = function () {
@@ -30,8 +33,6 @@ function PlaceAddCtrl($http, $scope, $rootScope, $location, $window, Place) {
 			.select(function (p) { return p.trim() })
 			.where(function (p) { return p != '' })
 			.distinct() : [];
-
-		console.log(phones)
 
 		var place = new Place({
 			description: $scope.description,

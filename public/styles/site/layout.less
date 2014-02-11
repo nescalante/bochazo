@@ -41,3 +41,22 @@ body {
 .btn + .btn {
 	margin-left: 4px;
 }
+
+html.full-screen, html.full-screen body, html.full-screen .body-content, html.full-screen div[ng-view] {
+	height: 100%;
+	min-height: 100%;
+}
+
+html.full-screen .body-content {
+	margin-top: 0px;
+}
+
+html.full-screen div[ng-view] {
+	padding-top: 120px;
+	padding-bottom: 20px;
+}
+
+html.full-screen .body-content h2:first-child {
+	position: absolute;
+	top: 70px;
+}

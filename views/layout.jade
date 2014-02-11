@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='bchz')
+html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 	head
 		meta(charset='utf-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no')
@@ -30,7 +30,7 @@ html(ng-app='bchz')
 						li
 							a(href='#/busqueda') Búsqueda
 						li
-							a Mapa
+							a(href='#/mapa') Mapa
 					form.navbar-form.navbar-left(role='search')
 						.form-group
 							input.form-control(type='search', ng-model='query', ng-enter='search()', placeholder='Buscar')
@@ -40,8 +40,8 @@ html(ng-app='bchz')
 		.container.body-content
 			div(ng-view)
 				block content
-			hr
-			footer &copy; 2013 - 
+			hr(ng-hide='fullScreen')
+			footer(ng-hide='fullScreen') &copy; 2013 - 
 				= title
 	script(src='components/jquery/jquery.js')
 	script(src='components/bootstrap/js/collapse.js')
@@ -54,6 +54,7 @@ html(ng-app='bchz')
 	script(src='scripts/whatever/layout.js')
 	script(src='scripts/whatever/home.js')
 	script(src='scripts/whatever/search.js')
+	script(src='scripts/whatever/map.js')
 	script(src='scripts/whatever/place/list.js')
 	script(src='scripts/whatever/place/add.js')
 	script(src='scripts/whatever/place/detail.js')

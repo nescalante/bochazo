@@ -1,5 +1,5 @@
 function PlaceDetailCtrl($http, $scope, $location, $routeParams, $window, Place) {
-	var map = new google.maps.Map(document.getElementById('map-detail'));
+	var map = new google.maps.Map($window.document.getElementById('map-detail'));
 
 	var data = Place.get($routeParams, function () {
 		$window.document.title = data.description;

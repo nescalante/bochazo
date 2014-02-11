@@ -64,13 +64,13 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 				var geocoder = new google.maps.Geocoder();
 
 				if ($rootScope.coords) {
-					callback($rootScope.coords);
+					callback(null, $rootScope.coords);
 				}
 				else if (navigator && navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function (position) {
 						$rootScope.coords = position.coords;
 
-						callback({ 
+						callback(null, { 
 							latitude: position.coords.latitude,
 							longitude: position.coords.longitude,
 							accuracy: position.coords.accuracy
@@ -88,8 +88,12 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 					}, callback);
 				} 
 				else {
-					callback();
+					callback({ message: 'Geolocation is not supported' });
 				}
+			},
+			default: {
+				latitude: -34.6037232,
+				longitude: -58.38159310000003
 			}
 		}
 	})
@@ -104,6 +108,7 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 			.when('/', { controller: HomeCtrl, templateUrl: 'place/search.html' })
 			.when('/busqueda', { controller: PlaceSearchCtrl, templateUrl: 'place/search.html' })
 			.when('/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
+			.when('/mapa', { controller: MapCtrl, templateUrl: 'site/map.html' })
 			.when('/canchas/agregar', { controller: PlaceAddCtrl, templateUrl: 'place/add.html' })
 			.when('/canchas/listado/:sport', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })
 			.when('/canchas/listado', { controller: PlaceListCtrl, templateUrl: 'place/list.html' })

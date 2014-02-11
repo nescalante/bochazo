@@ -32,13 +32,13 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 		$location.path('/busqueda').search($routeParams);
 	};
 
-	$scope.showMore = function () {
+	$scope.showMore = function showMore() {
 		if ($scope.count != $scope.places.length) {
 			$scope.loading = true;
 
 			$scope.params.skip = $scope.params.skip || $scope.places.length;
 			
-			Geolocation.get(function (coords) {
+			Geolocation.get(function (err, coords) {
 				if (coords) {
 					$scope.params.latitude = coords.latitude;
 					$scope.params.longitude = coords.longitude;
@@ -59,9 +59,9 @@ function PlaceListCtrl($http, $scope, $rootScope, $location, $routeParams, $wind
 				}, function (err) { console.log(err) ;});
 			});
 		}
-	};
 
-	$scope.showMore();
+		return showMore;
+	}();
 
 	function getSport(source) {
 		return source.any(function (s) { return s.url == $scope.params.sport }) ?
