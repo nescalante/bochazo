@@ -18,7 +18,7 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='#')= title
+					a.navbar-brand(href='/')= title
 				.navbar-collapse.collapse
 					ul.nav.navbar-nav
 						li.dropdown
@@ -26,11 +26,11 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 								b.caret
 							ul.dropdown-menu(role='menu')
 								li(ng-repeat='sport in sports')
-									a(href='#/canchas/listado/{{sport.url}}') {{sport.name}}
+									a(href='/canchas/listado/{{sport.url}}') {{sport.name}}
 						li
-							a(href='#/busqueda') Búsqueda
+							a(href='/busqueda') Búsqueda
 						li
-							a(href='#/mapa') Mapa
+							a(href='/mapa') Mapa
 					form.navbar-form.navbar-left(role='search')
 						.form-group
 							input.form-control(type='search', ng-model='query', ng-enter='search()', placeholder='Buscar')
@@ -43,26 +43,29 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 			hr(ng-hide='fullScreen')
 			footer(ng-hide='fullScreen') &copy; 2013 - 
 				= title
-	script(src='components/jquery/jquery.js')
-	script(src='components/bootstrap/js/collapse.js')
-	script(src='components/bootstrap/js/dropdown.js')
-	script(src='components/angular/angular.js')
-	script(src='components/angular-animate/angular-animate.js')
-	script(src='components/angular-route/angular-route.js')
-	script(src='components/angular-resource/angular-resource.js')
-	script(src='http://maps.google.com/maps/api/js?sensor=true&language=es')
-	script(src='scripts/app.js')
-	script(src='scripts/whatever/layout.js')
-	script(src='scripts/whatever/home.js')
-	script(src='scripts/whatever/search.js')
-	script(src='scripts/whatever/map.js')
-	script(src='scripts/whatever/place/list.js')
-	script(src='scripts/whatever/place/add.js')
-	script(src='scripts/whatever/place/detail.js')
-	
-	script(src='scripts/bchz/bchz.arrays.js')
-	script(src='scripts/bchz/bchz.util.js')
-	script(src='scripts/bchz/bchz.maps.js')
-	script(src='scripts/directives/ngEnter.js')
-	script(src='scripts/directives/ngComma.js')
-	script(src='scripts/directives/ngFocusInput.js')
+				
+		script(src='components/jquery/jquery.js')
+		script(src='components/bootstrap/js/collapse.js')
+		script(src='components/bootstrap/js/dropdown.js')
+		script(src='components/angular/angular.js')
+		script(src='components/angular-animate/angular-animate.js')
+		script(src='components/angular-route/angular-route.js')
+		script(src='components/angular-resource/angular-resource.js')
+		script(src='http://maps.google.com/maps/api/js?sensor=true&language=es')
+		
+		script(src='scripts/app.js')
+		script(src='scripts/whatever/layout.js')
+		script(src='scripts/whatever/home.js')
+		script(src='scripts/whatever/search.js')
+		script(src='scripts/whatever/map.js')
+		script(src='scripts/whatever/place/list.js')
+		script(src='scripts/whatever/place/add.js')
+		script(src='scripts/whatever/place/detail.js')
+		
+		script(src='scripts/bchz/bchz.arrays.js')
+		script(src='scripts/bchz/bchz.util.js')
+		script(src='scripts/bchz/bchz.maps.js')
+		script(src='scripts/directives/ngEnter.js')
+		script(src='scripts/directives/ngComma.js')
+		script(src='scripts/directives/ngFocusInput.js')
+		script(src='test.js')

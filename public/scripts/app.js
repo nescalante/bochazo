@@ -1,5 +1,5 @@
 var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
-	.run(function ($rootScope, $http, $window, $q) {
+	.run(function ($rootScope, $http, $location, $window, $q) {
         $rootScope.sports = [];
         var deferredSports = $q.defer();
 
@@ -103,15 +103,17 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 			list: { url: '/api/place/list', method: 'GET' }
 		});
 	}])
-	.config(function ($routeProvider) {
+	.config(function ($routeProvider, $locationProvider) {
+		$locationProvider.html5Mode(true);
+
 		$routeProvider
-			.when('/', { controller: 'HomeCtrl', templateUrl: 'place/search.html' })
-			.when('/busqueda', { controller: 'PlaceSearchCtrl', templateUrl: 'place/search.html' })
-			.when('/listado', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
-			.when('/mapa', { controller: 'MapCtrl', templateUrl: 'site/map.html' })
-			.when('/canchas/agregar', { controller: 'PlaceAddCtrl', templateUrl: 'place/add.html' })
-			.when('/canchas/listado/:sport', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
-			.when('/canchas/listado', { controller: 'PlaceListCtrl', templateUrl: 'place/list.html' })
-			.when('/canchas/:name', { controller: 'PlaceDetailCtrl', templateUrl: 'place/detail.html' })
+			.when('/', { controller: 'HomeCtrl', templateUrl: '/place/search.html' })
+			.when('/busqueda', { controller: 'PlaceSearchCtrl', templateUrl: '/place/search.html' })
+			.when('/listado', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
+			.when('/mapa', { controller: 'MapCtrl', templateUrl: '/site/map.html' })
+			.when('/canchas/agregar', { controller: 'PlaceAddCtrl', templateUrl: '/place/add.html' })
+			.when('/canchas/listado/:sport', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
+			.when('/canchas/listado', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
+			.when('/canchas/:name', { controller: 'PlaceDetailCtrl', templateUrl: '/place/detail.html' })
 			.otherwise({ redirectTo: '/' });
 	});

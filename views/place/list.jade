@@ -32,7 +32,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 			| .
 		article.place(ng-repeat='place in places')
 			.content
-				a(href='#/canchas/{{place.name}}')
+				a(href='/canchas/{{place.name}}')
 					h3 {{place.description}}
 				ul
 					li(ng-show='place.address')
@@ -51,5 +51,5 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 		a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;', ng-click='showMore()', ng-class='{ disabled: loading }', ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
 	.col-md-4
 		.alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
-			a.alert-link(href='#/canchas/agregar') acá
+			a.alert-link(href='/canchas/agregar') acá
 			| .

@@ -147,7 +147,7 @@
 		return array;
 	};
 
-	a.indexOf = a.indexOf || function (elt /*, from*/) {
+	a.indexOf = a.indexOf || function (elt) {
 		var len = this.length >>> 0;
 
 		var from = Number(arguments[1]) || 0;
