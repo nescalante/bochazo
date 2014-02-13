@@ -1,24 +1,25 @@
 {
-	"name": "bchz",
-	"version": "0.0.1",
-	"description": "Bochazo",
-	"main": "app.js",
-	"author": {
-		"name": "nescalante",
-		"email": "nlante@gmail.com"
-	},
-	"dependencies": {
-		"express": "3.4.4",
-		"jade": "*",
-		"less-middleware": "~0.1.14",
-		"mongoose": "~3.8.3",
-		"async": "~0.2.9",
-		"passport": "~0.1.18",
-		"passport-google": "~0.3.0",
-		"passport-facebook": "~1.0.2",
-		"bower": "~1.2.8"
-	},
-	"scripts": {
-		"postinstall": "node node_modules/bower/bin/bower install"
-	}
+  "name": "bchz",
+  "version": "0.0.1",
+  "description": "Bochazo",
+  "main": "app.js",
+  "author": {
+    "name": "nescalante",
+    "email": "nlante@gmail.com"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*",
+    "less-middleware": "~0.1.14",
+    "mongoose": "~3.8.3",
+    "async": "~0.2.9",
+    "passport": "~0.1.18",
+    "passport-google": "~0.3.0",
+    "passport-facebook": "~1.0.2",
+    "bower": "~1.2.8",
+    "very-array": "0.0.2"
+  },
+  "scripts": {
+    "postinstall": "node node_modules/bower/bin/bower install"
+  }
 }

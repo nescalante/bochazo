@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
 	court = require('./schema/court'),
+	va = require('very-array'),
 	schema = new mongoose.Schema({
 		name: { type: String, required: true, trim: true },
 		description: { type: String, required: true, trim: true },
@@ -50,9 +51,9 @@ schema
 schema
 	.virtual('summary')
 	.get(function () {
-		//item.summary = item.courts
-		//	.groupBy(function (c) { return c.sport })
-		//	.orderBy(function (c) { return c.key });
+		return va(this.courts)
+			.groupBy(function (c) { return c.sport })
+			.orderBy(function (c) { return c.key });
 	});
 
 module.exports = mongoose.model('place', schema);
