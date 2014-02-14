@@ -28,8 +28,7 @@ bchz.controller('PlaceAddCtrl', ['$http', '$scope', '$rootScope', '$location', '
 			$scope.currentTag = '';
 		}
 
-		var phones = $scope.phone ? $scope.phone
-			.split(',')
+		var phones = $scope.phone ? va($scope.phone.split(','))
 			.select(function (p) { return p.trim() })
 			.where(function (p) { return p != '' })
 			.distinct() : [];
@@ -47,7 +46,7 @@ bchz.controller('PlaceAddCtrl', ['$http', '$scope', '$rootScope', '$location', '
 		});
 
 		place.$save(function (result) {
-			$location.path('/canchas/' + result.name);
+			$location.path('/canchas/' + result.id);
 		}, function (response) {
 			console.log(response);
 		});
@@ -97,7 +96,7 @@ bchz.controller('PlaceAddCtrl', ['$http', '$scope', '$rootScope', '$location', '
 	};
 
 	$scope.$watchCollection('courts', function() {
-		$scope.groupedCourts = $scope.courts
+		$scope.groupedCourts = va($scope.courts)
 			.groupBy(function (c) { return {
 				sport: c.sport,
 				players: c.players,

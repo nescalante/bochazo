@@ -32,7 +32,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 			| .
 		article.place(ng-repeat='place in places')
 			.content
-				a(href='/canchas/{{place.name}}')
+				a(href='/canchas/{{place.id}}')
 					h3 {{place.description}}
 				ul
 					li(ng-show='place.address')

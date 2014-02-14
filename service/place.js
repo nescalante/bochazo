@@ -5,8 +5,8 @@ var Place = require('../model/place'),
 	async = require('async'),
 	regex = require('../public/scripts/bchz').regex;
 
-exports.get = function (name, callback) {
-	return Place.findOne({ name: name }, callback);
+exports.get = function (id, callback) {
+	return Place.findOne({ _id: id }, callback);
 };
 
 exports.list = function (params, callback) {
@@ -17,7 +17,7 @@ exports.list = function (params, callback) {
 
 	async.parallel([
 		function (task) {
-			var query = Place.find({}, { 'addressComponents': 0, '_id': 0, 'courts.isActive': 0 });
+			var query = Place.find({}, { 'addressComponents': 0, 'id': 0, 'courts.isActive': 0 });
 
 			applyFilters(query, params)
 				.skip(skip)
@@ -62,7 +62,7 @@ exports.insert = function (model, callback) {
     	.replace(/\s/g, '')
     	.replace(/\W/g, '');
 
-    model.name = permalink;
+    model._id = permalink;
 
 	new Place(model).save(callback);
 };
@@ -81,7 +81,6 @@ function applyFilters(query, params) {
 
 		query = query
 			.or([
-				{ 'name': { $regex: term } },
 				{ 'description': { $regex: term } },
 				{ 'phones': { $regex: term } },
 				{ 'address': { $regex: term } },

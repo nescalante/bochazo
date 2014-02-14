@@ -17,7 +17,7 @@ module.exports = exports = function (app) {
 	app.get('/:partial/:name.html', partial.get);
 
 	// api reference
-	app.get('/api/place/get/:name', place.get);
+	app.get('/api/place/get/:id', place.get);
 	app.get('/api/place/list', place.list);
 	app.post('/api/place', place.save);
 	app.get('/api/sport/list', sport.list);

@@ -10,7 +10,7 @@ bchz.controller('PlaceDetailCtrl', ['$http', '$scope', '$location', '$routeParam
 			zoom: 15
 		});
 
-		$scope.courts = data.courts
+		$scope.courts = va(data.courts)
 			.groupBy(function (c) { return {
 				sport: c.sport,
 				players: c.players,

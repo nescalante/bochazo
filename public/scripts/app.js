@@ -1,21 +1,21 @@
 var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 	.run(function ($rootScope, $http, $location, $window, $q) {
-        $rootScope.sports = [];
-        var deferredSports = $q.defer();
+		$rootScope.sports = [];
+		var deferredSports = $q.defer();
 
-        $http({ method: 'GET', url: 'api/sport/list' }).success(function (data, status, xhr) {
-            $rootScope.sports = data;
+		$http({ method: 'GET', url: 'api/sport/list' }).success(function (data, status, xhr) {
+			$rootScope.sports = data;
 
-            deferredSports.notify(data);
-        });
+			deferredSports.notify(data);
+		});
 
-        $rootScope.sportsPromise = deferredSports.promise;
+		$rootScope.sportsPromise = deferredSports.promise;
 
 		$rootScope.back = function () {
 			$window.history.back();
 		};
 
-        $rootScope.addTag = function (tag, target) {
+		$rootScope.addTag = function (tag, target) {
 			var tags,
 				invalidTags = [];
 
@@ -25,7 +25,7 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 				for (var i = 0; i < tags.length; i++) {
 					var currentTag = tags[i].trim().toLowerCase();
 
-					if (!target.contains(currentTag)) {
+					if (!va(target).contains(currentTag)) {
 						if (currentTag != '') {
 							target.push(currentTag);
 						}
@@ -42,14 +42,14 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 		};
 
 		$rootScope.removeTag = function (tag, target) {
- 			target = target.where(function (t) { return t != tag });
+			target = va(target).where(function (t) { return t != tag });
 
 			return target;
 		};
 
 		$rootScope.validateTag = function (tag, target) {
 			if (target) {
-				return target
+				return va(target)
 					.select(function (t) { return t.toLowerCase(); })
 					.contains(tag && tag.toLowerCase());
 			}
@@ -99,7 +99,7 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 	})
 	.factory('Place', ['$resource', function($resource) {
 		return $resource('/api/place', null, {
-			get: { url: '/api/place/get/:name', method: 'GET' },
+			get: { url: '/api/place/get/:id', method: 'GET' },
 			list: { url: '/api/place/list', method: 'GET' }
 		});
 	}])
@@ -114,6 +114,6 @@ var bchz = angular.module('bchz', ['ngRoute', 'ngAnimate', 'ngResource'])
 			.when('/canchas/agregar', { controller: 'PlaceAddCtrl', templateUrl: '/place/add.html' })
 			.when('/canchas/listado/:sport', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
 			.when('/canchas/listado', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
-			.when('/canchas/:name', { controller: 'PlaceDetailCtrl', templateUrl: '/place/detail.html' })
+			.when('/canchas/:id', { controller: 'PlaceDetailCtrl', templateUrl: '/place/detail.html' })
 			.otherwise({ redirectTo: '/' });
 	});

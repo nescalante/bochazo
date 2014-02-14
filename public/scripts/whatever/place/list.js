@@ -2,7 +2,7 @@ bchz.controller('PlaceListCtrl', ['$http', '$scope', '$rootScope', '$location', 
 	$window.document.title = 'Búsqueda de canchas';
 
 	$scope.params = $routeParams;
-	$scope.params.any = $routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags;
+	$scope.params.any = !!($routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags);
 	$scope.places = [];
 
 	['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
@@ -48,10 +48,7 @@ bchz.controller('PlaceListCtrl', ['$http', '$scope', '$rootScope', '$location', 
 					$scope.count = data.count;
 					$scope.loading = false;
 
-					data.list.each(function (ix, item) {
-						item.summary = item.courts
-							.groupBy(function (c) { return c.sport })
-							.orderBy(function (c) { return c.key });
+					data.list.forEach(function (item) {
 						$scope.places.push(item);
 					});
 
@@ -64,8 +61,9 @@ bchz.controller('PlaceListCtrl', ['$http', '$scope', '$rootScope', '$location', 
 	}();
 
 	function getSport(source) {
-		return source.any(function (s) { return s.url == $scope.params.sport }) ?
-			source.first(function (s) { return s.url == $scope.params.sport }).name :
-		 	$scope.params.sport;
+		return va(source)
+			.any(function (s) { return s.url == $scope.params.sport }) ?
+				va(source).first(function (s) { return s.url == $scope.params.sport }).name :
+		 		$scope.params.sport;
 	}
 }]);

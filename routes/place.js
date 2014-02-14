@@ -4,8 +4,8 @@ var url = require('url'),
 	service = require('../service');
 
 exports.get = function(req, res) {
-	if (req.params.name) {
-		service.place.get(req.params.name, function (err, result) {
+	if (req.params.id) {
+		service.place.get(req.params.id, function (err, result) {
 			if (err) {
 				res.json(500, err);
 			}
@@ -14,13 +14,13 @@ exports.get = function(req, res) {
 					res.json(result);
 				}
 				else {
-					res.json(404, { message: 'some error'});
+					res.json(404, { message: 'resource does not exists.'});
 				}
 			}
 		});
 	}
 	else {
-		res.json(404, { message: 'some error message' });
+		res.json(400, { message: 'id field is required.' });
 	}
 };
 

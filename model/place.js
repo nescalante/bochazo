@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 	court = require('./schema/court'),
 	va = require('very-array'),
 	schema = new mongoose.Schema({
-		name: { type: String, required: true, trim: true },
+		_id: { type: String, required: true, trim: true },
 		description: { type: String, required: true, trim: true },
 		info: { type: String, trim: true },
 		addressComponents: [{
@@ -20,7 +20,7 @@ var mongoose = require('mongoose'),
 		tags: [{ type: String }],
 		dateFrom: { type: Date, require: true, default: Date.now },
 		isActive: { type: Boolean, require: true, default: true }
-	}, { toObject: { getters: true }, toJSON: { getters: true }, versionKey: false });
+	}, { toObject: { getters: true }, toJSON: { getters: true } });
 
 schema
 	.virtual('latitude')
