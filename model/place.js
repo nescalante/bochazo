@@ -48,12 +48,4 @@ schema
 		this.location[1] = longitude;
 	});
 
-schema
-	.virtual('summary')
-	.get(function () {
-		return va(this.courts)
-			.groupBy(function (c) { return c.sport })
-			.orderBy(function (c) { return c.key });
-	});
-
 module.exports = mongoose.model('place', schema);

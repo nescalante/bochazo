@@ -9,9 +9,14 @@ var service = require('../service'),
 
 module.exports = exports = function (app) {
 	// root source
-	app.get('/', function(req, res) {
-		res.render('index', { title: 'BCHZ' });
-	});
+	app.get('/', manageResource('/site/home'));
+	app.get('/busqueda', manageResource('/place/search'));
+	app.get('/listado', manageResource('/place/list'));
+	app.get('/mapa', manageResource('/site/map'));
+	app.get('/canchas/agregar', manageResource('/place/add'));
+	app.get('/canchas/listado/:sport', manageResource('/place/list'));
+	app.get('/canchas/listado', manageResource('/place/list'));
+	app.get('/canchas/:id', manageResource('/place/detail'));
 
 	// partial views
 	app.get('/:partial/:name.html', partial.get);
@@ -23,4 +28,10 @@ module.exports = exports = function (app) {
 	app.get('/api/sport/list', sport.list);
 
 	authentication(app);
+
+	function manageResource(resource) {
+		return function (req, res) {
+			res.render('index', { title: 'BCHZ' });
+		};
+	}
 };

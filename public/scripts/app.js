@@ -1,12 +1,9 @@
 angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
-	.run(function ($rootScope, $http, $location, $window, $q) {
-		$rootScope.sports = [];
+	.run(function ($rootScope, $http, $location, $window, $q, Sport) {
 		var deferredSports = $q.defer();
 
-		$http({ method: 'GET', url: 'api/sport/list' }).success(function (data, status, xhr) {
-			$rootScope.sports = data;
-
-			deferredSports.notify(data);
+		$rootScope.sports = Sport.list(function (sports) {
+			deferredSports.notify(sports);
 		});
 
 		$rootScope.sportsPromise = deferredSports.promise;

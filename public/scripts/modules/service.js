@@ -43,4 +43,9 @@ angular.module('bchz.service', ['ngResource'])
 			get: { url: '/api/place/get/:id', method: 'GET' },
 			list: { url: '/api/place/list', method: 'GET' }
 		});
+	}])
+	.factory('Sport', ['$resource', function($resource) {
+		return $resource('/api/sport', null, {
+			list: { url: '/api/sport/list', method: 'GET', isArray: true }
+		});
 	}]);

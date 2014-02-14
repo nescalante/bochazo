@@ -5,7 +5,7 @@ angular.module("bchz").controller(
 		$window.document.title = 'Búsqueda de canchas';
 
 		$scope.params = $routeParams;
-		$scope.params.any = !!($routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags);
+		$scope.hasParams = !!($routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags);
 		$scope.places = [];
 
 		['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
@@ -28,7 +28,7 @@ angular.module("bchz").controller(
 		}
 
 		$scope.newSearch = function () {
-			['any', 'skip', 'latitude', 'longitude'].forEach(function (item) {
+			['skip', 'latitude', 'longitude'].forEach(function (item) {
 				delete $routeParams[item];
 			});
 
@@ -52,6 +52,10 @@ angular.module("bchz").controller(
 						$scope.loading = false;
 
 						data.list.forEach(function (item) {
+							item.summary = va(item.courts)
+								.groupBy(function (c) { return c.sport })
+								.orderBy(function (c) { return c.key });
+
 							$scope.places.push(item);
 						});
 

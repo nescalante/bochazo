@@ -6,11 +6,12 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 			p
 				strong {{count}}
 				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
-			p(ng-show='params.any') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
-			ul(ng-show='params.any')
+			p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
+			ul(ng-show='hasParams')
 				li(ng-show='params.query') 
 					| Que contengan la palabra 
 					strong {{params.query}}
+				li(ng-show='params.sport') Canchas de {{params.sport}}
 				li(ng-show='params.locations.length') En 
 					span.capitalize(ng-repeat-start='location in params.locations') {{location}}
 					span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
@@ -25,7 +26,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 			p.new-search
 				| Hacé click 
 				a.alert-link(href='', ng-click='newSearch()') acá
-				| &nbsp;para realizar una {{params.any ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
+				| &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
 		.alert.alert-info(ng-show='userAddress && count > 0') 
 			| Los complejos se listarán mostrando primero los más cercanos a 
 			a.alert-link.hint--top.hint--rounded(href='', data-hint='{{userAddress}}') tú posición
