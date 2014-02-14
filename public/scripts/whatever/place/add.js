@@ -49,7 +49,7 @@ angular.module("bchz").controller(
 			});
 
 			place.$save(function (result) {
-				$location.path('/canchas/' + result.id);
+				$location.path('/canchas/' + result._id);
 			}, function (response) {
 				console.log(response);
 			});

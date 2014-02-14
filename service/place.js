@@ -13,11 +13,14 @@ exports.list = function (params, callback) {
 	params = params || {};
 
 	var skip = params.skip || 0,
-		limit = params.limit || 10;
+		limit = params.limit || (params.shortened ? 50 : 10),
+		fields = params.shortened ? 
+			{ 'location': 1, 'description': 1 } :
+			{ 'addressComponents': 0, 'id': 0, 'courts.isActive': 0 };
 
 	async.parallel([
 		function (task) {
-			var query = Place.find({}, { 'addressComponents': 0, 'id': 0, 'courts.isActive': 0 });
+			var query = Place.find({}, fields);
 
 			applyFilters(query, params)
 				.skip(skip)
