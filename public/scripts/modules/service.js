@@ -2,6 +2,12 @@ angular.module('bchz.service', ['ngResource'])
 	.factory('Geolocation', function ($rootScope) {
 		return { 
 			get: function get(callback) {
+				if (typeof(google) === 'undefined') {
+					callback({ message: 'Google API failed to initialize.' });
+
+					return;
+				}
+
 				var geocoder = new google.maps.Geocoder();
 
 				if ($rootScope.coords) {
@@ -29,7 +35,7 @@ angular.module('bchz.service', ['ngResource'])
 					}, callback);
 				} 
 				else {
-					callback({ message: 'Geolocation is not supported' });
+					callback({ message: 'Geolocation is not supported.' });
 				}
 			},
 			default: {

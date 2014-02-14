@@ -2,12 +2,16 @@ angular.module("bchz").controller(
 	'PlaceDetailCtrl', 
 	['$http', '$scope', '$location', '$routeParams', '$window', 'Place', 
 	function ($http, $scope, $location, $routeParams, $window, Place) {
-		var map = new google.maps.Map($window.document.getElementById('map-detail'));
+		var map;
+
+		if (typeof(google) !== 'undefined') {
+			map = new google.maps.Map($window.document.getElementById('map-detail'));
+		}
 
 		var data = Place.get($routeParams, function () {
 			$window.document.title = data.description;
 
-			map.addMarker({
+			map && map.addMarker({
 				latitude: data.latitude,
 				longitude: data.longitude,
 				zoom: 15
