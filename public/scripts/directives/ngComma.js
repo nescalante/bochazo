@@ -1,5 +1,6 @@
-~function (b) {
-	b.directive('ngComma', function () {
+angular.module("bchz").directive(
+	'ngComma', 
+	function () {
 		return function (scope, element, attrs) {
 			element.bind("keydown keypress", function (event) {
 				if(event.which === 44) {
@@ -12,4 +13,3 @@
 			});
 		};
 	});
-}(bchz);

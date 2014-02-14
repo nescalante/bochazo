@@ -1,5 +1,6 @@
-~function (b) {
-	b.directive('ngFocusInput', function($timeout) {
+angular.module("bchz").directive(
+	'ngFocusInput', 
+	function($timeout) {
 		return {
 			link: function(scope, element, attrs) {
 				element.bind('click', function() {
@@ -10,4 +11,3 @@
 			}
 		};
 	});
-}(bchz);
