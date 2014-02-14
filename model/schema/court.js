@@ -9,6 +9,6 @@ var mongoose = require('mongoose'),
 		sport: { type: String, require: true, trim: true },
 		surface: { type: String, require: true, trim: true },
 		isActive: { type: Boolean, require: true, default: true }
-	}, { toObject: { getters: true }, toJSON: { getters: true } });
+	}, { toObject: { getters: true }, toJSON: { getters: true }, id: false });
 
 module.exports = schema;
