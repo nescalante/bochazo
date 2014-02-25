@@ -6,7 +6,7 @@ angular.module("bchz").controller(
 
 		$window.document.title = 'Mapa de canchas';
 		$rootScope.fullScreen = true;
-		$scope.$on('$destroy', function (a) { 
+		$scope.$on('$destroy', function () { 
 			$rootScope.fullScreen = false;
 		});
 

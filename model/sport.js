@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose'),
+	stringHelper = require('../helpers').string,
 	schema = new mongoose.Schema({
 		name: { type: String, required: true, trim: true },
 		allowPlayers: { type: Boolean, required: true, default: false },
@@ -13,7 +14,7 @@ var mongoose = require('mongoose'),
 	}, { toObject: { getters: true }, toJSON: { getters: true } });
 
 schema.virtual('url').get(function () {
-	return this.name.latinize().toLowerCase();
+	return stringHelper.latinize(this.name).toLowerCase();
 });
 
 module.exports = mongoose.model('sport', schema);

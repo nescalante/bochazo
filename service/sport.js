@@ -25,5 +25,7 @@ Sport.find({}, function (err, data) {
 			name: 'Paddle',
 			surfaces: ['Baldosa']
 		}).save();
+
+		console.log('Initial sport data added.');
 	}
 })

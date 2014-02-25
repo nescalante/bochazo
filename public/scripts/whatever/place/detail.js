@@ -7,17 +7,20 @@ angular.module("bchz").controller(
 		if (typeof(google) !== 'undefined') {
 			map = new google.maps.Map($window.document.getElementById('map-detail'));
 		}
+		else {
+			console.log('Oops! Google Maps could not be initialized.')
+		}
 
-		var data = Place.get($routeParams, function () {
-			$window.document.title = data.description;
+		Place.get($routeParams, function (resource) {
+			$window.document.title = resource.description;
 
 			map && map.addMarker({
-				latitude: data.latitude,
-				longitude: data.longitude,
+				latitude: resource.latitude,
+				longitude: resource.longitude,
 				zoom: 15
 			});
 
-			$scope.courts = va(data.courts)
+			$scope.courts = va(resource.courts)
 				.groupBy(function (c) { return {
 					sport: c.sport,
 					players: c.players,
@@ -32,11 +35,13 @@ angular.module("bchz").controller(
 					return c;
 				});
 
-			$scope.description = data.description;
-			$scope.info = data.info;
-			$scope.address = data.address;
-			$scope.phones = data.phones;
-			$scope.howToArrive = data.howToArrive;
-			$scope.tags = data.tags;
+			$scope.description = resource.description;
+			$scope.info = resource.info;
+			$scope.address = resource.address;
+			$scope.phones = resource.phones;
+			$scope.howToArrive = resource.howToArrive;
+			$scope.tags = resource.tags;
+		}, function (err) {
+			console.log('Cannot get resource!', err);
 		});
 	}]);

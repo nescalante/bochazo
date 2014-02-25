@@ -6,9 +6,6 @@ var express = require('express'),
 	app = express(),
 	routes = require('./routes');
 
-// extend string
-require('./public/scripts/bchz/bchz.strings.js');
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -20,21 +17,21 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.session({ secret: 'sarasa' }));
+app.use(app.router);
+
+app.use(function(err, req, res, next) {
+  console.error(err);
+  res.send(500, err);
+});
 
 // public folders
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/components', express.static(path.join(__dirname, 'bower_components')));
 
-app.use(app.router);
-
-// development only
-if ('development' == app.get('env')) {
-	app.use(express.errorHandler());
-}
 
 routes(app);
 
 http.createServer(app).listen(app.get('port'), function() {
-	console.log('express server listening on port ' + app.get('port'));
+	console.log('Running on port ' + app.get('port'));
 });

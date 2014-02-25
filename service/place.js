@@ -3,7 +3,7 @@
 var Place = require('../model/place'),
 	Sport = require('../model/sport'),
 	async = require('async'),
-	regex = require('../public/scripts/bchz').regex;
+	regex = require('../helpers').regex;
 
 exports.get = function (id, callback) {
 	return Place.findOne({ _id: id }, callback);
