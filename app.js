@@ -27,8 +27,19 @@ app.use('/components', express.static(path.join(__dirname, 'bower_components')))
 routes(app);
 
 app.use(function(req, res, next) {
-	res.statusCode = 404;
-	res.render('index', { title: 'BCHZ' });
+	res.status(404);
+
+	if (req.accepts('html')) {
+		res.render('index', { title: 'BCHZ' });
+		return;
+	}
+
+	if (req.accepts('json')) {
+		res.send({ message: 'Resource not found' });
+		return;
+	}
+
+	res.type('txt').send('Not found');
 });
 
 http.createServer(app).listen(app.get('port'), function() {
