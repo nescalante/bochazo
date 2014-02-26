@@ -14,13 +14,13 @@ exports.get = function(req, res) {
 					res.json(result);
 				}
 				else {
-					res.json(404, { message: 'resource does not exists.'});
+					res.json(404, { message: 'Place not found for that id.'});
 				}
 			}
 		});
 	}
 	else {
-		res.json(400, { message: 'id field is required.' });
+		res.json(400, { message: '"id" field is required.' });
 	}
 };
 

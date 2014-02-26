@@ -27,6 +27,10 @@ module.exports = exports = function (app) {
 	app.post('/api/place', place.save);
 	app.get('/api/sport/list', sport.list);
 
+	app.get('/api/*', function(req, res) {
+	  	res.json({ message: 'Action not found.' }, 404);
+	});
+
 	authentication(app);
 
 	function manageResource(resource) {

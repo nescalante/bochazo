@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose'),
 	court = require('./schema/court'),
-	va = require('very-array'),
 	schema = new mongoose.Schema({
 		_id: { type: String, required: true, trim: true },
 		description: { type: String, required: true, trim: true },

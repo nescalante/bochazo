@@ -1,7 +1,7 @@
 angular.module("bchz").controller(
 	'PlaceAddCtrl', 
-	['$http', '$scope', '$rootScope', '$location', '$window', 'Geolocation', 'Place', 
-	function ($http, $scope, $rootScope, $location, $window, Geolocation, Place) {
+	['$http', '$scope', '$rootScope', '$location', '$window', '$log', 'Geolocation', 'Place', 
+	function ($http, $scope, $rootScope, $location, $window, $log, Geolocation, Place) {
 		var map = new google.maps.Map($window.document.getElementById('map-add'));
 
 		$window.document.title = 'Agregá tu cancha';
@@ -31,10 +31,12 @@ angular.module("bchz").controller(
 				$scope.currentTag = '';
 			}
 
-			var phones = $scope.phone ? va($scope.phone.split(','))
-				.select(function (p) { return p.trim() })
-				.where(function (p) { return p != '' })
-				.distinct() : [];
+			var phones = $scope.phone ? 
+				va($scope.phone.split(','))
+					.select(function (p) { return p.trim() })
+					.where(function (p) { return p != '' })
+					.distinct() : 
+				[];
 
 			var place = new Place({
 				description: $scope.description,
@@ -49,9 +51,11 @@ angular.module("bchz").controller(
 			});
 
 			place.$save(function (result) {
+				$log.info('Place saved as ' + result._id);
+
 				$location.path('/canchas/' + result._id);
-			}, function (response) {
-				console.log(response);
+			}, function (err) {
+				$log.error('Place could not be saved', err);
 			});
 		};
 

@@ -38,8 +38,9 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 							span.glyphicon.glyphicon-search
 					ul.nav.navbar-nav.navbar-right
 		.container.body-content
-			div(ng-view)
+			div(ng-view, ng-hide='templateUrl')
 				block content
+			div(ng-include='templateUrl', ng-show='templateUrl')
 			hr(ng-hide='fullScreen')
 			footer(ng-hide='fullScreen') &copy; 2013 - 
 				= title

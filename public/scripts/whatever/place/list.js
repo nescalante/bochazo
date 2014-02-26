@@ -20,7 +20,7 @@ angular.module("bchz").controller(
 			$window.document.title = 'Canchas de ' + $scope.params.sport;
 		}
 		else if ($scope.params.sport) {
-			$rootScope.sportsPromise.then(function(sports) {
+			$rootScope.sports.$promise.then(function(sports) {
 				$scope.params.sport = getSport(sports);
 
 				$window.document.title = 'Canchas de ' + $scope.params.sport;
@@ -60,7 +60,9 @@ angular.module("bchz").controller(
 						});
 
 						$scope.params.skip = $scope.places.length;
-					}, function (err) { console.log(err) ;});
+					}, function (err) { 
+						$log.error('Could not get data from server', err);
+					});
 				});
 			}
 

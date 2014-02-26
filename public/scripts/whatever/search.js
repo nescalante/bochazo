@@ -23,7 +23,7 @@ angular.module("bchz").controller(
 			$scope.sport = getSport($rootScope.sports);
 		}
 		else if ($rootScope.sport) {
-			$rootScope.sportsPromise.then(function(sports) {
+			$rootScope.sports.$promise.then(function(sports) {
 				$scope.sport = getSport(sports);
 			});
 		}

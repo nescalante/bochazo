@@ -19,18 +19,17 @@ app.use(express.methodOverride());
 app.use(express.session({ secret: 'sarasa' }));
 app.use(app.router);
 
-app.use(function(err, req, res, next) {
-  console.error(err);
-  res.send(500, err);
-});
-
 // public folders
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/components', express.static(path.join(__dirname, 'bower_components')));
 
-
 routes(app);
+
+app.use(function(req, res, next) {
+	res.statusCode = 404;
+	res.render('index', { title: 'BCHZ' });
+});
 
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Running on port ' + app.get('port'));
