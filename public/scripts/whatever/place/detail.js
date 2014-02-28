@@ -10,7 +10,7 @@ angular.module("bchz").controller(
 		else {
 			$log.warn('Oops! Map could not be initialized.')
 		}
-		
+
 		$window.document.title = place.description;
 
 		map && map.addMarker({

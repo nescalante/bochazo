@@ -48,9 +48,9 @@ angular.module('bchz.service', ['ngResource'])
 			}
 		}
 	})
-	.factory('InfoWindow', ['$http', '$compile', '$rootScope', '$cacheFactory', 'Place', function ($http, $compile, $rootScope, $cacheFactory, Place) {
+	.factory('InfoWindow', ['$http', '$compile', '$rootScope', '$cacheFactory', function ($http, $compile, $rootScope, $cacheFactory) {
 		return {
-			get: function get (id, callback) {
+			get: function get (place, callback) {
 				var cache = $cacheFactory.get('iw') || $cacheFactory('iw'),
 					template = cache.get('template');
 
@@ -60,7 +60,7 @@ angular.module('bchz.service', ['ngResource'])
 				else {
 					$http.get('/place/info.html').success(function (html) {
 						cache.put('template', html);
-						get(id, callback);
+						get(place, callback);
 					});
 				}
 
@@ -69,43 +69,105 @@ angular.module('bchz.service', ['ngResource'])
 						element;
 
 					iwScope = $rootScope.$new(true);
+					iwScope.place = place;
+					element = $compile(template)(iwScope);
 
-					Place.get({ id: id }, function (place) {
-						iwScope.place = place;
-						element = $compile(template)(iwScope);
+					// wait for digest
+					setTimeout(function () {
+						var iw = new google.maps.InfoWindow({
+							content: element.html()
+						});
 
-						// wait for digest
-						setTimeout(function () {
-							var iw = new google.maps.InfoWindow({
-								content: element.html()
-							});
-
-							iwScope.$destroy();
-							callback(iw);
-						}, 1);
-					});
+						iwScope.$destroy();
+						callback(iw);
+					}, 1);
 				}
 			}
 		}
 	}])
-	.factory('Place', ['$resource', function($resource) {
+	.factory('Place', ['$resource', '$cacheFactory', '$log', 'InfoWindow', function($resource, $cacheFactory, $log, InfoWindow) {
 		var Place = $resource('/api/place', null, {
 				get: { url: '/api/place/get/:id', method: 'GET' },
 				list: { url: '/api/place/list', method: 'GET', transformResponse: transformList },
-				listShortened: { url: '/api/place/list', method: 'GET', params: { shortened: 1 } },
+				listShortened: { url: '/api/place/list', method: 'GET', params: { shortened: 1 }, transformResponse: transformList },
 			});
+
+		Place.prototype.appendMarker = function (map) {
+			var item = this,
+				iw,
+				marker = map.addMarker({
+					latitude: item.latitude,
+					longitude: item.longitude,
+					description: item.description,
+					clearLast: false,
+					setCenter: false,
+					zoom: 6
+				}),
+				iwCache = $cacheFactory.get('iw') || $cacheFactory('iw');
+
+			item.open = function () {
+				var last = iwCache.get('last');
+
+				if (iw) {
+					iw.open(map, marker);
+
+					last && last != iw && last.close();
+					iwCache.put('last', iw);
+				}
+			}
+
+			google.maps.event.addListener(marker, 'click', function() {
+				if (iw) {
+					item.open();
+				}
+				else {
+					Place.get({ id: item._id }, function (place) {
+						InfoWindow.get(place, function (result) {
+							iw = result;
+							item.open();
+						});
+					});
+				}
+			});
+		};
+
+		Place.fillMap = function fillMap(map, query, limit) {
+			if (!limit || limit > query.skip) {
+				Place.listShortened(query, function (data) {
+					angular.forEach(data.list, function (item) {
+						item.appendMarker(map);
+					});
+
+					query.skip = (query.skip || 0) + data.list.length;
+
+					if (data.list.length > 0) {
+						fillMap(map, query, data.count);
+					}
+					else {
+						delete query.skip;
+					}
+				}, function (err) { 
+					$log.error('Could not get data from server', err);
+				});
+			}
+			else {
+				delete query.skip;
+			}
+		}
 
 		return Place;
 
 		function transformList(data, header) {
 			var wrapped = angular.fromJson(data);
 
-			angular.forEach(wrapped.list, function (value) {
+			angular.forEach(wrapped.list, function (value, index) {
 				if (value.courts) {
 					value.summary = va(value.courts)
 						.groupBy(function (c) { return c.sport })
 						.orderBy(function (c) { return c.key });
 				}
+
+				wrapped.list[index] = new Place(value);
 			});
 
 			return wrapped;
