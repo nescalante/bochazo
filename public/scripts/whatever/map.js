@@ -28,7 +28,7 @@ angular.module("bchz").controller(
 				});
 			}
 			else {
-				map.setCenter({ lat: 47.2296588, lng: 22.872188499999993 })//query.latitude, lng: query.longitude });
+				map.setCenter({ lat: query.latitude, lng: query.longitude });
 				google.maps.event.trigger(map, 'resize');
 			}
 
