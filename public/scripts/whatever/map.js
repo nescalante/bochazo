@@ -11,11 +11,14 @@ angular.module("bchz").controller(
 			$rootScope.fullScreen = false;
 		});
 
+		$scope.places = [];
+
 		Geolocation.get(function (err, coords) {
 			var query = {
-				latitude: (coords && coords.latitude) || Geolocation.default.latitude,
-				longitude: (coords && coords.longitude) || Geolocation.default.longitude
-			};
+					latitude: (coords && coords.latitude) || Geolocation.default.latitude,
+					longitude: (coords && coords.longitude) || Geolocation.default.longitude
+				},
+				count;
 
 			if (coords) {
 				map.addMarker({
@@ -29,40 +32,53 @@ angular.module("bchz").controller(
 				google.maps.event.trigger(map, 'resize');
 			}
 
-			Place.listShortened(query, function (data) {
-				angular.forEach(data.list, function (item) {
-					var marker = map.addMarker({
-							latitude: item.latitude,
-							longitude: item.longitude,
-							description: item.description,
-							clearLast: false,
-							setCenter: false,
-							zoom: 6
+			(function callList() {
+				if (!count || count > $scope.places.length) {
+					Place.listShortened(query, function (data) {
+						angular.forEach(data.list, function (item) {
+							var marker = map.addMarker({
+									latitude: item.latitude,
+									longitude: item.longitude,
+									description: item.description,
+									clearLast: false,
+									setCenter: false,
+									zoom: 6
+								});
+
+							item.open = function () {
+								if (item.iw) {
+									item.iw.open(map, marker);
+
+									iwOpened && iwOpened != item.iw && iwOpened.close();
+									iwOpened = item.iw;
+								}
+							}
+
+							google.maps.event.addListener(marker, 'click', function() {
+								if (item.iw) {
+									item.open();
+								}
+								else {
+									InfoWindow.get(item._id, function (iw) {
+										item.iw = iw;
+										item.open();
+									});
+								}
+							});
+
+							$scope.places.push(item);
 						});
 
-					item.open = function () {
-						if (item.iw) {
-							item.iw.open(map, marker);
+						query.skip = $scope.places.length;
+						count = data.count;
 
-							iwOpened && iwOpened != item.iw && iwOpened.close();
-							iwOpened = item.iw;
+						if (data.list.length > 0) {
+							callList();
 						}
-					}
-
-					google.maps.event.addListener(marker, 'click', function() {
-						if (item.iw) {
-							item.open();
-						}
-						else {
-							InfoWindow.get(item._id, function (iw) {
-								item.iw = iw;
-								item.open();
-							});
-						}
+					}, function (err) { 
+						$log.error('Could not get data from server', err);
 					});
-				});
-			}, function (err) { 
-				$log.error('Could not get data from server', err);
-			});
+				}
+			})();
 		});
 	}]);
