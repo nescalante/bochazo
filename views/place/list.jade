@@ -44,7 +44,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 						.comma-list(ng-repeat='phone in place.phones')
 							a(href='tel:{{phone}}') {{phone}}
 							| {{$last ? '' : ', '}}
-					li(ng-repeat='summary in place.summary') 
+					li(ng-repeat='summary in place.summary')
 						span.glyphicon.glyphicon-asterisk
 						| {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
 					li.tags(ng-show='place.tags.length > 0')

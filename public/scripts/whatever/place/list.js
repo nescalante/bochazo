@@ -8,7 +8,7 @@ angular.module("bchz").controller(
 		$scope.hasParams = !!($routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags);
 		$scope.places = [];
 
-		['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
+		angular.forEach(['surfaces', 'players', 'locations', 'tags'], function (item) {
 			if (typeof($scope.params[item]) == 'string') {
 				$scope.params[item] = [$scope.params[item]];
 			}
@@ -28,7 +28,7 @@ angular.module("bchz").controller(
 		}
 
 		$scope.newSearch = function () {
-			['skip', 'latitude', 'longitude'].forEach(function (item) {
+			angular.forEach(['skip', 'latitude', 'longitude'], function (item) {
 				delete $routeParams[item];
 			});
 
@@ -47,15 +47,11 @@ angular.module("bchz").controller(
 						$scope.params.longitude = coords.longitude;
 					}
 
-					var data = Place.list($scope.params, function () {
+					Place.list($scope.params, function (data) {
 						$scope.count = data.count;
 						$scope.loading = false;
 
-						data.list.forEach(function (item) {
-							item.summary = va(item.courts)
-								.groupBy(function (c) { return c.sport })
-								.orderBy(function (c) { return c.key });
-
+						angular.forEach(data.list, function (item) {
 							$scope.places.push(item);
 						});
 

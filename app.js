@@ -42,6 +42,7 @@ app.use(function(req, res, next) {
 	res.type('txt').send('Not found');
 });
 
-http.createServer(app).listen(app.get('port'), function() {
-	console.log('Running on port ' + app.get('port'));
-});
+http.createServer(app)
+	.listen(app.get('port'), function() {
+		console.log('Running on port ' + app.get('port'));
+	});

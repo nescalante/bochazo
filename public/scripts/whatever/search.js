@@ -5,7 +5,7 @@ angular.module("bchz").controller(
 		$window.document.title = 'Búsqueda de canchas';
 		var params = {};
 
-		['surfaces', 'players', 'locations', 'tags'].forEach(function (item) {
+		angular.forEach(['surfaces', 'players', 'locations', 'tags'], function (item) {
 			if (typeof($routeParams[item]) == 'string') {
 				params[item] = [$routeParams[item]];
 			}
@@ -28,8 +28,8 @@ angular.module("bchz").controller(
 			});
 		}
 
-		params.surfaces.forEach(function (item) { $scope.surfaces[item] = true; });
-		params.players.forEach(function (item) { $scope.players[item] = true; });
+		angular.forEach(params.surfaces, function (item) { $scope.surfaces[item] = true; });
+		angular.forEach(params.players, function (item) { $scope.players[item] = true; });
 
 		$scope.submit = function () {
 			var surfaces = [],

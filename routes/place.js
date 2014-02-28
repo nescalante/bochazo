@@ -1,7 +1,8 @@
 'use strict';
 
 var url = require('url'),
-	service = require('../service');
+	service = require('../service'),
+	ObjectId = require('mongoose').Types.ObjectId; 
 
 exports.get = function(req, res) {
 	if (req.params.id) {

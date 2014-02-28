@@ -24,16 +24,16 @@ if (typeof(google) !== "undefined") {
 			if (options.latLng || (options.latitude != null && options.longitude != null)) {
 				var latLng = options.latLng || new google.maps.LatLng(options.latitude, options.longitude),
 					marker = new google.maps.Marker({ 
+						flat: false,
 						map: map,
 						title: options.description, 
 						position: latLng 
 					});
 				
 				// fixes map size bugs
-				setTimeout(function () { 
-					google.maps.event.trigger(map, 'resize');
+				if (options.setCenter === undefined || options.setCenter === true) {
 					map.setCenter(latLng); 
-				}, 0);
+				}
 
 				if (options.zoom) {
 					map.setZoom(options.zoom);
@@ -53,7 +53,7 @@ if (typeof(google) !== "undefined") {
 					});
 				}
 
-				if ((options.cleanLast === undefined || options.cleanLast === false) && map.marker) {
+				if (options.cleanLast && map.marker) {
 					map.marker.setMap(null);
 				}
 
@@ -84,6 +84,8 @@ if (typeof(google) !== "undefined") {
 					}
 				});
 			}
+
+			return map.marker;
 		};
 	}(google.maps.Map.prototype);
 }

@@ -1,14 +1,8 @@
 angular.module('bchz.service', ['ngResource'])
-	.factory('Geolocation', function ($rootScope) {
+	.factory('Geolocation', function ($rootScope, $log) {
 		return { 
 			get: function get(callback) {
-				if (typeof(google) === 'undefined') {
-					callback({ message: 'Google API failed to initialize.' });
-
-					return;
-				}
-
-				var geocoder = new google.maps.Geocoder();
+				var geocoder;
 
 				if ($rootScope.coords) {
 					callback(null, $rootScope.coords);
@@ -23,6 +17,14 @@ angular.module('bchz.service', ['ngResource'])
 							accuracy: position.coords.accuracy
 						 });
 
+						if (typeof(google) === 'undefined') {
+							$log.warn('Google API failed to initialize.');
+
+							return;
+						}
+
+						geocoder = new google.maps.Geocoder();
+
 						var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						geocoder.geocode({ latLng : latLng }, function (results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
@@ -35,6 +37,8 @@ angular.module('bchz.service', ['ngResource'])
 					}, callback);
 				} 
 				else {
+					$log.warn('Geolocation is not supported.');
+
 					callback({ message: 'Geolocation is not supported.' });
 				}
 			},
@@ -44,11 +48,68 @@ angular.module('bchz.service', ['ngResource'])
 			}
 		}
 	})
+	.factory('InfoWindow', ['$http', '$compile', '$rootScope', '$cacheFactory', 'Place', function ($http, $compile, $rootScope, $cacheFactory, Place) {
+		return {
+			get: function get (id, callback) {
+				var cache = $cacheFactory.get('iw') || $cacheFactory('iw'),
+					template = cache.get('template');
+
+				if (template) {
+					initialize();
+				}
+				else {
+					$http.get('/place/info.html').success(function (html) {
+						cache.put('template', html);
+						get(id, callback);
+					});
+				}
+
+				function initialize() {
+					var iwScope,
+						element;
+
+					iwScope = $rootScope.$new(true);
+
+					Place.get({ id: id }, function (place) {
+						iwScope.place = place;
+						element = $compile(template)(iwScope);
+
+						// wait for digest
+						setTimeout(function () {
+							var iw = new google.maps.InfoWindow({
+								content: element.html()
+							});
+
+							iwScope.$destroy();
+							callback(iw);
+						}, 1);
+					});
+				}
+			}
+		}
+	}])
 	.factory('Place', ['$resource', function($resource) {
-		return $resource('/api/place', null, {
-			get: { url: '/api/place/get/:id', method: 'GET' },
-			list: { url: '/api/place/list', method: 'GET' }
-		});
+		var Place = $resource('/api/place', null, {
+				get: { url: '/api/place/get/:id', method: 'GET' },
+				list: { url: '/api/place/list', method: 'GET', transformResponse: transformList },
+				listShortened: { url: '/api/place/list', method: 'GET', params: { shortened: 1 } },
+			});
+
+		return Place;
+
+		function transformList(data, header) {
+			var wrapped = angular.fromJson(data);
+
+			angular.forEach(wrapped.list, function (value) {
+				if (value.courts) {
+					value.summary = va(value.courts)
+						.groupBy(function (c) { return c.sport })
+						.orderBy(function (c) { return c.key });
+				}
+			});
+
+			return wrapped;
+		}
 	}])
 	.factory('Sport', ['$resource', function($resource) {
 		return $resource('/api/sport', null, {
