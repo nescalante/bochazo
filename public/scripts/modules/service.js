@@ -87,7 +87,7 @@ angular.module('bchz.service', ['ngResource'])
 	}])
 	.factory('Place', ['$resource', '$cacheFactory', '$log', 'InfoWindow', function($resource, $cacheFactory, $log, InfoWindow) {
 		var Place = $resource('/api/place', null, {
-				get: { url: '/api/place/get/:id', method: 'GET' },
+				get: { url: '/api/place/get/:id', method: 'GET', transformResponse: transformGet },
 				list: { url: '/api/place/list', method: 'GET', transformResponse: transformList },
 				listShortened: { url: '/api/place/list', method: 'GET', params: { shortened: 1 }, transformResponse: transformList },
 			});
@@ -100,8 +100,7 @@ angular.module('bchz.service', ['ngResource'])
 					longitude: item.longitude,
 					description: item.description,
 					clearLast: false,
-					setCenter: false,
-					zoom: 6
+					setCenter: false
 				}),
 				iwCache = $cacheFactory.get('iw') || $cacheFactory('iw');
 
@@ -131,7 +130,7 @@ angular.module('bchz.service', ['ngResource'])
 			});
 		};
 
-		Place.fillMap = function fillMap(map, query, limit) {
+		Place.fillMap = function fillMap(map, query, callback, limit) {
 			if (!limit || limit > query.skip) {
 				Place.listShortened(query, function (data) {
 					angular.forEach(data.list, function (item) {
@@ -141,17 +140,27 @@ angular.module('bchz.service', ['ngResource'])
 					query.skip = (query.skip || 0) + data.list.length;
 
 					if (data.list.length > 0) {
-						fillMap(map, query, data.count);
+						fillMap(map, query, callback, data.count);
 					}
 					else {
-						delete query.skip;
+						callback(getResponse(data.count));
 					}
 				}, function (err) { 
 					$log.error('Could not get data from server', err);
 				});
 			}
 			else {
+				callback(getResponse(limit));
+			}
+
+			function getResponse(count) {
 				delete query.skip;
+
+				return {
+					query: query,
+					map: map,
+					count: count
+				}
 			}
 		}
 
@@ -161,20 +170,50 @@ angular.module('bchz.service', ['ngResource'])
 			var wrapped = angular.fromJson(data);
 
 			angular.forEach(wrapped.list, function (value, index) {
-				if (value.courts) {
-					value.summary = va(value.courts)
-						.groupBy(function (c) { return c.sport })
-						.orderBy(function (c) { return c.key });
-				}
-
+				value.summary = value.courts && getSummary(value.courts);
 				wrapped.list[index] = new Place(value);
 			});
 
 			return wrapped;
 		}
+
+		function transformGet(data, header) {
+			var wrapped = angular.fromJson(data);
+
+			wrapped.summary = wrapped.courts && getSummary(wrapped.courts);
+
+			return wrapped;
+		}
+
+		function getSummary(courts) {
+			return va(courts)
+				.groupBy(function (c) { return c.sport })
+				.orderBy(function (c) { return c.key });
+		}
 	}])
-	.factory('Sport', ['$resource', function($resource) {
-		return $resource('/api/sport', null, {
-			list: { url: '/api/sport/list', method: 'GET', isArray: true }
-		});
+	.factory('Sport', ['$resource', '$rootScope', '$cacheFactory', function($resource, $rootScope, $cacheFactory) {
+		var Sport = $resource('/api/sport', null, {
+				list: { url: '/api/sport/list', method: 'GET', isArray: true }
+			}),
+			siteCache = $cacheFactory.get('site') || $cacheFactory('site');
+
+		Sport.getByName = function getSport(sport, callback) {
+			var sports = siteCache.get('sports'),
+				result;
+
+			if (!sports) {
+				Sport.list(function (sports) {
+					siteCache.put('sports', sports);
+					getSport(sport, callback);
+				});
+			}
+			else {
+				result = va(sports)
+					.first(function (s) { return s.url == sport || s.name == sport });
+
+				callback(result);
+			}
+		}
+
+		return Sport;
 	}]);

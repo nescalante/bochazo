@@ -42,9 +42,13 @@ body {
 	margin-left: 4px;
 }
 
-html.full-screen, html.full-screen body, html.full-screen .body-content, html.full-screen div[ng-view] {
+html.full-screen, html.full-screen body, html.full-screen .body-content, html.full-screen div[ng-view], html.full-screen .row.full-height, html.full-screen .row.full-height > div {
 	height: 100%;
 	min-height: 100%;
+}
+
+html.full-screen .row.full-height + .row {
+	padding-top: 20px;
 }
 
 html.full-screen .body-content {
@@ -60,4 +64,23 @@ html.full-screen div[ng-view] {
 html.full-screen .body-content h2:first-child {
 	position: absolute;
 	top: 70px;
+}
+
+#map-add {
+	height: 300px; 
+	width: 100%;
+	margin-top: 10px;
+}
+
+#map-detail {
+	height: 360px;
+}
+
+#map-general, #map-home {
+	height: 100%;
+}
+
+.map-canvas {
+	border: 4px solid @brand-primary;
+	box-shadow: 1px 1px 4px #666;
 }

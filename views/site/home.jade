@@ -1,0 +1,16 @@
+h2 ¿Dónde querés jugar?
+
+.row.full-height
+	.col-md-8
+		#map-home.map-canvas map
+	.col-md-4
+		.alert.alert-success
+			p
+				strong {{count}}
+				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}} en nuestra base de datos.
+		.alert.alert-info Si aún no encontraste tu complejo podés usar el buscador que aparece arriba en la barra de navegación, o bien hacer una 
+			a.alert-link(href='/busqueda') búsqueda avanzada
+			| .
+.row
+	p otro contenido
+	p mas contenido

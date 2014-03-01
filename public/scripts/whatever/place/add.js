@@ -52,7 +52,6 @@ angular.module("bchz").controller(
 
 			place.$save(function (result) {
 				$log.info('Place saved as ' + result._id);
-
 				$location.path('/canchas/' + result._id);
 			}, function (err) {
 				$log.error('Place could not be saved', err);

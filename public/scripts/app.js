@@ -1,6 +1,7 @@
 angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
-	.run(function ($rootScope, $http, $location, $window, $q, Sport) {
+	.run(function ($rootScope, $http, $location, $window, $q, Sport, appName) {
 		$rootScope.sports = Sport.list();
+		$rootScope.name = appName;
 
 		$rootScope.back = function () {
 			$window.history.back();
@@ -53,7 +54,7 @@ angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
 		$locationProvider.html5Mode(true);
 
 		$routeProvider
-			.when('/', { controller: 'HomeCtrl', templateUrl: '/place/search.html' })
+			.when('/', { controller: 'HomeCtrl', templateUrl: '/site/home.html' })
 			.when('/busqueda', { controller: 'PlaceSearchCtrl', templateUrl: '/place/search.html' })
 			.when('/listado', { controller: 'PlaceListCtrl', templateUrl: '/place/list.html' })
 			.when('/mapa', { controller: 'MapCtrl', templateUrl: '/site/map.html' })
@@ -67,4 +68,5 @@ angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
 			}, templateUrl: '/place/detail.html' })
 			.when('/404', { templateUrl: '/site/404.html' })
 			.otherwise({ templateUrl: '/site/404.html' });
-	});
+	})
+	.constant('appName', 'Bochazo');

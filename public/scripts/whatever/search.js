@@ -1,7 +1,7 @@
 angular.module("bchz").controller(
 	'PlaceSearchCtrl', 
-	['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 
-	function ($http, $scope, $rootScope, $location, $routeParams, $window) {
+	['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 'Sport',
+	function ($http, $scope, $rootScope, $location, $routeParams, $window, Sport) {
 		$window.document.title = 'Búsqueda de canchas';
 		var params = {};
 
@@ -19,14 +19,9 @@ angular.module("bchz").controller(
 		$scope.surfaces = [];
 		$scope.players = [];
 
-		if ($routeParams.sport && $rootScope.sports) {
-			$scope.sport = getSport($rootScope.sports);
-		}
-		else if ($rootScope.sport) {
-			$rootScope.sports.$promise.then(function(sports) {
-				$scope.sport = getSport(sports);
-			});
-		}
+		Sport.getByName($routeParams.sport, function (result) {
+			$scope.sport = result;
+		});
 
 		angular.forEach(params.surfaces, function (item) { $scope.surfaces[item] = true; });
 		angular.forEach(params.players, function (item) { $scope.players[item] = true; });
@@ -72,7 +67,7 @@ angular.module("bchz").controller(
 			$location.path('/canchas/listado').search(query);
 		};
 
-		function getSport(source) {
-			return source.first(function (s) { return s.url == $routeParams.sport || s.name == $routeParams.sport });
+		function getSport(source, sport) {
+			return source.first(function (s) { return s.url == sport || s.name == sport });
 		}
 	}]);
