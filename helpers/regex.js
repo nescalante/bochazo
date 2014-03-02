@@ -1,3 +1,5 @@
+'use strict';
+
 var latinize = require('./string').latinize;
 
 module.exports = {
@@ -11,6 +13,6 @@ module.exports = {
 				return charMap[match]; 
 			});
 
-		return new RegExp(query, 'i')
+		return new RegExp(query, 'i');
 	}
 };

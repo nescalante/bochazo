@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	latinize: function latinize(value) {
 		var translate = /[áéíóúÁÉÍÓÚ]/g,

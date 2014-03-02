@@ -1,4 +1,5 @@
 'use strict';
+
 var mongoose = require('mongoose'),
 	stringHelper = require('../helpers').string,
 	schema = new mongoose.Schema({

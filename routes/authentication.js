@@ -1,3 +1,5 @@
+'use strict';
+
 var passport = require('passport'),
 	GoogleStrategy = require('passport-google').Strategy;
 
