@@ -3,7 +3,7 @@ h2 Búsqueda de canchas
 p Ingresá a continuación los parámetros para tu búsqueda
 	form.form-horizontal(name='search')
 		.form-group
-			label.control-label.col-sm-3(for='') Deporte
+			label.control-label.col-sm-3(for='sport') Deporte
 			.col-sm-6
 				select#sport.form-control(name='sport', ng-model='sport', ng-options='t.name for t in sports')
 					option(value='') [Seleccioná un deporte]
@@ -35,6 +35,12 @@ p Ingresá a continuación los parámetros para tu búsqueda
 					span.label.label-primary(ng-repeat='tag in tags') {{tag}}
 						button.close(type='button', ng-click='$parent.tags = removeTag(tag, $parent.tags)') &times;
 					input#tags(type='text', name='tags', maxlength='18', placeholder='{{tags.length == 0 ? "Algún servicio" : null}}', ng-model='currentTag', ng-class='{ "text-danger": validateTag(currentTag, tags) }', ng-enter='currentTag = addTag(currentTag, tags)', ng-comma='currentTag = addTag(currentTag, tags)', ng-focus='tagFocused = true', ng-blur='tagFocused = false')
+		.form-group
+			.col-sm-offset-3.col-sm-6
+				.checkbox
+					label
+						input#show-map(type='checkbox', ng-model='showMap')
+						| Quiero ver el mapa de canchas
 		.form-group
 			.col-sm-offset-3.col-sm-6
 				button.btn.btn-primary(type='submit', ng-click='submit()') ¡Buscar!

@@ -27,10 +27,15 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 				| Hacé click 
 				a.alert-link(href='', ng-click='newSearch()') acá
 				| &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
-		.alert.alert-info(ng-show='userAddress && count > 0') 
-			| Los complejos se listarán mostrando primero los más cercanos a 
-			a.alert-link.hint--top.hint--rounded(href='', data-hint='{{userAddress}}') tú posición
-			| .
+		.alert.alert-info
+			p(ng-show='userAddress && count > 0')
+				| Los complejos se listarán mostrando primero los más cercanos a 
+				a.alert-link.hint--top.hint--rounded(href='', data-hint='{{userAddress}}') tú posición
+				| .
+			p
+				| También podés buscar tu complejo en el 
+				a.alert-link.hint--top.hint--rounded(href='/mapa', data-hint='{{userAddress}}') mapa de canchas
+				| .
 		article.place(ng-repeat='place in places')
 			.content
 				a(href='/canchas/{{place._id}}')

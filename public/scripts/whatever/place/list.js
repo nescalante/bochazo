@@ -5,7 +5,11 @@ angular.module("bchz").controller(
 		$window.document.title = 'Búsqueda de canchas';
 
 		$scope.params = $routeParams;
-		$scope.hasParams = !!($routeParams.query || $routeParams.surfaces || $routeParams.players || $routeParams.locations || $routeParams.tags);
+		$scope.hasParams = !!($routeParams.query || 
+			($routeParams.surfaces && $routeParams.surfaces.length) || 
+			($routeParams.players && $routeParams.players.length) || 
+			($routeParams.locations && $routeParams.locations.length) || 
+			($routeParams.tags && $routeParams.tags.length));
 		$scope.places = [];
 
 		angular.forEach(['surfaces', 'players', 'locations', 'tags'], function (item) {
