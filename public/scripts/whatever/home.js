@@ -10,6 +10,11 @@ angular.module("bchz").controller(
 			$rootScope.fullScreen = false;
 		});
 
+		$scope.focusSearch = function () {
+			angular.element(".navbar input[type=search]")
+				.focus();
+		};
+
 		Geolocation.get(function (err, coords) {
 			var query = {
 					latitude: (coords && coords.latitude) || Geolocation.default.latitude,
@@ -17,7 +22,7 @@ angular.module("bchz").controller(
 				};
 
 			map.setCenter({ lat: query.latitude, lng: query.longitude });
-			map.setZoom(coords ? 13: 6);
+			map.setZoom(coords ? 13 : 6);
 			google.maps.event.trigger(map, 'resize');
 
 			Place.fillMap(map, query, function (result) {

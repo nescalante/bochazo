@@ -8,7 +8,9 @@ h2 ¿Dónde querés jugar?
 			p
 				strong {{count}}
 				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}} en nuestra base de datos.
-		.alert.alert-info Si aún no encontraste tu complejo podés usar el buscador que aparece arriba en la barra de navegación, o bien hacer una 
+		.alert.alert-info Si aún no encontraste tu complejo podés usar el 
+			a.alert-link(href='', ng-click='focusSearch()') buscador
+			| &nbsp;que aparece arriba en la barra de navegación, o bien hacer una 
 			a.alert-link(href='/busqueda') búsqueda avanzada
 			| .
 .row
