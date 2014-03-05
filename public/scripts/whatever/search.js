@@ -28,7 +28,9 @@ angular.module("bchz").controller(
 
 		$scope.submit = function () {
 			var surfaces = [],
-				players = [];
+				players = [],
+				query,
+				path;
 
 			if ($scope.currentLocation) {
 				$rootScope.addTag($scope.currentLocation, $scope.locations);
@@ -56,15 +58,16 @@ angular.module("bchz").controller(
 				}
 			}
 
-			var query = {
+			query = {
 				locations: $scope.locations,
 				tags: $scope.tags,
 				sport: ($scope.sport && $scope.sport.url) || '',
 				surfaces: surfaces,
 				players: players
 			};
+			path = $scope.showMap ? '/mapa' : '/canchas/listado';
 
-			$location.path('/canchas/listado').search(query);
+			$location.path(path).search(query);
 		};
 
 		function getSport(source, sport) {

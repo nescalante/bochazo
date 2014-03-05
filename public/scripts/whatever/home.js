@@ -2,7 +2,9 @@ angular.module("bchz").controller(
 	'HomeCtrl', 
 	['$scope', '$rootScope', '$location', '$window', 'appName', 'Geolocation', 'Place',
 	function ($scope, $rootScope, $location, $window, appName, Geolocation, Place) {
-		var map = new google.maps.Map($window.document.getElementById('map-home'));
+		var map = new google.maps.Map($window.document.getElementById('map-home')),
+			query = {},
+			places = [];
 
 		$window.document.title = appName;
 		$rootScope.fullScreen = true;
@@ -15,18 +17,29 @@ angular.module("bchz").controller(
 				.focus();
 		};
 
+		$scope.reloadMap = function () {
+			if ($scope.sport) {
+				query.sport = $scope.sport.name;
+			}
+
+			angular.forEach(places, function (item) {
+				item.deleteMarker && item.deleteMarker();
+			});
+
+			Place.fillMap(map, query, function (result) {
+				$scope.count = result.count;
+				places = result.places;
+			});
+		}
+
 		Geolocation.get(function (err, coords) {
-			var query = {
-					latitude: (coords && coords.latitude) || Geolocation.default.latitude,
-					longitude: (coords && coords.longitude) || Geolocation.default.longitude
-				};
+			query.latitude = (coords && coords.latitude) || Geolocation.default.latitude;
+			query.longitude = (coords && coords.longitude) || Geolocation.default.longitude;
 
 			map.setCenter({ lat: query.latitude, lng: query.longitude });
 			map.setZoom(coords ? 13 : 6);
 			google.maps.event.trigger(map, 'resize');
 
-			Place.fillMap(map, query, function (result) {
-				$scope.count = result.count;
-			});
+			$scope.reloadMap();
 		});
 	}]);

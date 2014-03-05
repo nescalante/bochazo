@@ -1,18 +1,24 @@
-h2 ¿Dónde querés jugar?
+h2 ¿Qué querés jugar?
 
 .row.full-height
-	.col-md-8
+	.col-md-8.map-select
+		.select-fix
+			select#sport.form-control(name='sport', ng-model='sport', ng-options='t.name for t in sports', ng-change='reloadMap()')
+				option(value='') [Seleccioná un deporte]
 		#map-home.map-canvas map
-	.col-md-4
+	.col-md-4.visible-md.visible-lg
 		.alert.alert-success
 			p
 				strong {{count}}
-				| &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}} en nuestra base de datos.
+				| &nbsp;complejo{{count == 1 ? '' : 's'}} {{sport ? 'con canchas de ' + sport.name + ' ' : ''}}encontrado{{count == 1 ? '' : 's'}} en nuestra base de datos.
 		.alert.alert-info Si aún no encontraste tu complejo podés usar el 
 			a.alert-link(href='', ng-click='focusSearch()') buscador
 			| &nbsp;que aparece arriba en la barra de navegación, o bien hacer una 
 			a.alert-link(href='/busqueda') búsqueda avanzada
 			| .
 .row
-	p otro contenido
-	p mas contenido
+	.col-md-8
+		p otro contenido
+		p mas contenido
+	.col-md-4
+		p otra columna

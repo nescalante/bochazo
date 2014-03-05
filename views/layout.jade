@@ -8,6 +8,7 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 		link(rel='stylesheet', href='/components/hint.css/hint.css')
 		link(rel='stylesheet', href='/styles/bootstrap/bootstrap.css')
 		link(rel='stylesheet', href='/styles/site/layout.css')
+		link(rel='stylesheet', href='/styles/site/home.css')
 		link(rel='stylesheet', href='/styles/site/place.css')
 		link(rel='search', type='application/opensearchdescription+xml' title=title href='/opensearch.xml')
 	body
@@ -41,9 +42,11 @@ html(ng-app='bchz', ng-class='{ "full-screen": fullScreen }')
 			div(ng-view, ng-hide='templateUrl')
 				block content
 			div(ng-include='templateUrl', ng-show='templateUrl')
-			hr(ng-hide='fullScreen')
-			footer(ng-hide='fullScreen') &copy; 2013 - 
-				= title
+			.clearfix
+			div(ng-hide='hideFooter')
+				hr.visible-md.visible-lg
+				footer.visible-md.visible-lg &copy; 2013 - 
+					= title
 				
 		script(src='/components/jquery/dist/jquery.js')
 		script(src='/components/bootstrap/js/collapse.js')
