@@ -21,6 +21,9 @@ angular.module("bchz").controller(
 			if ($scope.sport) {
 				query.sport = $scope.sport.name;
 			}
+			else {
+				query.sport = undefined;
+			}
 
 			angular.forEach(places, function (item) {
 				item.deleteMarker && item.deleteMarker();
@@ -30,7 +33,7 @@ angular.module("bchz").controller(
 				$scope.count = result.count;
 				places = result.places;
 			});
-		}
+		};
 
 		Geolocation.get(function (err, coords) {
 			query.latitude = (coords && coords.latitude) || Geolocation.default.latitude;
