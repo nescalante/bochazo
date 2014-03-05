@@ -3,7 +3,7 @@ h2 Mapa de canchas
 .row.full-height
 	.col-md-8
 		#map-general.map-canvas map
-	.col-md-4
+	.col-md-4.visible-md.visible-lg
 		.alert(ng-show='count != null', ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
 			p
 				strong {{count}}
