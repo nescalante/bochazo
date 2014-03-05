@@ -48,7 +48,7 @@ angular.module('bchz.service', ['ngResource'])
 			}
 		}
 	})
-	.factory('InfoWindow', ['$http', '$compile', '$rootScope', '$cacheFactory', function ($http, $compile, $rootScope, $cacheFactory) {
+	.factory('InfoWindow', ['$http', '$compile', '$rootScope', '$cacheFactory', '$timeout', function ($http, $compile, $rootScope, $cacheFactory, $timeout) {
 		return {
 			get: function get (place, callback) {
 				var cache = $cacheFactory.get('iw') || $cacheFactory('iw'),
@@ -73,7 +73,7 @@ angular.module('bchz.service', ['ngResource'])
 					element = $compile(template)(iwScope);
 
 					// wait for digest
-					setTimeout(function () {
+					$timeout(function () {
 						var iw = new google.maps.InfoWindow({
 							content: element.html()
 						});
