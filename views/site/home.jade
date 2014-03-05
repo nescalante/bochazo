@@ -8,9 +8,11 @@ h2 ¿Qué querés jugar?
 		#map-home.map-canvas map
 	.col-md-4.visible-md.visible-lg
 		.alert.alert-success
-			p
+			p(ng-show='count != null')
 				strong {{count}}
 				| &nbsp;complejo{{count == 1 ? '' : 's'}} {{sport ? 'con canchas de ' + sport.name + ' ' : ''}}encontrado{{count == 1 ? '' : 's'}} en nuestra base de datos.
+			p(ng-hide='count != null')
+				| Buscando ...
 		.alert.alert-info Si aún no encontraste tu complejo podés usar el 
 			a.alert-link(href='', ng-click='focusSearch()') buscador
 			| &nbsp;que aparece arriba en la barra de navegación, o bien hacer una 
@@ -18,7 +20,18 @@ h2 ¿Qué querés jugar?
 			| .
 .row
 	.col-md-8
-		p otro contenido
-		p mas contenido
+		h3 Canchas por deporte
+		ul
+			li(ng-repeat='s in sports')
+				a(href='/canchas/listado/{{s.url}}') 
+					h4 {{s.name}}
+				h5 Superficie
+				ul
+					li(ng-repeat='surface in s.surfaces')
+						a(href='/canchas/listado/{{s.url}}?surfaces={{surface}}') {{surface}}
+				h5(ng-show='s.allowPlayers') Jugadores
+				ul
+					li(ng-repeat='players in s.allowedPlayers')
+						a(href='/canchas/listado/{{s.url}}?players={{players}}') {{players}} jugadores
+
 	.col-md-4
-		p otra columna

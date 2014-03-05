@@ -18,9 +18,12 @@ angular.module("bchz").controller(
 		$scope.tags = params.tags;
 		$scope.surfaces = [];
 		$scope.players = [];
+		$scope.showMap = !!$routeParams.fromMap;
 
 		Sport.getByName($routeParams.sport, function (result) {
-			$scope.sport = result;
+			if (result) {
+				$scope.sport = va($rootScope.sports).first(function (s) { return s.url == result.url });
+			}
 		});
 
 		angular.forEach(params.surfaces, function (item) { $scope.surfaces[item] = true; });

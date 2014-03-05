@@ -1,7 +1,7 @@
 angular.module("bchz").controller(
 	'PlaceListCtrl', 
-	['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 'Geolocation', 'Place', 'Sport',
-	function ($http, $scope, $rootScope, $location, $routeParams, $window, Geolocation, Place, Sport) {
+	['$http', '$scope', '$rootScope', '$location', '$routeParams', '$log', '$window', 'Geolocation', 'Place', 'Sport',
+	function ($http, $scope, $rootScope, $location, $routeParams, $log, $window, Geolocation, Place, Sport) {
 		$window.document.title = 'Búsqueda de canchas';
 
 		$scope.params = $routeParams;
@@ -23,12 +23,12 @@ angular.module("bchz").controller(
 			$scope.params.sport = result.name;
 		});
 
-		$scope.newSearch = function () {
+		$scope.redirectTo = function (path) {
 			angular.forEach(['skip', 'latitude', 'longitude'], function (item) {
 				delete $routeParams[item];
 			});
 
-			$location.path('/busqueda').search($routeParams);
+			$location.path(path).search($routeParams);
 		};
 
 		$scope.showMore = function showMore() {

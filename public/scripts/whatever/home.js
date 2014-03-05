@@ -29,6 +29,8 @@ angular.module("bchz").controller(
 				item.deleteMarker && item.deleteMarker();
 			});
 
+			$scope.count = null;
+
 			Place.fillMap(map, query, function (result) {
 				$scope.count = result.count;
 				places = result.places;
