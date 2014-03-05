@@ -21,6 +21,7 @@
     "hint.css": "~1.3.1",
     "angular-resource": "~1.2.7",
     "bootstrap": "~3.0.3",
-    "very-array": "*"
+    "very-array": "*",
+    "jquery": "~2.1.0"
   }
 }

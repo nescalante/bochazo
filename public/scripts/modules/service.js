@@ -150,7 +150,9 @@ angular.module('bchz.service', ['ngResource'])
 				});
 			}
 			else {
-				callback(getResponse(limit));
+				if (callback) {
+					callback(getResponse(limit));
+				}
 			}
 
 			function getResponse(count) {
