@@ -1,7 +1,7 @@
 'use strict';
 
-var service = require('../service'),
-	express = require('express'),
+var express = require('express'),
+	service = require('../controllers'),
 	place = require('./place'),
 	sport = require('./sport'),
 	partial = require('./partial'),
