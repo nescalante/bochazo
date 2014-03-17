@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'MapCtrl', 
 	['$scope', '$rootScope', '$location', '$routeParams', '$window', '$compile', 'Geolocation', 'Place', 'Sport', 'InfoWindow',
 	function ($scope, $rootScope, $location, $routeParams, $window, $compile, Geolocation, Place, Sport, InfoWindow) {
+		'use strict';
+
 		var map = new google.maps.Map($window.document.getElementById('map-general')),
 			query = $routeParams;
 

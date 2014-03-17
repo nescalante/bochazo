@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'LayoutCtrl', 
 	['$rootScope', '$scope', '$location', '$route', '$log',
 	function ($rootScope, $scope, $location, $route, $log) {
+		'use strict';
+
 		$scope.$on('$routeChangeSuccess', function(event, current) {
 			$rootScope.templateUrl = null;
 

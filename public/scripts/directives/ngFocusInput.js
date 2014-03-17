@@ -1,6 +1,8 @@
 angular.module("bchz").directive(
 	'ngFocusInput', 
 	function($timeout) {
+		'use strict';
+
 		return {
 			link: function(scope, element, attrs) {
 				element.bind('click', function() {

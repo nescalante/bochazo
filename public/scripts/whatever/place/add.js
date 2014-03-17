@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'PlaceAddCtrl', 
 	['$http', '$scope', '$rootScope', '$location', '$window', '$log', 'Geolocation', 'Place', 
 	function ($http, $scope, $rootScope, $location, $window, $log, Geolocation, Place) {
+		'use strict';
+		
 		var map = new google.maps.Map($window.document.getElementById('map-add'));
 
 		$window.document.title = 'Agregá tu cancha';

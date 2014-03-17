@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'PlaceDetailCtrl', 
 	['$http', '$scope', '$location', '$window', '$log', 'place', 
 	function ($http, $scope, $location, $window, $log, place) {
+		'use strict';
+
 		var map;
 
 		if (typeof(google) !== 'undefined') {

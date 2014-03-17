@@ -1,3 +1,5 @@
+'use strict';
+
 if (typeof(google) !== "undefined") {
 	~function(m) {
 		var geocoder = new google.maps.Geocoder(),

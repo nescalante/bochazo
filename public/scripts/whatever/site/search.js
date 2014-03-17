@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'PlaceSearchCtrl', 
 	['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 'Sport',
 	function ($http, $scope, $rootScope, $location, $routeParams, $window, Sport) {
+		'use strict';
+
 		$window.document.title = 'Búsqueda de canchas';
 		var params = {};
 

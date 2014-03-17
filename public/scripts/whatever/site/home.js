@@ -2,6 +2,8 @@ angular.module("bchz").controller(
 	'HomeCtrl', 
 	['$scope', '$rootScope', '$location', '$window', 'appName', 'Geolocation', 'Place',
 	function ($scope, $rootScope, $location, $window, appName, Geolocation, Place) {
+		'use strict';
+
 		var map = new google.maps.Map($window.document.getElementById('map-home')),
 			query = {},
 			places = [];
