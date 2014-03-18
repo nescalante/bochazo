@@ -27,12 +27,6 @@ angular.module("bchz").controller(
 		});
 
 		$scope.save = function () {
-			if ($scope.currentTag) {
-				$rootScope.addTag($scope.currentTag, $scope.tags);
-
-				$scope.currentTag = '';
-			}
-
 			var phones = $scope.phone ? 
 				va($scope.phone.split(','))
 					.select(function (p) { return p.trim() })

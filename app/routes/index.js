@@ -35,7 +35,7 @@ module.exports = exports = function (app) {
 
 	function manageResource(resource) {
 		return function (req, res) {
-			res.render('index', { title: 'BCHZ' });
+			res.render('layout', { title: 'BCHZ' });
 		};
 	}
 };

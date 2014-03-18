@@ -37,18 +37,6 @@ angular.module("bchz").controller(
 				query,
 				path;
 
-			if ($scope.currentLocation) {
-				$rootScope.addTag($scope.currentLocation, $scope.locations);
-
-				$scope.currentLocation = '';
-			}
-
-			if ($scope.currentTag) {
-				$rootScope.addTag($scope.currentTag, $scope.tags);
-
-				$scope.currentTag = '';
-			}
-
 			if ($scope.sport && $scope.sport.allowPlayers) {
 				for (var p in $scope.players) {
 					if ($scope.players.hasOwnProperty(p)) {
@@ -74,8 +62,4 @@ angular.module("bchz").controller(
 
 			$location.path(path).search(query);
 		};
-
-		function getSport(source, sport) {
-			return source.first(function (s) { return s.url == sport || s.name == sport });
-		}
 	}]);
