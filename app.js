@@ -1,10 +1,10 @@
 'use strict';
 
 var express = require('express'),
-	http = require('http'),
-	path = require('path'),
-	app = express(),
-	routes = require('./app/routes');
+    http = require('http'),
+    path = require('path'),
+    app = express(),
+    routes = require('./app/routes');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -27,22 +27,22 @@ app.use('/components', express.static(path.join(__dirname, 'bower_components')))
 routes(app);
 
 app.use(function(req, res, next) {
-	res.status(404);
+    res.status(404);
 
-	if (req.accepts('html')) {
-		res.render('index', { title: 'BCHZ' });
-		return;
-	}
+    if (req.accepts('html')) {
+        res.render('index', { title: 'BCHZ' });
+        return;
+    }
 
-	if (req.accepts('json')) {
-		res.send({ message: 'Resource not found' });
-		return;
-	}
+    if (req.accepts('json')) {
+        res.send({ message: 'Resource not found' });
+        return;
+    }
 
-	res.type('txt').send('Not found');
+    res.type('txt').send('Not found');
 });
 
 http.createServer(app)
-	.listen(app.get('port'), function() {
-		console.log('Running on port ' + app.get('port'));
-	});
+    .listen(app.get('port'), function() {
+        console.log('Running on port ' + app.get('port'));
+    });
