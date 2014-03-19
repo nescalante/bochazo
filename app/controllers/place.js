@@ -1,8 +1,8 @@
 'use strict';
 
 var async = require('async'),
-    Place = require('../model/place'),
-    Sport = require('../model/sport'),
+    Place = require('../models/place'),
+    Sport = require('../models/sport'),
     regex = require('../helpers').regex;
 
 exports.get = function (id, callback) {

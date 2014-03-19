@@ -1,6 +1,6 @@
 'use strict';
 
-var Sport = require('../model/sport'),
+var Sport = require('../models/sport'),
     async = require('async');
 
 exports.list = function (callback) {
