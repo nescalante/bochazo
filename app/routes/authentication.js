@@ -5,7 +5,7 @@ var passport = require('passport'),
 
 module.exports = exports = function (app) {
     var loggedIn = function(req, res) {
-            res.render('index', { title: 'Logeado' });
+            res.render('layout', { title: 'Logeado' });
         },
         logout = function(req, res) {
             req.logout();

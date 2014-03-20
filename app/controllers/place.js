@@ -34,8 +34,8 @@ exports.list = function (params, callback) {
         }, 
         function (task) {
             var query = Place.find({});
-
-            applyFilters(query, params)
+            
+            applyFilters(query, params, true)
                 .count(function (err, data) {
                     task(null, {
                         err: err, 
@@ -74,7 +74,7 @@ exports.count = function (model, callback) {
     new Place.count(callback);
 };
 
-function applyFilters(query, params) {
+function applyFilters(query, params, isCount) {
     if (params.sport) {
         query = query.where('courts.sport', regex.getAI(params.sport));
     }
@@ -114,7 +114,7 @@ function applyFilters(query, params) {
         query = query.in('courts.surface', createRegexArray(params.surfaces));
     }
 
-    if (params.latitude && params.longitude) {
+    if (!isCount && params.latitude && params.longitude) {
         query = query
             .where('location')
             .near({

@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
     res.status(404);
 
     if (req.accepts('html')) {
-        res.render('index', { title: 'BCHZ' });
+        res.render('layout', { title: 'BCHZ' });
         return;
     }
 
