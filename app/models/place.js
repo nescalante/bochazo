@@ -24,7 +24,7 @@ var mongoose = require('mongoose'),
 schema
     .virtual('latitude')
     .get(function () {
-        return this.location[0];
+        return this.location && this.location[0];
     })
     .set(function (latitude) {
         if (!this.location || this.location.length == 0) {
@@ -37,7 +37,7 @@ schema
 schema
     .virtual('longitude')
     .get(function () {
-        return this.location[1];
+        return this.location && this.location[1];
     })
     .set(function (longitude) {
         if (!this.location || this.location.length == 0) {
