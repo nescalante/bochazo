@@ -1,4 +1,4 @@
-angular.module("bchz").directive(
+angular.module('bchz').directive(
     'ngEnter', 
     function () {
         'use strict';

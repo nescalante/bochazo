@@ -1,4 +1,4 @@
-angular.module("bchz").controller(
+angular.module('bchz').controller(
     'MapCtrl', 
     ['$scope', '$rootScope', '$location', '$routeParams', '$window', '$compile', 'Geolocation', 'Place', 'Sport', 'InfoWindow',
     function ($scope, $rootScope, $location, $routeParams, $window, $compile, Geolocation, Place, Sport, InfoWindow) {

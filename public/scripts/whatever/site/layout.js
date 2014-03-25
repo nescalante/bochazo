@@ -1,4 +1,4 @@
-angular.module("bchz").controller(
+angular.module('bchz').controller(
     'LayoutCtrl', 
     ['$rootScope', '$scope', '$location', '$route', '$log',
     function ($rootScope, $scope, $location, $route, $log) {

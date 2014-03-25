@@ -1,4 +1,4 @@
-angular.module("bchz").controller(
+angular.module('bchz').controller(
     'PlaceListCtrl', 
     ['$http', '$scope', '$rootScope', '$location', '$routeParams', '$log', '$window', 'Geolocation', 'Place', 'Sport',
     function ($http, $scope, $rootScope, $location, $routeParams, $log, $window, Geolocation, Place, Sport) {

@@ -1,4 +1,4 @@
-angular.module("bchz").controller(
+angular.module('bchz').controller(
     'HomeCtrl', 
     ['$scope', '$rootScope', '$location', '$window', 'appName', 'Geolocation', 'Place',
     function ($scope, $rootScope, $location, $window, appName, Geolocation, Place) {

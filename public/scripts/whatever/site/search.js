@@ -1,4 +1,4 @@
-angular.module("bchz").controller(
+angular.module('bchz').controller(
     'PlaceSearchCtrl', 
     ['$http', '$scope', '$rootScope', '$location', '$routeParams', '$window', 'Sport',
     function ($http, $scope, $rootScope, $location, $routeParams, $window, Sport) {

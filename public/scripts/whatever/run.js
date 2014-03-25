@@ -1,4 +1,4 @@
-angular.module("bchz").run(
+angular.module('bchz').run(
     ['$rootScope', '$http', '$location', '$window', '$q', 'Sport', 'appName',
     function ($rootScope, $http, $location, $window, $q, Sport, appName) {
         'use strict';

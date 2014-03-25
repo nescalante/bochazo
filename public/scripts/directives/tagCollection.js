@@ -1,4 +1,4 @@
-angular.module("bchz").directive(
+angular.module('bchz').directive(
     'tagCollection', 
     ['$timeout', function ($timeout) {
         'use strict';
