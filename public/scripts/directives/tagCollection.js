@@ -20,12 +20,12 @@ angular.module('bchz').directive(
 
                 // styling events
                 input
-                .bind('focus', function() {
-                    element.addClass('focused');
-                })
-                .bind('blur', function() {
-                    element.removeClass('focused');
-                });
+                    .bind('focus', function() {
+                        element.addClass('focused');
+                    })
+                    .bind('blur', function() {
+                        element.removeClass('focused');
+                    });
 
                 scope.$watchCollection(attrs.tagCollectionModel, function () {
                     if (scope[attrs.tagCollectionModel] && scope[attrs.tagCollectionModel].length > 0) {
@@ -37,7 +37,7 @@ angular.module('bchz').directive(
                 });
 
                 input
-                .bind("keydown keyup keypress blur", function (event) {
+                    .bind("keydown keyup keypress blur", function (event) {
                         // validate input
                         if(event.type == 'keyup') {
                             validateTag(input, input.val(), scope[attrs.tagCollectionModel]);
