@@ -51,6 +51,7 @@ angular.module('bchz').controller(
                 $location.path('/canchas/' + result._id);
             }, function (err) {
                 $log.error('Place could not be saved', err);
+                $window.scrollTo(0, 0);
             });
         };
 
