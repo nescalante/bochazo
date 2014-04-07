@@ -76,8 +76,10 @@ angular.module('bchz.service').factory(
                         fillMap(map, query, callback, data.count, places);
                     }
                     else {
-                        callback(getResponse(data.count, places));
+                        delete query.skip;
                     }
+
+                    callback(getResponse(data.count, places));
                 }, function (err) { 
                     $log.error('Could not get data from server', err);
                 });
@@ -89,10 +91,12 @@ angular.module('bchz.service').factory(
             }
 
             function getResponse(count, places) {
-                delete query.skip;
+                var responseQuery = JSON.parse(JSON.stringify(query)); // object clone
+
+                delete responseQuery.skip;
 
                 return {
-                    query: query,
+                    query: responseQuery,
                     map: map,
                     count: count,
                     places: places

@@ -13,7 +13,7 @@ exports.list = function (params, callback) {
     params = params || {};
 
     var skip = params.skip || 0,
-        limit = params.limit || (params.shortened ? 50 : 10),
+        limit = params.limit || (params.shortened ? 200 : 20),
         fields = params.shortened ? 
             { 'location': 1, 'description': 1 } :
             { 'addressComponents': 0, 'id': 0, 'courts.isActive': 0 };
