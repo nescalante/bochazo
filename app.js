@@ -1,48 +1,14 @@
 'use strict';
 
-var express = require('express'),
-    http = require('http'),
-    path = require('path'),
-    app = express(),
-    routes = require('./app/routes');
+// create express app
+var app = require('express')();
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'app/views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.cookieParser());
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.session({ secret: 'sarasa' }));
-app.use(app.router);
+// initializate
+require('./app/config')(app);
 
-// public folders
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'bower_components')));
-
-routes(app);
-
-app.use(function(req, res, next) {
-    res.status(404);
-
-    if (req.accepts('html')) {
-        res.render('layout', { title: 'BCHZ' });
-        return;
-    }
-
-    if (req.accepts('json')) {
-        res.send({ message: 'Resource not found' });
-        return;
-    }
-
-    res.type('txt').send('Not found');
-});
-
-http.createServer(app)
+// start server
+require('http')
+    .createServer(app)
     .listen(app.get('port'), function() {
-        console.log('Running on port ' + app.get('port'));
+        console.log('Running ' + app.get('env') + ' environment on port ' + app.get('port'));
     });

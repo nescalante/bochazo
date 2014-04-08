@@ -28,7 +28,7 @@ exports.list = function (params, callback) {
                 .exec(function (err, data) {
                     task(null, { 
                         err: err, 
-                        data: data 
+                        data: data
                     });
                 });
         }, 
@@ -44,6 +44,8 @@ exports.list = function (params, callback) {
                 });
         }
     ], function (err, results) {
+        var list, count;
+
         err = err || results[0].err || results[1].err;
 
         if (err) {
@@ -52,9 +54,17 @@ exports.list = function (params, callback) {
             });
         }
         else {
+            list = params.shortened ? results[0].data.map(function (i) { return { 
+                _id: i._id,
+                description: i.description,
+                latitude: i.latitude,
+                longitude: i.longitude
+            }; }) : results[0].data;
+            count = results[1].data;
+
             callback(null, {
-                list: results[0].data,
-                count: results[1].data
+                list: list,
+                count: count
             });
         }
     });
