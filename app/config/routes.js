@@ -1,3 +1,5 @@
+'use strict';
+
 var routes = require('../routes');
 
 module.exports = exports = function (app) {

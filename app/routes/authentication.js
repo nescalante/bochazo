@@ -1,4 +1,5 @@
-var passport = require('passport');
+var passport = require('passport'),
+    service = require('../controllers');
 
 module.exports = exports = {
     loggedIn: function (req, res) {
@@ -7,6 +8,11 @@ module.exports = exports = {
     logout: function (req, res) {
         req.logout();
         res.redirect('/');
+    },
+    login: function(identifier, profile, done) {
+        profile.identifier = identifier;
+
+        service.user.login(profile, done);
     },
     ensureAuthenticated: function (req, res, next) {
         if (req.isAuthenticated()) { 
