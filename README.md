@@ -4,5 +4,4 @@
 
 `npm install`
 
-fun
-
+`bower install`
