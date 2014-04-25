@@ -12,6 +12,9 @@ module.exports = function (grunt) {
             client: ['public/scripts/**/*.js'],
             test: ['test/*.js']
         },
+        lesslint: {
+            src: ['public/styles/site/*.less']
+        },
         mochaTest: {
             test: {
                 src: ['test/*.js']
@@ -21,7 +24,7 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('lint', ['jshint', 'lesslint']);
     grunt.registerTask('test', ['mochaTest']);
     grunt.registerTask('default', ['lint', 'test']);
     grunt.registerTask('build', ['lint', 'test']);

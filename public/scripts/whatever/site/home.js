@@ -14,6 +14,10 @@ angular.module('bchz').controller(
             $rootScope.fullScreen = false;
         });
 
+        $scope.$on('$viewContentLoaded', function () { 
+            map.fix();
+        });
+
         $scope.focusSearch = function () {
             angular.element(".navbar input[type=search]")
                 .focus();

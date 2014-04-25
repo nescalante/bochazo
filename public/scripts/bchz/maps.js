@@ -22,6 +22,14 @@ if (typeof(google) !== "undefined") {
                 });
             };
 
+        m.fix = function () {
+            var map = this;
+
+            setTimeout(function () {
+                google.maps.event.trigger(map, 'resize');
+            }, 1);
+        };
+
         m.addMarker = function addMarker(options) {
             var map = this;
 
