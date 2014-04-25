@@ -1,16 +1,21 @@
 angular.module('bchz').controller(
     'MapCtrl', 
-    ['$scope', '$rootScope', '$location', '$routeParams', '$window', '$compile', 'Geolocation', 'Place', 'Sport', 'InfoWindow',
-    function ($scope, $rootScope, $location, $routeParams, $window, $compile, Geolocation, Place, Sport, InfoWindow) {
+    ['$scope', '$rootScope', '$location', '$routeParams', '$window', '$compile', 'fullScreen', 'Geolocation', 'Place', 'Sport', 'InfoWindow',
+    function ($scope, $rootScope, $location, $routeParams, $window, $compile, fullScreen, Geolocation, Place, Sport, InfoWindow) {
         'use strict';
 
         var map = new google.maps.Map($window.document.getElementById('map-general')),
             query = $routeParams;
 
         $window.document.title = 'Mapa de canchas';
-        $rootScope.fullScreen = $rootScope.hideFooter = true;
+
+        // set controller as map full screen mode
+        fullScreen($scope, map);
+
+        $rootScope.hideFooter = true;
+
         $scope.$on('$destroy', function () { 
-            $rootScope.fullScreen = $rootScope.hideFooter = false;
+            $rootScope.hideFooter = false;
         });
 
         $scope.params = $routeParams;

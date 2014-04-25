@@ -1,7 +1,7 @@
 angular.module('bchz').controller(
     'HomeCtrl', 
-    ['$scope', '$rootScope', '$location', '$window', 'appName', 'Geolocation', 'Place',
-    function ($scope, $rootScope, $location, $window, appName, Geolocation, Place) {
+    ['$scope', '$rootScope', '$location', '$window', 'appName', 'fullScreen', 'Geolocation', 'Place',
+    function ($scope, $rootScope, $location, $window, appName, fullScreen, Geolocation, Place) {
         'use strict';
 
         var map = new google.maps.Map($window.document.getElementById('map-home')),
@@ -9,14 +9,6 @@ angular.module('bchz').controller(
             places = [];
 
         $window.document.title = appName;
-        $rootScope.fullScreen = true;
-        $scope.$on('$destroy', function () { 
-            $rootScope.fullScreen = false;
-        });
-
-        $scope.$on('$viewContentLoaded', function () { 
-            map.fix();
-        });
 
         $scope.focusSearch = function () {
             angular.element(".navbar input[type=search]")
@@ -44,6 +36,9 @@ angular.module('bchz').controller(
                 places = result.places;
             });
         };
+
+        // set controller as map full screen mode
+        fullScreen($scope, map);
 
         Geolocation.get(function (err, coords) {
             query.latitude = (coords && coords.latitude) || Geolocation.default.latitude;
