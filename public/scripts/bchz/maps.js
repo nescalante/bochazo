@@ -1,7 +1,9 @@
 'use strict';
 
 if (typeof(google) !== "undefined") {
-    ~function(m) {
+    var google = google || {};
+
+    (function(m) {
         var geocoder = new google.maps.Geocoder(),
             mapResults = function (results) {
                 return results.map(function (i) {
@@ -23,7 +25,7 @@ if (typeof(google) !== "undefined") {
         m.addMarker = function addMarker(options) {
             var map = this;
 
-            if (options.latLng || (options.latitude != null && options.longitude != null)) {
+            if (options.latLng || (options.latitude && options.longitude)) {
                 var latLng = options.latLng || new google.maps.LatLng(options.latitude, options.longitude),
                     marker = new google.maps.Marker({ 
                         flat: false,
@@ -89,5 +91,5 @@ if (typeof(google) !== "undefined") {
 
             return map.marker;
         };
-    }(google.maps.Map.prototype);
+    })(google.maps.Map.prototype);
 }

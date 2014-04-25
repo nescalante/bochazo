@@ -77,10 +77,10 @@ angular.module('bchz').directive(
                         for (var i = 0; i < tags.length; i++) {
                             var currentTag = tags[i].trim().toLowerCase();
 
-                            if (isValidTag(currentTag, target) && currentTag != '') {
+                            if (isValidTag(currentTag, target) && currentTag) {
                                 target.push(currentTag);
                             }
-                            else if (currentTag != '') {
+                            else if (currentTag) {
                                 invalidTags.push(currentTag);
                             }
                         }
@@ -93,7 +93,7 @@ angular.module('bchz').directive(
 
                 function removeTag(tag, target) {
                     if (target) {
-                        target = va(target).where(function (t) { return t != tag });
+                        target = va(target).where(function (t) { return t != tag; });
                     }
 
                     return target;

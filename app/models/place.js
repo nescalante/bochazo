@@ -27,7 +27,7 @@ schema
         return this.location && this.location[0];
     })
     .set(function (latitude) {
-        if (!this.location || this.location.length == 0) {
+        if (!this.location || !this.location.length) {
             this.location = [0, 0];
         }
 
@@ -40,7 +40,7 @@ schema
         return this.location && this.location[1];
     })
     .set(function (longitude) {
-        if (!this.location || this.location.length == 0) {
+        if (!this.location || !this.location.length) {
             this.location = [0, 0];
         }
 

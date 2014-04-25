@@ -28,7 +28,9 @@ angular.module('bchz').controller(
             }
 
             angular.forEach(places, function (item) {
-                item.deleteMarker && item.deleteMarker();
+                if (item.deleteMarker) {
+                    item.deleteMarker();
+                }
             });
 
             $scope.count = null;

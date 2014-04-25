@@ -6,7 +6,7 @@ var express = require('express'),
 module.exports = function (app) {
     // all environments
     app.set('port', process.env.PORT || 3000);
-    app.set('title', process.env.TITLE || 'BCHZ')
+    app.set('title', process.env.TITLE || 'BCHZ');
     app.set('views', folders.views);
     app.set('view engine', 'jade');
 
@@ -51,5 +51,4 @@ module.exports = function (app) {
 
         res.type('txt').send('Not found');
     });
-}
-
+};

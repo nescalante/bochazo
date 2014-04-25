@@ -50,5 +50,5 @@ angular.module('bchz.service').factory(
                 latitude: -34.6037232,
                 longitude: -58.38159310000003
             }
-        }
+        };
     }]);

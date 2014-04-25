@@ -29,8 +29,8 @@ angular.module('bchz').controller(
         $scope.save = function () {
             var phones = $scope.phone ? 
                 va($scope.phone.split(','))
-                    .select(function (p) { return p.trim() })
-                    .where(function (p) { return p != '' })
+                    .select(function (p) { return p.trim(); })
+                    .where(function (p) { return !!p; })
                     .distinct() : 
                 [];
 
@@ -106,8 +106,8 @@ angular.module('bchz').controller(
                     surface: c.surface,
                     isIndoor: c.isIndoor
                 }; })
-                .groupBy(function (c) { return c.key.sport })
-                .orderBy(function (c) { return c.key });
+                .groupBy(function (c) { return c.key.sport; })
+                .orderBy(function (c) { return c.key; });
         });
 
         $scope.addCourt = function(court) {
@@ -116,14 +116,14 @@ angular.module('bchz').controller(
                     sport: court.sport.name || court.sport,
                     players: court.players,
                     surface: court.surface,
-                    isIndoor: court.isIndoor,
+                    isIndoor: court.isIndoor
                 });
             }
-        }
+        };
 
         $scope.removeCourt = function(court) {
-            $scope.courts = $scope.courts.where(function (c) { return c != court });
-        }
+            $scope.courts = $scope.courts.where(function (c) { return c != court; });
+        };
 
         function assignResult(result, assignAddress) {
             if (assignAddress !== false) {

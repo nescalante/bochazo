@@ -25,4 +25,4 @@ exports.login = function (profile, done) {
             done(null, user);
         }
     });
-}
+};

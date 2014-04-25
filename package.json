@@ -18,16 +18,32 @@
     "mongoose": "~3.8.3",
     "async": "~0.2.9",
     "passport": "~0.1.18",
+    "passport-local": "~1.0.0",
     "passport-google": "~0.3.0",
     "passport-facebook": "~1.0.2",
     "bower": "~1.2.8",
-    "very-array": "0.0.2",
-    "commander": "~2.1.0"
+    "commander": "~2.1.0",
+    "very-array": "~0.4.3",
+    "latinize": "~0.1.0",
+    "array-assert": "0.0.1"
   },
   "scripts": {
-    "postinstall": "node node_modules/bower/bin/bower install"
+    "postinstall": "node node_modules/bower/bin/bower install",
+    "test": "node test"
   },
   "devDependencies": {
-    "grunt": "~0.4.4"
+    "grunt": "~0.4.4",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-shell": "~0.6.4",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.4.0",
+    "assert": "~1.1.1",
+    "usemin-patterns": "~0.1.4",
+    "grunt-usemin": "~2.1.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "tape": "~2.12.3",
+    "mocha": "~1.18.2",
+    "grunt-mocha-test": "~0.10.2"
   }
 }

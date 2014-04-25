@@ -8,7 +8,7 @@ exports.list = function (callback) {
 };
 
 Sport.find({}, function (err, data) {
-    if (data.length == 0) {
+    if (!data.length) {
         new Sport({
             name: 'Fútbol',
             icon: 'glyphicons_329_soccer_ball.png',
@@ -31,4 +31,4 @@ Sport.find({}, function (err, data) {
 
         console.log('Initial sport data added.');
     }
-})
+});

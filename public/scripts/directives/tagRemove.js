@@ -14,5 +14,5 @@ angular.module('bchz').directive(
                     scope.$emit('tag.remove', tag, parent);
                 });
             }
-        }
+        };
     }]);

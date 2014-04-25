@@ -27,10 +27,12 @@ angular.module('bchz').controller(
             }
         });
 
-        $scope.params.sport && Sport.getByName($scope.params.sport, function (result) {
-            $window.document.title = 'Canchas de ' + result.name;
-            $scope.params.sport = result.name;
-        });
+        if ($scope.params.sport) {
+            Sport.getByName($scope.params.sport, function (result) {
+                $window.document.title = 'Canchas de ' + result.name;
+                $scope.params.sport = result.name;
+            });
+        }
 
         $scope.redirectTo = function (path) {
             angular.forEach(['skip', 'latitude', 'longitude'], function (item) {

@@ -24,7 +24,7 @@ angular.module('bchz').controller(
 
         Sport.getByName($routeParams.sport, function (result) {
             if (result) {
-                $scope.sport = va($rootScope.sports).first(function (s) { return s.url == result.url });
+                $scope.sport = va($rootScope.sports).first(function (s) { return s.url == result.url; });
             }
         });
 
@@ -39,15 +39,15 @@ angular.module('bchz').controller(
 
             if ($scope.sport && $scope.sport.allowPlayers) {
                 for (var p in $scope.players) {
-                    if ($scope.players.hasOwnProperty(p)) {
-                        $scope.players[p] && players.push(p);
+                    if ($scope.players.hasOwnProperty(p) && $scope.players[p]) {
+                         players.push(p);
                     }
                 }
             }
 
             for (var s in $scope.surfaces) {
-                if ($scope.surfaces.hasOwnProperty(s)) {
-                    $scope.surfaces[s] && surfaces.push(s);
+                if ($scope.surfaces.hasOwnProperty(s) && $scope.surfaces[s]) {
+                    surfaces.push(s);
                 }
             }
 

@@ -21,11 +21,11 @@ angular.module('bchz.service').factory(
             }
             else {
                 result = va(sports)
-                    .first(function (s) { return s.url == sport || s.name == sport });
+                    .first(function (s) { return s.url == sport || s.name == sport; });
 
                 callback(result);
             }
-        }
+        };
 
         return Sport;
     }]);

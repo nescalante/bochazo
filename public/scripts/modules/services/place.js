@@ -28,10 +28,13 @@ angular.module('bchz.service').factory(
                 if (iw) {
                     iw.open(map, marker);
 
-                    last && last != iw && last.close();
+                    if (last && last != iw) {
+                        last.close();
+                    }
+
                     iwCache.put('last', iw);
                 }
-            }
+            };
 
             item.getMarker = function () {
                 return marker;
@@ -100,9 +103,9 @@ angular.module('bchz.service').factory(
                     map: map,
                     count: count,
                     places: places
-                }
+                };
             }
-        }
+        };
 
         return Place;
 
@@ -127,7 +130,7 @@ angular.module('bchz.service').factory(
 
         function getSummary(courts) {
             return va(courts)
-                .groupBy(function (c) { return c.sport })
-                .orderBy(function (c) { return c.key });
+                .groupBy(function (c) { return c.sport; })
+                .orderBy(function (c) { return c.key; });
         }
     }]);

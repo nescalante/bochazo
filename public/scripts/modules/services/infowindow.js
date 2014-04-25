@@ -38,5 +38,5 @@ angular.module('bchz.service').factory(
                     }, 1);
                 }
             }
-        }
+        };
     }]);

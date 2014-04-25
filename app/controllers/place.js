@@ -104,23 +104,19 @@ function applyFilters(query, params, isCount) {
             ]);
     }
 
-    if (params.locations)
-    {
+    if (params.locations) {
         query = query.in('addressComponents.longName', createRegexArray(params.locations));
     }
 
-    if (params.tags)
-    {
+    if (params.tags) {
         query = query.in('tags', createRegexArray(params.tags));
     }
 
-    if (params.players)
-    {
+    if (params.players) {
         query = query.in('courts.players', createArray(params.players));
     }
 
-    if (params.surfaces)
-    {
+    if (params.surfaces) {
         query = query.in('courts.surface', createRegexArray(params.surfaces));
     }
 
