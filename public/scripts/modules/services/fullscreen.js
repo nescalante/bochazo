@@ -4,8 +4,12 @@ angular.module('bchz.service').factory(
     function ($rootScope) {
         'use strict';
 
-        return function set(scope, map) {
+        return function set(scope, map, hideFooter) {
             $rootScope.fullScreen = true;
+
+            if (hideFooter) {
+                $rootScope.hideFooter = true;
+            }
 
             scope.$on('$destroy', function () { 
                 $rootScope.fullScreen = false;

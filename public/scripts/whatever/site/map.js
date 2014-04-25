@@ -5,18 +5,13 @@ angular.module('bchz').controller(
         'use strict';
 
         var map = new google.maps.Map($window.document.getElementById('map-general')),
-            query = $routeParams;
+            query = $routeParams,
+            hideFooter = true;
 
         $window.document.title = 'Mapa de canchas';
 
         // set controller as map full screen mode
-        fullScreen($scope, map);
-
-        $rootScope.hideFooter = true;
-
-        $scope.$on('$destroy', function () { 
-            $rootScope.hideFooter = false;
-        });
+        fullScreen($scope, map, hideFooter);
 
         $scope.params = $routeParams;
         $scope.hasParams = !!($routeParams.query || 
