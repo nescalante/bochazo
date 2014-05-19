@@ -50,12 +50,13 @@ module.exports = function (grunt) {
                 },
                 options: {
                     sourceMap: true,
-                    sourceMapFilename: 'public/styles/site.css.map'
+                    sourceMapFilename: 'public/styles/site.css.map',
+                    sourceMapBasepath: 'public/styles'
                 }
             },
             production: {
                 files: {
-                    'public/styles/site.css': 'public/styles/site/all.less',
+                    'public/styles/site.css': 'public/styles/site/all.less'
                 },
                 options: {
                     cleancss: true
