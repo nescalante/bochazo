@@ -25,7 +25,6 @@ module.exports = function (app) {
     }
 
     // public folders
-    app.use(require('less-middleware')({ src: folders.public }));
     app.use('/', express.static(folders.public));
     app.use('/components', express.static(folders.components));
 

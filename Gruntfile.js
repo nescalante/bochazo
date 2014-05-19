@@ -13,12 +13,17 @@ module.exports = function (grunt) {
             test: ['test/*.js']
         },
         lesslint: {
-            src: ['public/styles/site/*.less']
+            src: ['public/styles/site/bootstrap.less', 'public/styles/site/site.less']
         },
         mochaTest: {
             test: {
                 src: ['test/*.js']
             }
+        },
+        clean: {
+            bootstrap: ['public/styles/bootstrap'],
+            fonts: ['public/fonts'],
+            css: ['public/styles/site.css', 'public/styles/site.css.map']
         },
         copy: {
             bootstrap: {
@@ -30,7 +35,7 @@ module.exports = function (grunt) {
             fonts: {
                 cwd: 'bower_components/bootstrap/dist/fonts/',
                 src: '**',
-                dest: 'public/styles/fonts/',
+                dest: 'public/fonts/',
                 expand: true
             },
             variables: {
@@ -41,8 +46,19 @@ module.exports = function (grunt) {
         less: {
             development: {
                 files: {
-                    'public/styles/site.css': 'public/styles/site/site.less',
-                    'public/styles/bootstrap.css': 'public/styles/bootstrap/bootstrap.less',
+                    'public/styles/site.css': 'public/styles/site/all.less',
+                },
+                options: {
+                    sourceMap: true,
+                    sourceMapFilename: 'public/styles/site.css.map'
+                }
+            },
+            production: {
+                files: {
+                    'public/styles/site.css': 'public/styles/site/all.less',
+                },
+                options: {
+                    cleancss: true
                 }
             }
         }
@@ -50,9 +66,11 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('lint', ['copy:bootstrap', 'copy:fonts', 'copy:variables', 'jshint', 'lesslint']);
-    grunt.registerTask('compileless', [])
+    grunt.registerTask('init', ['clean', 'copy:bootstrap', 'copy:fonts', 'copy:variables'])
+    grunt.registerTask('lint', ['jshint', 'lesslint']);
     grunt.registerTask('test', ['mochaTest']);
+    grunt.registerTask('compile', ['less:development']);
     grunt.registerTask('default', ['lint', 'test']);
-    grunt.registerTask('build', ['lint', 'test']);
+    grunt.registerTask('build', ['init', 'lint', 'test', 'compile']);
+    grunt.registerTask('deploy', ['init', 'lint', 'test', 'less:production', 'clean:bootstrap']);
 };
