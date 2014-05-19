@@ -46,7 +46,9 @@ html(ng-app='bchz' ng-class='{ "full-screen": fullScreen }')
             .clearfix
             div(ng-hide='hideFooter')
                 hr.visible-md.visible-lg
-                footer.visible-md.visible-lg &copy; 2013 - 
+                footer.visible-md.visible-lg &copy; 
+                    = year
+                    | - 
                     = title
         
         //- libraries

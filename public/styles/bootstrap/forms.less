@@ -275,7 +275,7 @@ input[type="checkbox"],
 
 .help-block {
   display: block; // account for any element using help-block
-  margin-top: 4px;
+  margin-top: 5px;
   margin-bottom: 10px;
   color: lighten(@text-color, 25%); // lighten the text some for contrast
 }
@@ -307,6 +307,11 @@ input[type="checkbox"],
     // In navbar-form, allow folks to *not* use `.form-group`
     .form-control {
       display: inline-block;
+    }
+
+    // Override `width: 100%;` when not within a `.form-group`
+    select.form-control {
+      width: auto;
     }
 
     // Remove default margin on radios/checkboxes that were used for stacking, and
@@ -344,6 +349,12 @@ input[type="checkbox"],
     margin-top: 0;
     margin-bottom: 0;
     padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+  }
+  // Account for padding we're adding to ensure the alignment and of help text
+  // and other content below items
+  .radio,
+  .checkbox {
+    min-height: @line-height-computed + (@padding-base-vertical + 1);
   }
 
   // Make form groups behave like rows
