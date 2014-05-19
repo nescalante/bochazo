@@ -14,7 +14,7 @@ module.exports = exports = function (app) {
         '/canchas/:id'
     ].forEach(function (route) {
         app.get(route, function (req, res) {
-            res.render('layout', { title: app.get('title') });
+            res.render('layout', { title: app.get('title'), year: new Date(Date.now()).getFullYear() });
         });
     });
 
