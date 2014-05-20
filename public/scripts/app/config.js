@@ -1,5 +1,5 @@
 angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
-    .config(function ($routeProvider, $locationProvider) {
+    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         'use strict';
 
         $locationProvider.html5Mode(true);
@@ -19,7 +19,7 @@ angular.module('bchz', ['ngRoute', 'ngAnimate', 'bchz.service'])
             }, templateUrl: '/place/detail.html' })
             .when('/404', { templateUrl: '/site/404.html' })
             .otherwise({ templateUrl: '/site/404.html' });
-    })
+    }])
     .constant('appName', 'Bochazo');
 
 angular.module('bchz.service', ['ngResource']);

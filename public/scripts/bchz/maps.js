@@ -1,7 +1,7 @@
-'use strict';
+(function (google) {
+    'use strict';
 
-if (typeof(google) !== "undefined") {
-    var google = google || {};
+    if (!google) return;
 
     (function(m) {
         var geocoder = new google.maps.Geocoder(),
@@ -100,4 +100,4 @@ if (typeof(google) !== "undefined") {
             return map.marker;
         };
     })(google.maps.Map.prototype);
-}
+})(google);
