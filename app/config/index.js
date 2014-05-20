@@ -26,7 +26,6 @@ module.exports = function (app) {
 
     // public folders
     app.use('/', express.static(folders.public));
-    app.use('/components', express.static(folders.components));
 
     // set authentication
     require('./authentication')(app);
