@@ -1,7 +1,7 @@
 var passport = require('passport'),
     service = require('../controllers');
 
-module.exports = exports = {
+module.exports = {
     loggedIn: function (req, res) {
         res.render('layout', { status: 'loggedIn' });
     },

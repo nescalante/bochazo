@@ -2,7 +2,14 @@
 
 var routes = require('../routes');
 
-module.exports = exports = function (app) {
+module.exports = function (app) {
+
+    var layoutConfig = { 
+        title: app.get('title'), 
+        year: new Date().getFullYear(),
+        env: app.get('env')
+    };
+
     // root source
     [   '/',
         '/busqueda',
@@ -14,7 +21,7 @@ module.exports = exports = function (app) {
         '/canchas/:id'
     ].forEach(function (route) {
         app.get(route, function (req, res) {
-            res.render('layout', { title: app.get('title'), year: new Date(Date.now()).getFullYear() });
+            res.render('layout', layoutConfig);
         });
     });
 

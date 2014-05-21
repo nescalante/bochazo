@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = exports = {
+module.exports = {
     place: require('./place'),
     sport: require('./sport'),
     partial: require('./partial'),

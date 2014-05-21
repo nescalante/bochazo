@@ -5,7 +5,7 @@ var passport = require('passport'),
     routes = require('../routes'),
     realm = 'http://localhost:3000/' || process.env.REALM;
 
-module.exports = exports = function (app) {
+module.exports = function (app) {
     passport.use(new GoogleStrategy({
         returnURL: realm + 'auth/google/return',
         realm: realm

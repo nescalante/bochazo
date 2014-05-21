@@ -16,3 +16,6 @@ npm-debug.log
 node_modules
 bower_components
 src/client/styles/bootstrap
+src/client/styles/*.css
+src/client/styles/*.css.map
+src/client/fonts

@@ -51,12 +51,14 @@ module.exports = function (grunt) {
         },
         clean: {
             bootstrap: ['<%= dirs.styles %>/bootstrap'],
-            deploy: ['<%= dirs.deploy %>']
+            fonts: ['<%= dirs.client %>/fonts'],
+            deploy: ['<%= dirs.deploy %>'],
+            css: ['<%= dirs.styles %>/hint.css', '<%= dirs.styles %>/site.css.map', '<%= dirs.styles %>/site.css']
         },
         copy: {
             hint: {
-                src: '<%= dirs.components %>/hint.css/hint.min.css',
-                dest: '<%= dirs.deploy %>/hint.css'
+                src: '<%= dirs.components %>/hint.css/hint.css',
+                dest: '<%= dirs.styles %>/hint.css'
             },
             bootstrap: {
                 cwd: '<%= dirs.components %>/bootstrap/less/',
@@ -64,7 +66,13 @@ module.exports = function (grunt) {
                 dest: '<%= dirs.styles %>/bootstrap/',
                 expand: true
             },
-            fonts: {
+            fontsdev: {
+                cwd: '<%= dirs.components %>/bootstrap/dist/fonts/',
+                src: '**',
+                dest: '<%= dirs.client %>/fonts/',
+                expand: true
+            },
+            fontsprod: {
                 cwd: '<%= dirs.components %>/bootstrap/dist/fonts/',
                 src: '**',
                 dest: '<%= dirs.deploy %>/fonts/',
@@ -88,11 +96,11 @@ module.exports = function (grunt) {
         less: {
             development: {
                 files: {
-                    '<%= dirs.deploy %>/site.css': '<%= dirs.styles %>/site/all.less',
+                    '<%= dirs.styles %>/site.css': '<%= dirs.styles %>/site/all.less',
                 },
                 options: {
                     sourceMap: true,
-                    sourceMapFilename: '<%= dirs.deploy %>/site.css.map',
+                    sourceMapFilename: '<%= dirs.styles %>/site.css.map',
                     sourceMapBasepath: '<%= dirs.styles %>'
                 }
             },
@@ -106,14 +114,18 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            options: {
-                banner: '(function (angular) {' + grunt.util.linefeed + grunt.util.linefeed, 
-                footer: grunt.util.linefeed + '})(angular);',
-                separator: grunt.util.linefeed + grunt.util.linefeed
+            scripts: {
+                src: libs.concat(scripts),
+                dest: '<%= dirs.deploy %>/bchz.js',
+                options: {
+                    banner: '(function () {' + grunt.util.linefeed + grunt.util.linefeed, 
+                    footer: grunt.util.linefeed + '})();',
+                    separator: grunt.util.linefeed + grunt.util.linefeed
+                }
             },
-            main: {
-                src: scripts.concat(libs),
-                dest: '<%= dirs.deploy %>/bchz.js'
+            css: {
+                src: ['<%= dirs.deploy %>/site.css', '<%= dirs.components %>/hint.css/hint.min.css'],
+                dest: '<%= dirs.deploy %>/site.css'
             }
         },
         uglify: {
@@ -141,12 +153,13 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('init:lint', ['clean'])
     grunt.registerTask('lint', ['copy:bootstrap', 'copy:variables', 'jshint', 'lesslint']);
     grunt.registerTask('test', ['mochaTest']);
-    grunt.registerTask('components', ['copy:hint', 'copy:fonts', 'copy:images', 'copy:opensearch']);
-    grunt.registerTask('compile:dev', ['less:development', 'clean:bootstrap', 'concat', 'components']);
-    grunt.registerTask('compile:prod', ['less:production', 'clean:bootstrap', 'concat', 'uglify:production', 'components']);
+    grunt.registerTask('components', ['copy:hint', 'copy:images', 'copy:opensearch']);
+    grunt.registerTask('components:dev', ['components', 'copy:fontsdev']);
+    grunt.registerTask('components:prod', ['components', 'copy:fontsprod']);
+    grunt.registerTask('compile:dev', ['less:development', 'clean:bootstrap', 'concat:scripts', 'components:dev']);
+    grunt.registerTask('compile:prod', ['less:production', 'clean:bootstrap', 'concat', 'uglify:production', 'components:prod']);
     
     grunt.registerTask('default', ['lint', 'test']);
     grunt.registerTask('build', ['clean', 'lint', 'test', 'compile:dev']);

@@ -25,7 +25,13 @@ module.exports = function (app) {
     }
 
     // public folders
-    app.use('/', express.static(folders.public));
+    if ('development' != app.get('env')) {
+        app.use('/', express.static(folders.build));
+    }
+    else {
+        app.use('/components', express.static(folders.components));
+        app.use('/', express.static(folders.public));
+    }
 
     // set authentication
     require('./authentication')(app);
