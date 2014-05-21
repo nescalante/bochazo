@@ -114,14 +114,18 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            scripts: {
-                src: libs.concat(scripts),
+            app: {
+                src: scripts,
                 dest: '<%= dirs.deploy %>/bchz.js',
                 options: {
-                    banner: '(function () {' + grunt.util.linefeed + grunt.util.linefeed, 
-                    footer: grunt.util.linefeed + '})();',
+                    banner: '(function (angular) {' + grunt.util.linefeed + grunt.util.linefeed, 
+                    footer: grunt.util.linefeed + '})(angular);',
                     separator: grunt.util.linefeed + grunt.util.linefeed
                 }
+            },
+            scripts: {
+                src: libs.concat(['<%= dirs.deploy %>/bchz.js']),
+                dest: '<%= dirs.deploy %>/bchz.js',
             },
             css: {
                 src: ['<%= dirs.deploy %>/site.css', '<%= dirs.components %>/hint.css/hint.min.css'],
@@ -155,10 +159,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('lint', ['copy:bootstrap', 'copy:variables', 'jshint', 'lesslint']);
     grunt.registerTask('test', ['mochaTest']);
-    grunt.registerTask('components', ['copy:hint', 'copy:images', 'copy:opensearch']);
-    grunt.registerTask('components:dev', ['components', 'copy:fontsdev']);
-    grunt.registerTask('components:prod', ['components', 'copy:fontsprod']);
-    grunt.registerTask('compile:dev', ['less:development', 'clean:bootstrap', 'concat:scripts', 'components:dev']);
+    grunt.registerTask('components', []);
+    grunt.registerTask('components:dev', ['copy:fontsdev', 'copy:hint']);
+    grunt.registerTask('components:prod', ['copy:opensearch', 'copy:images', 'copy:fontsprod']);
+    grunt.registerTask('compile:dev', ['less:development', 'clean:bootstrap', 'components:dev']);
     grunt.registerTask('compile:prod', ['less:production', 'clean:bootstrap', 'concat', 'uglify:production', 'components:prod']);
     
     grunt.registerTask('default', ['lint', 'test']);
