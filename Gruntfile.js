@@ -2,7 +2,7 @@
 
 module.exports = function (grunt) {
     var scripts = [
-        '<%= dirs.scripts %>/bchz/*.js', 
+        '<%= dirs.scripts %>/extensions/*.js', 
         '<%= dirs.scripts %>/app/*.js',
         '<%= dirs.scripts %>/directives/*.js', 
         '<%= dirs.scripts %>/modules/services/*.js', 
@@ -25,9 +25,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         dirs: {
-            scripts: 'public/scripts',
-            styles: 'public/styles',
-            fonts: 'public/fonts',
+            client: 'src/client',
+            scripts: 'src/client/scripts',
+            styles: 'src/client/styles',
+            images: 'src/client/images',
             deploy: 'build',
             components: 'bower_components'
         },
@@ -36,7 +37,7 @@ module.exports = function (grunt) {
                 reporter: require('jshint-stylish'),
                 jshintrc: true
             },
-            server: ['app/**/*.js'],
+            server: ['src/server/**/*.js'],
             client: ['<%= dirs.scripts %>/**/*.js'],
             test: ['test/*.js']
         },
@@ -50,10 +51,7 @@ module.exports = function (grunt) {
         },
         clean: {
             bootstrap: ['<%= dirs.styles %>/bootstrap'],
-            fonts: ['<%= dirs.fonts %>'],
-            css: ['<%= dirs.styles %>/site.css', '<%= dirs.styles %>/site.css.map'],
-            scripts: ['<%= dirs.scripts %>/bchz.js', '<%= dirs.scripts %>/bchz.min.js'],
-            deploy: ['<%= dirs.deploy %>'],
+            deploy: ['<%= dirs.deploy %>']
         },
         copy: {
             hint: {
@@ -77,11 +75,11 @@ module.exports = function (grunt) {
                 dest: '<%= dirs.styles %>/bootstrap/variables.less'
             },
             opensearch: {
-                src: 'public/opensearch.xml',
+                src: '<%= dirs.client %>/opensearch.xml',
                 dest: '<%= dirs.deploy %>/opensearch.xml',
             },
             images: {
-                cwd: 'public/images/',
+                cwd: '<%= dirs.images %>/',
                 src: '**',
                 dest: '<%= dirs.deploy %>/images/',
                 expand: true
@@ -109,11 +107,13 @@ module.exports = function (grunt) {
         },
         concat: {
             options: {
+                banner: '(function (angular) {' + grunt.util.linefeed + grunt.util.linefeed, 
+                footer: grunt.util.linefeed + '})(angular);',
                 separator: grunt.util.linefeed + grunt.util.linefeed
             },
             main: {
-                src: scripts,
-                dest: '<%= dirs.scripts %>/bchz.js'
+                src: scripts.concat(libs),
+                dest: '<%= dirs.deploy %>/bchz.js'
             }
         },
         uglify: {
@@ -133,8 +133,7 @@ module.exports = function (grunt) {
                     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> */' + grunt.util.linefeed + grunt.util.linefeed
                 },
                 files: {
-                    '<%= dirs.deploy %>/bchz.js': scripts,
-                    '<%= dirs.deploy %>/libs.js': libs
+                    '<%= dirs.deploy %>/bchz.js': ['<%= dirs.deploy %>/bchz.js']
                 }
             }
         }
@@ -142,13 +141,14 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('init:lint', ['clean', 'copy:bootstrap', 'copy:fonts', 'copy:variables'])
-    grunt.registerTask('lint', ['init:lint', 'jshint', 'lesslint']);
+    grunt.registerTask('init:lint', ['clean'])
+    grunt.registerTask('lint', ['copy:bootstrap', 'copy:variables', 'jshint', 'lesslint']);
     grunt.registerTask('test', ['mochaTest']);
-    grunt.registerTask('copysrc', ['copy:hint', 'copy:images', 'copy:opensearch']);
-    grunt.registerTask('compile:dev', ['less:development', 'uglify:development', 'copysrc']);
-    grunt.registerTask('compile:prod', ['less:production', 'uglify:production', 'copysrc']);
+    grunt.registerTask('components', ['copy:hint', 'copy:fonts', 'copy:images', 'copy:opensearch']);
+    grunt.registerTask('compile:dev', ['less:development', 'clean:bootstrap', 'concat', 'components']);
+    grunt.registerTask('compile:prod', ['less:production', 'clean:bootstrap', 'concat', 'uglify:production', 'components']);
+    
     grunt.registerTask('default', ['lint', 'test']);
-    grunt.registerTask('build', ['lint', 'test', 'compile:dev']);
-    grunt.registerTask('deploy', ['lint', 'test', 'compile:prod']);
+    grunt.registerTask('build', ['clean', 'lint', 'test', 'compile:dev']);
+    grunt.registerTask('deploy', ['clean', 'lint', 'test', 'compile:prod']);
 };

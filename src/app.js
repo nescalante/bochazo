@@ -4,7 +4,7 @@
 var app = require('express')();
 
 // initializate
-require('./app/config')(app);
+require('./server/config')(app);
 
 // start server
 require('http')

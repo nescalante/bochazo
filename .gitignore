@@ -15,6 +15,4 @@ build
 npm-debug.log
 node_modules
 bower_components
-public/styles/bootstrap
-public/styles/site.css*
-public/fonts
+src/client/styles/bootstrap

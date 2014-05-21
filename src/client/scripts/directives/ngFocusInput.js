@@ -1,6 +1,6 @@
 angular.module('bchz').directive(
     'ngFocusInput', 
-    function($timeout) {
+    ['$timeout', function($timeout) {
         'use strict';
 
         return {
@@ -12,4 +12,4 @@ angular.module('bchz').directive(
                 });
             }
         };
-    });
+    }]);

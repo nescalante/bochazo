@@ -2,7 +2,7 @@
   "name": "bchz",
   "version": "0.1.2",
   "description": "Bochazo",
-  "main": "app.js",
+  "main": "src/server.js",
   "author": {
     "name": "nescalante",
     "email": "nlante@gmail.com"
@@ -28,7 +28,10 @@
   },
   "scripts": {
     "postinstall": "node node_modules/bower/bin/bower install",
-    "test": "mocha"
+    "test": "mocha",
+    "start": "grunt build & node src/server/app",
+    "build": "grunt build",
+    "deploy": "grunt deploy"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

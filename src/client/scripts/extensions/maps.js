@@ -100,4 +100,4 @@
             return map.marker;
         };
     })(google.maps.Map.prototype);
-})(google);
+})(typeof google !== 'undefined' && google);
