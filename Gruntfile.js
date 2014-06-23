@@ -132,6 +132,15 @@ module.exports = function (grunt) {
                 dest: '<%= dirs.deploy %>/site.css'
             }
         },
+        watch: {
+            less: {
+                files: ['<%= dirs.styles %>/**/*.less'],
+                tasks: ['copy:bootstrap', 'copy:variables', 'less:development'],
+                options: {
+                    spawn: false,
+                },
+            },
+        },
         uglify: {
             development: {
                 options: {

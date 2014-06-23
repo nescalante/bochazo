@@ -6,7 +6,7 @@
 // Global values
 // --------------------------------------------------
 
-@navbar-default:         #aeaf70;
+@navbar-default:         #428b0a;
 
 // Grays
 // -------------------------
@@ -29,7 +29,7 @@
 // Scaffolding
 // -------------------------
 
-@body-bg:               #ffffbb;
+@body-bg:               #fff;
 @text-color:            @gray-dark;
 
 // Links
@@ -275,17 +275,17 @@
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
-@navbar-default-link-color:                #442;
-@navbar-default-link-hover-color:          darken(@navbar-default-link-color, 10%);
+@navbar-default-link-color:                #fff;
+@navbar-default-link-hover-color:          darken(@navbar-default-link-color, 0%);
 @navbar-default-link-hover-bg:             darken(@navbar-default-bg, 10%);
-@navbar-default-link-active-color:         #442;
+@navbar-default-link-active-color:         darken(@navbar-default-link-color, 0%);
 @navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
 @navbar-default-link-disabled-color:       #ccc;
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
 @navbar-default-brand-color:               @navbar-default-link-color;
-@navbar-default-brand-hover-color:         darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-hover-color:         @navbar-default-brand-color;
 @navbar-default-brand-hover-bg:            transparent;
 
 // Navbar toggle
@@ -625,7 +625,7 @@
 // -------------------------
 
 // Hr border color
-@hr-border:                   #ed9;
+@hr-border:                   @navbar-default;
 
 // Horizontal forms & lists
 @component-offset-horizontal: 180px;

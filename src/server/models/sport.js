@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    stringHelper = require('../helpers').string,
+    latinize = require('latinize'),
     schema = new mongoose.Schema({
         name: { type: String, required: true, trim: true },
         icon: { type: String, required: true, trim: true },
@@ -16,7 +16,7 @@ var mongoose = require('mongoose'),
     }, { toObject: { getters: true }, toJSON: { getters: true } });
 
 schema.virtual('url').get(function () {
-    return stringHelper.latinize(this.name).toLowerCase();
+    return latinize(this.name).toLowerCase();
 });
 
 module.exports = mongoose.model('sport', schema);

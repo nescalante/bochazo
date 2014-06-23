@@ -2,8 +2,7 @@
 
 var async = require('async'),
     Place = require('../models/place'),
-    Sport = require('../models/sport'),
-    regex = require('../helpers').regex;
+    Sport = require('../models/sport');
 
 exports.get = function (id, callback) {
     return Place.findOne({ _id: id }, callback);

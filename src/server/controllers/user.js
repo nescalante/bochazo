@@ -3,8 +3,6 @@
 var User = require('../models/user');
 
 exports.login = function (profile, done) {
-    var email = profile.emails[0].value;
-
     User.findOne({ _id: email }, function (err, user) {
         if (err) {
             done(err, null);
@@ -14,8 +12,8 @@ exports.login = function (profile, done) {
 
         if (!user) {
             new User({ 
-                _id: email,
-                email: email,
+                _id: profile.email,
+                email: profile.email,
                 displayName: profile.displayName,
                 identifier: profile.identifier
             }).save(done);

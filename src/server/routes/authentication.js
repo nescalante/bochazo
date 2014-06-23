@@ -9,8 +9,29 @@ module.exports = {
         req.logout();
         res.redirect('/');
     },
-    login: function(identifier, profile, done) {
+    login: function (identifier, password, done) {
+
+
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { 
+                return done(err); 
+            }
+            
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+                
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+
+            return done(null, user);
+        });
+    }));
+)
+    googleLogin: function(identifier, profile, done) {
         profile.identifier = identifier;
+        profile.email = profile.emails[0].value;
 
         service.user.login(profile, done);
     },

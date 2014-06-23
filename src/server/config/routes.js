@@ -3,7 +3,6 @@
 var routes = require('../routes');
 
 module.exports = function (app) {
-
     var layoutConfig = { 
         title: app.get('title'), 
         year: new Date().getFullYear(),
@@ -11,7 +10,8 @@ module.exports = function (app) {
     };
 
     // root source
-    [   '/',
+    [   
+        '/',
         '/busqueda',
         '/listado',
         '/mapa',

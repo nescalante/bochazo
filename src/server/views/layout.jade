@@ -42,6 +42,8 @@ html(ng-app='bchz' ng-class='{ "full-screen": fullScreen }')
                         button.btn.btn-default(type='submit' ng-click='search()') 
                             span.glyphicon.glyphicon-search
                     ul.nav.navbar-nav.navbar-right
+                        li
+                            a(href='/ingresar') Ingresar
         .container.body-content
             div(ng-view ng-hide='templateUrl')
             div(ng-include='templateUrl' ng-show='templateUrl')

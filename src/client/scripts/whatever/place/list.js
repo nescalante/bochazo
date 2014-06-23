@@ -35,7 +35,7 @@ angular.module('bchz').controller(
             $location.path(path).search($routeParams);
         };
 
-        $scope.showMore = function showMore() {
+        $scope.showMore = (function showMore() {
             if ($scope.count != $scope.places.length) {
                 $scope.loading = true;
 
@@ -63,5 +63,5 @@ angular.module('bchz').controller(
             }
 
             return showMore;
-        }();
+        })();
     }]);
