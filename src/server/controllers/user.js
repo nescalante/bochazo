@@ -3,7 +3,7 @@
 var User = require('../models/user');
 
 exports.login = function (profile, done) {
-    User.findOne({ _id: email }, function (err, user) {
+    User.findOne({ _id: profile.email }, function (err, user) {
         if (err) {
             done(err, null);
             

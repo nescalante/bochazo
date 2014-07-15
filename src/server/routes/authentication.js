@@ -10,8 +10,6 @@ module.exports = {
         res.redirect('/');
     },
     login: function (identifier, password, done) {
-
-
         User.findOne({ username: username }, function (err, user) {
             if (err) { 
                 return done(err); 
@@ -27,8 +25,7 @@ module.exports = {
 
             return done(null, user);
         });
-    }));
-)
+    },
     googleLogin: function(identifier, profile, done) {
         profile.identifier = identifier;
         profile.email = profile.emails[0].value;

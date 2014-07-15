@@ -2,7 +2,8 @@
 
 var async = require('async'),
     Place = require('../models/place'),
-    Sport = require('../models/sport');
+    Sport = require('../models/sport'),
+    arrayAssert = require('array-assert');
 
 exports.get = function (id, callback) {
     return Place.findOne({ _id: id }, callback);
@@ -85,11 +86,11 @@ exports.count = function (model, callback) {
 
 function applyFilters(query, params, isCount) {
     if (params.sport) {
-        query = query.where('courts.sport', regex.getAI(params.sport));
+        query = query.where('courts.sport', arrayAssert(params.sport)[0]);
     }
     
     if (params.query) {
-        var term = regex.getAI(params.query);
+        var term = arrayAssert(params.query)[0];
 
         query = query
             .or([
@@ -104,19 +105,19 @@ function applyFilters(query, params, isCount) {
     }
 
     if (params.locations) {
-        query = query.in('addressComponents.longName', createRegexArray(params.locations));
+        query = query.in('addressComponents.longName', arrayAssert(params.locations));
     }
 
     if (params.tags) {
-        query = query.in('tags', createRegexArray(params.tags));
+        query = query.in('tags', arrayAssert(params.tags));
     }
 
     if (params.players) {
-        query = query.in('courts.players', createArray(params.players));
+        query = query.in('courts.players', toArray(params.players));
     }
 
     if (params.surfaces) {
-        query = query.in('courts.surface', createRegexArray(params.surfaces));
+        query = query.in('courts.surface', arrayAssert(params.surfaces));
     }
 
     if (!isCount && params.latitude && params.longitude) {
@@ -130,22 +131,11 @@ function applyFilters(query, params, isCount) {
     return query;
 }
 
-function createRegexArray(param) {
-    if (!(param instanceof Array))
-    {
-        param = [param];
+function toArray(term) {
+    if (!(term instanceof Array)) {
+        return [term];
     }
-
-    return param.map(function (l) { 
-        return regex.getAI(l);
-    });
-}
-
-function createArray(param) {
-    if (!(param instanceof Array))
-    {
-        param = [param];
+    else {
+        return term;
     }
-
-    return param;
 }
