@@ -85,10 +85,6 @@ exports.count = function (model, callback) {
 };
 
 function applyFilters(query, params, isCount) {
-    if (params.sport) {
-        query = query.where('courts.sport', arrayAssert(params.sport)[0]);
-    }
-    
     if (params.query) {
         var term = arrayAssert(params.query)[0];
 
@@ -104,21 +100,13 @@ function applyFilters(query, params, isCount) {
             ]);
     }
 
-    if (params.locations) {
-        query = query.in('addressComponents.longName', arrayAssert(params.locations));
-    }
-
-    if (params.tags) {
-        query = query.in('tags', arrayAssert(params.tags));
-    }
-
-    if (params.players) {
-        query = query.in('courts.players', toArray(params.players));
-    }
-
-    if (params.surfaces) {
-        query = query.in('courts.surface', arrayAssert(params.surfaces));
-    }
+    query = filter(query)
+        .on('courts.sport').with(params.sport)
+        .on('courts.surface').with(params.surfaces)
+        .on('addressComponents.longName').with(params.locations)
+        .on('tags').with(params.tags)
+        .on('courts.players').withArray(params.players)
+        .apply();
 
     if (!isCount && params.latitude && params.longitude) {
         query = query
@@ -131,11 +119,43 @@ function applyFilters(query, params, isCount) {
     return query;
 }
 
-function toArray(term) {
-    if (!(term instanceof Array)) {
-        return [term];
-    }
-    else {
-        return term;
+function filter(query) {
+    return {
+        on: function (field) {
+            return {
+                with: function (param) {
+                    if (param) {
+                        return filter(query.in(field, arrayAssert(param)));
+                    }
+                    else {
+                        return defaultResult();
+                    }                    
+                },
+                withArray: function (param) {
+                    var arrayParam;
+
+                    if (param) {
+                        if (!(param instanceof Array)) {
+                            arrayParam = [param];
+                        }
+                        else {
+                            arrayParam = param;
+                        }
+
+                        return filter(query.in(field, arrayParam));
+                    }
+                    else {
+                        return defaultResult();
+                    }                    
+                }
+            };
+        },
+        apply: function () {
+            return query;
+        }
+    };
+
+    function defaultResult() {
+        return filter(query);
     }
 }
