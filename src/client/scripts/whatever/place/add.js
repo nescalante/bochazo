@@ -122,7 +122,7 @@ angular.module('bchz').controller(
         };
 
         $scope.removeCourt = function(court) {
-            $scope.courts = $scope.courts.where(function (c) { return c != court; });
+            $scope.courts = va($scope.courts).where(function (c) { return c != court; });
         };
 
         function assignResult(result, assignAddress) {

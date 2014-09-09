@@ -38,13 +38,16 @@ angular.module('bchz').directive(
 
                 input
                     .bind("keydown keyup keypress blur", function (event) {
+                        var isEnterOrComma;
+
                         // validate input
-                        if(event.type == 'keyup') {
+                        if (event.type === 'keyup') {
                             validateTag(input, input.val(), scope[attrs.tagCollectionModel]);
                         }
 
                         // add tag logic on enter or comma
-                        if(event.type == 'blur' || event.which === 13 || event.which === 44) {
+                        isEnterOrComma = event.type === 'keydown' && (event.which === 13 || event.which === 44);
+                        if (event.type === 'blur' || isEnterOrComma) {
                             scope.$apply(function () {
                                 if (attrs.tagInput) {
                                     scope[attrs.tagInput] = addTag(scope[attrs.tagInput], scope[attrs.tagCollectionModel]);
@@ -55,6 +58,21 @@ angular.module('bchz').directive(
                             });
 
                             event.preventDefault();
+                        }
+
+                        // is delete
+                        if (event.type === 'keydown' && event.keyCode === 8 && event.target.selectionStart === 0 && event.target.selectionEnd === 0) {
+                            scope.$apply(function () {
+                                var lastInput;
+                                if (scope[attrs.tagCollectionModel].length) {
+                                    lastInput = scope[attrs.tagCollectionModel].splice(-1, 1);
+
+                                    input.val(lastInput + (input.val() ? ', ' + input.val() : ''));
+                                    input[0].setSelectionRange(0, lastInput[0].length);
+
+                                    event.preventDefault();
+                                }
+                            });
                         }
                     });
 
