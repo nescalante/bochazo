@@ -40,7 +40,7 @@ p Te pedimos que ingreses a continuación los datos correspondientes al complejo
             .col-sm-6.col-sm-offset-3(ng-show='currentCourt.sport.allowPlayers')
                 label.control-label.col-sm-3(for='players') Jugadores
                 .col-sm-9
-                    input#players.form-control(type='number' name='players' placeholder='Alguna cantidad' ng-model='currentCourt.players' ng-init='null')  
+                    input#players.form-control(type='number' name='players' min='1' placeholder='Alguna cantidad' ng-model='currentCourt.players' ng-init='null')  
             .col-sm-6.col-sm-offset-3
                 label.control-label.col-sm-3(for='surface') Superficie
                 .col-sm-9

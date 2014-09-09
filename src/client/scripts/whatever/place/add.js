@@ -119,6 +119,9 @@ angular.module('bchz').controller(
                     isIndoor: court.isIndoor
                 });
             }
+            else if (court && !court.sport) {
+                
+            }
         };
 
         $scope.removeCourt = function(court) {
