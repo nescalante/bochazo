@@ -47,7 +47,7 @@
     "very-array": "~0.4.3"
   },
   "scripts": {
-    "postinstall": "node node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt",
+    "postinstall": "node node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt deploy",
     "test": "mocha",
     "start": "grunt build && node src/app",
     "build": "grunt build",
