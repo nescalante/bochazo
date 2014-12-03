@@ -43,6 +43,8 @@
     "passport-google": "~0.3.0",
     "passport-local": "~1.0.0",
     "tape": "~2.12.3",
+    "taunus": "^3.2.1",
+    "taunus-express": "^1.0.1",
     "usemin-patterns": "~0.1.4",
     "very-array": "~0.4.3"
   },
