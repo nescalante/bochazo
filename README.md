@@ -5,3 +5,5 @@
 `npm install`
 
 `bower install`
+
+License GPL
