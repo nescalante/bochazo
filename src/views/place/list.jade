@@ -1,61 +1,61 @@
 h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
 
 .row
-    .col-md-8
-        .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
-            p
-                strong {{count}}
-                | &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
-            p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
-            ul(ng-show='hasParams')
-                li(ng-show='params.query') 
-                    | Que contengan la palabra 
-                    strong {{params.query}}
-                li(ng-show='params.sport') Canchas de {{params.sport}}
-                li(ng-show='params.locations.length') En 
-                    span.capitalize(ng-repeat-start='location in params.locations') {{location}}
-                    span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
-                li(ng-show='params.players.length') Para 
-                    span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}} 
-                    | jugadores
-                li(ng-show='params.surfaces.length') Superficie de 
-                    span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
-                li(ng-show='params.tags.length') Con 
-                    label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
-                    span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
-            p.new-search
-                | Hacé click 
-                a.alert-link(href='' ng-click='redirectTo("/busqueda")') acá
-                | &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
-        .alert.alert-info
-            p(ng-show='userAddress && count > 0')
-                | Los complejos se listarán mostrando primero los más cercanos a 
-                a.alert-link.hint--top.hint--rounded(href='' data-hint='{{userAddress}}') tú posición
-                | .
-            p
-                | Acordate que también podés buscar tu complejo en el 
-                a.alert-link.hint--top.hint--rounded(href='' ng-click='redirectTo("/mapa")') mapa de canchas
-                | .
-        article.place(ng-repeat='place in places')
-            .content
-                a(href='/canchas/{{place._id}}')
-                    h3 {{place.description}}
-                ul
-                    li(ng-show='place.address')
-                        span.glyphicon.glyphicon-map-marker
-                        | {{place.address}}
-                    li(ng-show='place.phones')
-                        span.glyphicon.glyphicon-phone-alt
-                        .comma-list(ng-repeat='phone in place.phones')
-                            a(href='tel:{{phone}}') {{phone}}
-                            | {{$last ? '' : ', '}}
-                    li(ng-repeat='summary in place.summary')
-                        span.glyphicon.glyphicon-asterisk
-                        | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
-                    li.tags(ng-show='place.tags.length > 0')
-                        label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
-        a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;' ng-click='showMore()' ng-class='{ disabled: loading }' ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
-    .col-md-4
-        .alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click 
-            a.alert-link(href='/canchas/agregar') acá
-            | .
+  .col-md-8
+    .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
+      p
+        strong {{count}}
+        | &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
+      p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
+      ul(ng-show='hasParams')
+        li(ng-show='params.query')
+          | Que contengan la palabra
+          strong {{params.query}}
+        li(ng-show='params.sport') Canchas de {{params.sport}}
+        li(ng-show='params.locations.length') En
+          span.capitalize(ng-repeat-start='location in params.locations') {{location}}
+          span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
+        li(ng-show='params.players.length') Para
+          span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}}
+          | jugadores
+        li(ng-show='params.surfaces.length') Superficie de
+          span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
+        li(ng-show='params.tags.length') Con
+          label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
+          span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
+      p.new-search
+        | Hacé click
+        a.alert-link(href='' ng-click='redirectTo("/busqueda")') acá
+        | &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
+    .alert.alert-info
+      p(ng-show='userAddress && count > 0')
+        | Los complejos se listarán mostrando primero los más cercanos a
+        a.alert-link.hint--top.hint--rounded(href='' data-hint='{{userAddress}}') tú posición
+        | .
+      p
+        | Acordate que también podés buscar tu complejo en el
+        a.alert-link.hint--top.hint--rounded(href='' ng-click='redirectTo("/mapa")') mapa de canchas
+        | .
+    article.place(ng-repeat='place in places')
+      .content
+        a(href='/canchas/{{place._id}}')
+          h3 {{place.description}}
+        ul
+          li(ng-show='place.address')
+            span.glyphicon.glyphicon-map-marker
+            | {{place.address}}
+          li(ng-show='place.phones')
+            span.glyphicon.glyphicon-phone-alt
+            .comma-list(ng-repeat='phone in place.phones')
+              a(href='tel:{{phone}}') {{phone}}
+              | {{$last ? '' : ', '}}
+          li(ng-repeat='summary in place.summary')
+            span.glyphicon.glyphicon-asterisk
+            | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
+          li.tags(ng-show='place.tags.length > 0')
+            label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
+    a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;' ng-click='showMore()' ng-class='{ disabled: loading }' ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
+  .col-md-4
+    .alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click
+      a.alert-link(href='/canchas/agregar') acá
+      | .

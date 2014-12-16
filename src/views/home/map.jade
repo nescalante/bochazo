@@ -1,31 +1,31 @@
 h2 Mapa de canchas
 
 .row.full-height
-    .col-md-8
-        #map-general.map-canvas map
-    .col-md-4.visible-md.visible-lg
-        .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
-            p
-                strong {{count}}
-                | &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
-            p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
-            ul(ng-show='hasParams')
-                li(ng-show='params.query') 
-                    | Que contengan la palabra 
-                    strong {{params.query}}
-                li(ng-show='params.sport') Canchas de {{params.sport}}
-                li(ng-show='params.locations.length') En 
-                    span.capitalize(ng-repeat-start='location in params.locations') {{location}}
-                    span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
-                li(ng-show='params.players.length') Para 
-                    span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}} 
-                    | jugadores
-                li(ng-show='params.surfaces.length') Superficie de 
-                    span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
-                li(ng-show='params.tags.length') Con 
-                    label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
-                    span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
-            p.new-search
-                | Hacé click 
-                a.alert-link(href='' ng-click='redirectTo("/busqueda")') acá
-                | &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
+  .col-md-8
+    #map-general.map-canvas map
+  .col-md-4.visible-md.visible-lg
+    .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
+      p
+        strong {{count}}
+        | &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
+      p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
+      ul(ng-show='hasParams')
+        li(ng-show='params.query')
+          | Que contengan la palabra
+          strong {{params.query}}
+        li(ng-show='params.sport') Canchas de {{params.sport}}
+        li(ng-show='params.locations.length') En
+          span.capitalize(ng-repeat-start='location in params.locations') {{location}}
+          span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
+        li(ng-show='params.players.length') Para
+          span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}}
+          | jugadores
+        li(ng-show='params.surfaces.length') Superficie de
+          span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
+        li(ng-show='params.tags.length') Con
+          label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
+          span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
+      p.new-search
+        | Hacé click
+        a.alert-link(href='' ng-click='redirectTo("/busqueda")') acá
+        | &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.

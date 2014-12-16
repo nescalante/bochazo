@@ -1,20 +1,20 @@
 .content
-    .infoview
-        a(href='/canchas/{{place._id}}')
-            h3 {{place.description}}
-        ul
-            li(ng-show='place.address')
-                span.glyphicon.glyphicon-map-marker
-                | {{place.address}}
-            li(ng-show='place.phones')
-                span.glyphicon.glyphicon-phone-alt
-                .comma-list(ng-repeat='phone in place.phones')
-                    a(href='tel:{{phone}}') {{phone}}
-                    | {{$last ? '' : ', '}}
-            li(ng-repeat='summary in place.summary') 
-                span.glyphicon.glyphicon-asterisk
-                | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
-            li(ng-show='place.tags.length > 0')
-                span.glyphicon.glyphicon-tags
-                .comma-list(ng-repeat='tag in place.tags')
-                    | {{tag}}{{$last ? '' : ', '}}
+  .infoview
+    a(href='/canchas/{{place._id}}')
+      h3 {{place.description}}
+    ul
+      li(ng-show='place.address')
+        span.glyphicon.glyphicon-map-marker
+        | {{place.address}}
+      li(ng-show='place.phones')
+        span.glyphicon.glyphicon-phone-alt
+        .comma-list(ng-repeat='phone in place.phones')
+          a(href='tel:{{phone}}') {{phone}}
+          | {{$last ? '' : ', '}}
+      li(ng-repeat='summary in place.summary')
+        span.glyphicon.glyphicon-asterisk
+        | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
+      li(ng-show='place.tags.length > 0')
+        span.glyphicon.glyphicon-tags
+        .comma-list(ng-repeat='tag in place.tags')
+          | {{tag}}{{$last ? '' : ', '}}
