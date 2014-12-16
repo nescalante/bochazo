@@ -1,9 +1,9 @@
 'use strict';
 
-var service = require('../../../server/controllers')
+var service = require('../../../domain/services')
 
 module.exports = function (req, res, next) {
-  service.sport.list(function (err, result) {
+  var a = service.sport.list(function (err, result) {
     if (err) {
       res.json(500, err);
       return;

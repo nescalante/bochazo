@@ -1,26 +1,26 @@
 'use strict';
 
-var User = require('../models/user');
+var User = require('../models').User;
 
 exports.login = function (profile, done) {
-    User.findOne({ _id: profile.email }, function (err, user) {
-        if (err) {
-            done(err, null);
-            
-            return;
-        }
+  User.findOne({ _id: profile.email }, function (err, user) {
+    if (err) {
+      done(err, null);
 
-        if (!user) {
-            new User({ 
-                _id: profile.email,
-                email: profile.email,
-                displayName: profile.displayName,
-                identifier: profile.identifier
-            }).save(done);
-        }
+      return;
+    }
 
-        if (user) {
-            done(null, user);
-        }
-    });
+    if (!user) {
+      new User({
+        _id: profile.email,
+        email: profile.email,
+        displayName: profile.displayName,
+        identifier: profile.identifier
+      }).save(done);
+    }
+
+    if (user) {
+      done(null, user);
+    }
+  });
 };

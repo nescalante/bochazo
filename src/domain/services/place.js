@@ -1,9 +1,9 @@
 'use strict';
 
 var async = require('async');
-var Place = require('../models/place');
-var Sport = require('../models/sport');
 var arrayAssert = require('array-assert');
+var Place = require('../models').Place;
+var Sport = require('../models').Sport;
 
 exports.get = function (id, callback) {
   return Place.findOne({ _id: id }, callback);

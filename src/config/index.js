@@ -7,15 +7,17 @@ var taunusExpress = require('taunus-express');
 var jade = require('jade');
 var path = require('path');
 var serveStatic = require('serve-static');
+var services = require('../domain/services');
 var layout = jade.compileFile('./src/views/layout.jade');
+var sports = services.sport.list();
 
 function getLayout(model) {
   var result = Object.create(model);
 
-  result.sports =
-  result.title = "Prueba";
+  result.sports = sports;
+  result.title = 'TGHOUNUS';
 
-  return layout(model);
+  return layout(result);
 }
 
 taunusExpress(taunus, app, {

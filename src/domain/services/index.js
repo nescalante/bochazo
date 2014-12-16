@@ -1,9 +1,10 @@
 'use strict';
 
-var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/bchz',
-  place = require('./place'),
-  sport = require('./sport'),
-  mongoose = require('mongoose');
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/bchz';
+var place = require('./place.js');
+var sport = require('./sport.js');
+var authentication = ('./authentication.js');
+var mongoose = require('mongoose');
 
 mongoose.connect(mongoUri, function (err) {
   if (err) {
@@ -16,5 +17,8 @@ mongoose.connect(mongoUri, function (err) {
   }
 });
 
-exports.place = place;
-exports.sport = sport;
+module.exports = {
+  place: place,
+  sport: sport,
+  authentication: authentication
+};

@@ -28,7 +28,7 @@ html(ng-app='bchz' ng-class='{ "full-screen": fullScreen }')
               a.dropdown-toggle(href='' data-toggle='dropdown') Canchas&nbsp;
                 b.caret
               ul.dropdown-menu(role='menu')
-                each sport in model.sports
+                each sport in sports
                   a(href='/canchas/listado/' + sport.url)= sport.name
             li
               a(href='/busqueda') Búsqueda

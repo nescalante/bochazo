@@ -2,6 +2,5 @@
 
 module.exports = {
   place: require('./place'),
-  sport: require('./sport'),
-  authentication: require('./authentication')
+  sport: require('./sport')
 };
