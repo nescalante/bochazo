@@ -31,6 +31,8 @@ taunusExpress(taunus, app, {
   }
 });
 
+require('./routes.js')(app);
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('title', process.env.TITLE || 'BCHZ');

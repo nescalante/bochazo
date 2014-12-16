@@ -1,18 +1,16 @@
 'use strict';
 
-var service = require('../../../domain/services')
+var services = require('../../../domain/services');
 
 module.exports = function (req, res, next) {
-  var a = service.sport.list(function (err, result) {
+  services.sport.list(function (err, result) {
     if (err) {
-      res.json(500, err);
-      return;
+      throw err;
     }
 
     res.viewModel = {
       model: {
-        sports: result,
-        title: 'lalala'
+        sports: result
       }
     };
 

@@ -4,8 +4,9 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
   .col-md-8
     .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
       p
-        strong {{count}}
-        | &nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.
+        strong= count
+        - var listCountInfo = ' complejo' + (count == 1 ? '' : 's') + ' encontrado' + (count == 1 ? '' : 's') + '.'
+        = listCountInfo
       p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
       ul(ng-show='hasParams')
         li(ng-show='params.query')
@@ -36,24 +37,32 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
         | Acordate que también podés buscar tu complejo en el
         a.alert-link.hint--top.hint--rounded(href='' ng-click='redirectTo("/mapa")') mapa de canchas
         | .
-    article.place(ng-repeat='place in places')
-      .content
-        a(href='/canchas/{{place._id}}')
-          h3 {{place.description}}
-        ul
-          li(ng-show='place.address')
-            span.glyphicon.glyphicon-map-marker
-            | {{place.address}}
-          li(ng-show='place.phones')
-            span.glyphicon.glyphicon-phone-alt
-            .comma-list(ng-repeat='phone in place.phones')
-              a(href='tel:{{phone}}') {{phone}}
-              | {{$last ? '' : ', '}}
-          li(ng-repeat='summary in place.summary')
-            span.glyphicon.glyphicon-asterisk
-            | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
-          li.tags(ng-show='place.tags.length > 0')
-            label.label.label-primary(ng-repeat='tag in place.tags') {{tag}}
+    each place in list
+      article.place
+        .content
+          a(href='/canchas/{{place._id}}')
+            h3= place.description
+          ul
+            if place.address
+              li
+                span.glyphicon.glyphicon-map-marker
+                = place.address
+            if place.phones
+              li
+                span.glyphicon.glyphicon-phone-alt
+                each phone in place.phones
+                  .comma-list
+                    - var phoneLink = 'tel:' + phone
+                    - var aComma = place.phones.indexOf(phone) === place.phones.length - 1 ? '' : ', '
+                    a(href=phoneLink)= phone
+                    = aComma
+            li(ng-repeat='summary in place.summary')
+              span.glyphicon.glyphicon-asterisk
+              | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
+            if (place.tags.length)
+              li.tags
+                each tag in place.tags
+                  label.label.label-primary= tag
     a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;' ng-click='showMore()' ng-class='{ disabled: loading }' ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
   .col-md-4
     .alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
-  place: require('./place'),
-  sport: require('./sport')
+  authentication: require('./authentication.js'),
+  place: require('./place.js'),
+  sport: require('./sport.js')
 };
