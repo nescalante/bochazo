@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-	schema = new mongoose.Schema({
+var mongoose = require('mongoose');
+var schema = new mongoose.Schema({
 		_id: { type: String, required: true, trim: true },
 		displayName: { type: String, required: true, trim: true },
 		identifier: { type: String, trim: true },

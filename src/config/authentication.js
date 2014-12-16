@@ -7,12 +7,13 @@ var passport = require('passport'),
     realm = 'http://localhost:3000/' || process.env.REALM;
 
 module.exports = function (app) {
+  return;
     passport.use(new GoogleStrategy({
         returnURL: realm + 'auth/google/return',
         realm: realm
     }, routes.authentication.googleLogin));
 
-    app.post('/login', 
+    app.post('/login',
         passport.authenticate('local'),
         function (req, res) {
             res.json(req.user);
