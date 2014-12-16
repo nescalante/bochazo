@@ -8,21 +8,17 @@ var jade = require('jade');
 var path = require('path');
 var serveStatic = require('serve-static');
 var services = require('../domain/services');
-var layout = jade.compileFile('./src/views/layout.jade');
 var sports = services.sport.list();
-
-function getLayout(model) {
-  var result = Object.create(model);
-
-  result.sports = sports;
-  result.title = 'TGHOUNUS';
-
-  return layout(result);
-}
 
 taunusExpress(taunus, app, {
   routes: require('../routes.js'),
-  layout: getLayout,
+  layout: jade.compileFile('./src/views/layout.jade'),
+  getDefaultViewModel: function (done) {
+    done(null, {
+      title: 'TGHOUNUS',
+      sports: sports
+    });
+  },
   getPartial: function (action, model, done) {
     var file = path.join('./src/views', action + '.jade');
     var html = jade.renderFile(file, model);

@@ -1,32 +1,32 @@
-h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
+h2= (params && params.sport ? 'Canchas de ' + params.sport : params ? 'Búsqueda de canchas' : 'Listado de canchas')
 
 .row
   .col-md-8
-    .alert(ng-show='count != null' ng-class='{ "alert-success": count > 0, "alert-danger": count == 0 }')
+    div(class=(count > 0 ? 'alert alert-success' : 'alert alert-danger'))
       p
         strong= count
-        - var listCountInfo = ' complejo' + (count == 1 ? '' : 's') + ' encontrado' + (count == 1 ? '' : 's') + '.'
-        = listCountInfo
-      p(ng-show='hasParams') {{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:
-      ul(ng-show='hasParams')
-        li(ng-show='params.query')
-          | Que contengan la palabra
-          strong {{params.query}}
-        li(ng-show='params.sport') Canchas de {{params.sport}}
-        li(ng-show='params.locations.length') En
-          span.capitalize(ng-repeat-start='location in params.locations') {{location}}
-          span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
-        li(ng-show='params.players.length') Para
-          span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}}
-          | jugadores
-        li(ng-show='params.surfaces.length') Superficie de
-          span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
-        li(ng-show='params.tags.length') Con
-          label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
-          span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
+        = (' complejo' + (count == 1 ? '' : 's') + ' encontrado' + (count == 1 ? '' : 's') + '.')
+      if (hasParams)
+        p= ((count === 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando') + ':')
+        ul
+          li(ng-show='params.query')
+            | Que contengan la palabra
+            strong {{params.query}}
+          li(ng-show='params.sport') Canchas de {{params.sport}}
+          li(ng-show='params.locations.length') En
+            span.capitalize(ng-repeat-start='location in params.locations') {{location}}
+            span(ng-repeat-end='') {{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}
+          li(ng-show='params.players.length') Para
+            span(ng-repeat='player in params.players') {{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}}
+            | jugadores
+          li(ng-show='params.surfaces.length') Superficie de
+            span.lowercase(ng-repeat='surface in params.surfaces') {{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}
+          li(ng-show='params.tags.length') Con
+            label.label(ng-class='{ "label-success": count > 0, "label-danger": count == 0 }' ng-repeat-start='tag in params.tags') {{tag}}
+            span(ng-repeat-end='') {{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}
       p.new-search
         | Hacé click
-        a.alert-link(href='' ng-click='redirectTo("/busqueda")') acá
+        a.alert-link(href=('/busqueda' + (params.url ? '?' + params.url : ''))) &nbsp;acá
         | &nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.
     .alert.alert-info
       p(ng-show='userAddress && count > 0')
@@ -40,7 +40,7 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
     each place in list
       article.place
         .content
-          a(href='/canchas/{{place._id}}')
+          a(href=('/canchas/' + place._id))
             h3= place.description
           ul
             if place.address
@@ -52,18 +52,18 @@ h2 {{params.sport ? 'Canchas de ' + params.sport : 'Búsqueda de canchas'}}
                 span.glyphicon.glyphicon-phone-alt
                 each phone in place.phones
                   .comma-list
-                    - var phoneLink = 'tel:' + phone
-                    - var aComma = place.phones.indexOf(phone) === place.phones.length - 1 ? '' : ', '
-                    a(href=phoneLink)= phone
-                    = aComma
-            li(ng-repeat='summary in place.summary')
-              span.glyphicon.glyphicon-asterisk
-              | {{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}
+                    a(href=('tel:' + phone))= phone
+                    = (place.phones.indexOf(phone) === place.phones.length - 1 ? '' : ', ')
+            each summary in place.summary
+              li
+                span.glyphicon.glyphicon-asterisk
+                = (summary.length + ' cancha' + (summary.length > 1 ? 's' : '') + ' de ' + summary.key)
             if (place.tags.length)
               li.tags
                 each tag in place.tags
                   label.label.label-primary= tag
-    a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;' ng-click='showMore()' ng-class='{ disabled: loading }' ng-show='count > places.length') {{loading ? 'Cargando ...' : 'Mostrar más'}}
+    if (count > list.length)
+      a.center-block.btn.btn-primary.btn-show-more(style='width: 200px;' ng-click='showMore()' ng-class='{ disabled: loading }' href=('/canchas?' + params.next)) Mostrar más
   .col-md-4
     .alert.alert-info ¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click
       a.alert-link(href='/canchas/agregar') acá
