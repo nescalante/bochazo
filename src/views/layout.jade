@@ -25,11 +25,12 @@ html(ng-app='bchz' ng-class='{ "full-screen": fullScreen }')
         .navbar-collapse.collapse
           ul.nav.navbar-nav
             li.dropdown
-              a.dropdown-toggle(href='' data-toggle='dropdown') Canchas&nbsp;
+              a.dropdown-toggle(data-toggle='dropdown') Canchas&nbsp;
                 b.caret
               ul.dropdown-menu(role='menu')
                 each sport in sports
-                  a(href='/canchas/listado/' + sport.url)= sport.name
+                  li
+                    a(href='/canchas/listado/' + sport.url)= sport.name
             li
               a(href='/busqueda') Búsqueda
             li
@@ -45,7 +46,7 @@ html(ng-app='bchz' ng-class='{ "full-screen": fullScreen }')
             li
               a(href='/ingresar') Ingresar
     .container.body-content
-      div!=partial
+      main!=partial
       .clearfix
       div(ng-hide='hideFooter')
         hr.visible-md.visible-lg

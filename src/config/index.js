@@ -2,26 +2,30 @@
 
 var express = require('express');
 var app = express();
+var _ = require('lodash');
 var taunus = require('taunus');
 var taunusExpress = require('taunus-express');
 var jade = require('jade');
 var path = require('path');
 var serveStatic = require('serve-static');
 var services = require('../domain/services');
-var sports = services.sport.list();
+
+global.sports = services.sport.list();
+
+var layoutModel = {
+  title: 'TGHOUNUS',
+  sports: global.sports
+};
 
 taunusExpress(taunus, app, {
   routes: require('../routes.js'),
   layout: jade.compileFile('./src/views/layout.jade'),
   getDefaultViewModel: function (done) {
-    done(null, {
-      title: 'TGHOUNUS',
-      sports: sports
-    });
+    done(null, layoutModel);
   },
   getPartial: function (action, model, done) {
     var file = path.join('./src/views', action + '.jade');
-    var html = jade.renderFile(file, model);
+    var html = jade.renderFile(file, model, layoutModel);
 
     done(null, html);
   }

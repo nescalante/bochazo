@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
 
     res.viewModel = {
       model: {
-        sports: result
+        sports: global.sports
       }
     };
 

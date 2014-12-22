@@ -1,0 +1,25 @@
+each place in list
+  article.place
+    .content
+      a(href='/canchas/' + place._id)
+        h3= place.description
+      ul
+        if place.address
+          li
+            span.glyphicon.glyphicon-map-marker
+            = place.address
+        if place.phones
+          li
+            span.glyphicon.glyphicon-phone-alt
+            each phone, index in place.phones
+              .comma-list
+                a(href='tel:' + phone)= phone
+                = index === place.phones.length - 1 ? '' : ', '
+        each summary in place.summary
+          li
+            span.glyphicon.glyphicon-asterisk
+            = summary.length + ' cancha' + (summary.length > 1 ? 's' : '') + ' de ' + summary.key
+        if (place.tags.length)
+          li.tags
+            each tag in place.tags
+              label.label.label-primary= tag

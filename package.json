@@ -35,8 +35,14 @@
   "scripts": {
     "postinstall": "node node_modules/bower/bin/bower install",
     "test": "mocha",
-    "start": "grunt build && node src/app",
-    "build": "grunt build",
+    "start": "nodemon src/main & lessc src/content/site/all.less public/site.css & browserify -t jadeify src/client.js -o public/bchz.js",
+    "build": "lessc src/content/site/all.less public/site.css & browserify -t jadeify src/client.js -o public/bchz.js",
+    "bundle": "browserify -t jadeify src/client.js -o public/bchz.js",
     "deploy": "grunt deploy"
+  },
+  "devDependencies": {
+    "browserify": "^7.0.2",
+    "jadeify": "^3.1.0",
+    "less": "^2.1.1"
   }
 }

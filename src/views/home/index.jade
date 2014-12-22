@@ -25,16 +25,17 @@ h2 ¿Qué querés jugar?
   .col-md-8
     h3 Canchas por deporte
       ul
-        li(ng-repeat='s in sports')
-          a(href='/canchas/listado/{{s.url}}')
-            h4 {{s.name}}
+        each sport in sports
+          li
+            a(href='/canchas/listado/' + sport.url)
+              h4= sport.name
           h5 Superficie
-      ul
-        li(ng-repeat='surface in s.surfaces')
-          a(href='/canchas/listado/{{s.url}}?surfaces={{surface}}') {{surface}}
-          h5(ng-show='s.allowPlayers') Jugadores
-      ul
-        li(ng-repeat='players in s.allowedPlayers')
-          a(href='/canchas/listado/{{s.url}}?players={{players}}') {{players}} jugadores
+            ul
+              li(ng-repeat='surface in s.surfaces')
+                a(href='/canchas/listado/{{s.url}}?surfaces={{surface}}') {{surface}}
+                h5(ng-show='s.allowPlayers') Jugadores
+            ul
+              li(ng-repeat='players in s.allowedPlayers')
+                a(href='/canchas/listado/{{s.url}}?players={{players}}') {{players}} jugadores
 
   .col-md-4
