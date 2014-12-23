@@ -4665,7 +4665,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (address, description, howToArrive, info, phones, summary, tags, undefined) {
+;var locals_for_with = (locals || {});(function (address, description, detailedSummary, howToArrive, info, phones, tags, undefined) {
 buf.push("<div class=\"row place-detail\"><div class=\"col-md-8\"><h2>" + (jade.escape(null == (jade_interp = description) ? "" : jade_interp)) + "</h2>");
 if ( (info))
 {
@@ -4730,9 +4730,9 @@ buf.push("<label class=\"label label-primary\">" + (jade.escape(null == (jade_in
 }).call(this);
 
 buf.push("</div>");
-// iterate summary
+// iterate detailedSummary
 ;(function(){
-  var $$obj = summary;
+  var $$obj = detailedSummary;
   if ('number' == typeof $$obj.length) {
 
     for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
@@ -4798,7 +4798,7 @@ buf.push("</ul></div>");
   }
 }).call(this);
 
-buf.push("</div><div class=\"col-md-4\"><div id=\"map-detail\" ng-show=\"showMap\" class=\"map-canvas\"></div></div></div><a href=\"/canchas\" class=\"btn btn-default\">Volver</a>");}.call(this,"address" in locals_for_with?locals_for_with.address:typeof address!=="undefined"?address:undefined,"description" in locals_for_with?locals_for_with.description:typeof description!=="undefined"?description:undefined,"howToArrive" in locals_for_with?locals_for_with.howToArrive:typeof howToArrive!=="undefined"?howToArrive:undefined,"info" in locals_for_with?locals_for_with.info:typeof info!=="undefined"?info:undefined,"phones" in locals_for_with?locals_for_with.phones:typeof phones!=="undefined"?phones:undefined,"summary" in locals_for_with?locals_for_with.summary:typeof summary!=="undefined"?summary:undefined,"tags" in locals_for_with?locals_for_with.tags:typeof tags!=="undefined"?tags:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
+buf.push("</div><div class=\"col-md-4\"><div id=\"map-detail\" ng-show=\"showMap\" class=\"map-canvas\"></div></div></div><a href=\"/canchas\" class=\"btn btn-default\">Volver</a>");}.call(this,"address" in locals_for_with?locals_for_with.address:typeof address!=="undefined"?address:undefined,"description" in locals_for_with?locals_for_with.description:typeof description!=="undefined"?description:undefined,"detailedSummary" in locals_for_with?locals_for_with.detailedSummary:typeof detailedSummary!=="undefined"?detailedSummary:undefined,"howToArrive" in locals_for_with?locals_for_with.howToArrive:typeof howToArrive!=="undefined"?howToArrive:undefined,"info" in locals_for_with?locals_for_with.info:typeof info!=="undefined"?info:undefined,"phones" in locals_for_with?locals_for_with.phones:typeof phones!=="undefined"?phones:undefined,"tags" in locals_for_with?locals_for_with.tags:typeof tags!=="undefined"?tags:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 };
 },{"jade/runtime":7}],64:[function(require,module,exports){
 var jade = require("jade/runtime");
