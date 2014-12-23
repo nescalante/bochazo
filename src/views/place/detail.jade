@@ -24,7 +24,7 @@
     .tags
       each tag in tags
         label.label.label-primary= tag
-    each group in summary
+    each group in detailedSummary
       div
         h3= group.key + ' - ' + group.length + ' cancha' + (group.length > 1 ? 's' : '')
         ul

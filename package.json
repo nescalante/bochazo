@@ -30,7 +30,7 @@
     "tape": "~2.12.3",
     "taunus": "^3.2.1",
     "taunus-express": "^1.0.1",
-    "very-array": "~0.4.3"
+    "very-array": "^0.6.1"
   },
   "scripts": {
     "postinstall": "node node_modules/bower/bin/bower install",

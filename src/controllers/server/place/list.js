@@ -14,10 +14,6 @@ module.exports = function (req, res, next) {
       throw err;
     }
 
-    result.list.forEach(function (i) {
-      i.summary = i.courts && getSummary(i.courts);
-    });
-
     result.params = query || {};
     result.params.sport = result.params.sport || req.param('sport');
     result.params.next = qs.stringify(_.merge(result.params, { skip: (+result.params.skip || 0) + (+result.params.take || 10) }));
@@ -44,9 +40,3 @@ module.exports = function (req, res, next) {
     next();
   });
 };
-
-function getSummary(courts) {
-  return va(courts)
-    .groupBy(function (c) { return c.sport; })
-    .orderBy(function (c) { return c.key; });
-}
