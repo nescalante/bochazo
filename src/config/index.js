@@ -25,7 +25,7 @@ taunusExpress(taunus, app, {
   },
   getPartial: function (action, model, done) {
     var file = path.join('./src/views', action + '.jade');
-    var html = jade.renderFile(file, model, layoutModel);
+    var html = jade.renderFile(file, model);
 
     done(null, html);
   }

@@ -2,8 +2,8 @@
 
 //var taunus = require('taunus');
 var main = document.getElementsByTagName('main')[0];
-var taunify = require('taunify');
-var opts = taunify();
+var wiring = require('taunus-wiring');
+var opts = wiring();
 
 //taunus.mount(main, opts);
 

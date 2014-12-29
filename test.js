@@ -2,6 +2,7 @@ var staticModule = require('static-module');
 var through = require('through2');
 var path = require('path');
 var taunus = require('taunus');
+var jade = require('jade');
 var fs = require('fs');
 var rc = require('taunus/lib/rc');
 
@@ -18,60 +19,73 @@ module.exports = function (file, opts) {
   });
 
   var sm = staticModule({
-      taunify: taunify
+      'taunus-wiring': wiring
     },
     { vars: vars }
   );
 
   return sm;
 
-  function taunify() {
+  function wiring() {
     var json;
     var stream = through(write, end);
 
-    stream.push('console.log("testing");');
-    stream.push('console.log(' + JSON.stringify(rc) + ');');
-    stream.end('/*test*/');
-
-    var data = getdir(rc.views);
-      console.log(data);
+    stream.push('{\n');
+    getdir('controllers', rc.client_controllers); stream.push(',');
+    getdir('templates', rc.views);
+    stream.push(',"routes":"' + rc.routes + '"}');
+    stream.end(';\n');
 
     return stream;
 
-    function getdir(dir, obj) {
-      var result = "";
-      var relativeDir = path.relative(vars.__dirname, dir).replace(/\\/g, '/') + '/';
-      var files = fs.readdirSync('./' + dir);
+    function getdir(name, dir) {
+      var count = 0;
+      var rootDir = path.relative(__dirname, dir).replace(/\\/g, '/') + '/';
 
-      obj = obj || {};
+      stream.push('"' + name + '"' + ':' + '{\n');
+      scandir(dir);
+      stream.push('\n}');
 
-      if (dir.substring(dir.length - 1, dir.length) !== '/') {
-        dir += '/';
+      function scandir(dir, obj) {
+        var relativeDir = path.relative(vars.__dirname, dir).replace(/\\/g, '/') + '/';
+        var pathDir = path.relative(rootDir, path.join(__dirname, dir)).replace(/\\/g, '/');
+        var files = fs.readdirSync('./' + dir);
+
+        pathDir = pathDir ? pathDir + '/' : '';
+
+        if (dir.substring(dir.length - 1, dir.length) !== '/') {
+          dir += '/';
+        }
+
+        files.forEach(function (f, ix) {
+          var splitted = f.split('.');
+          var name = splitted[0];
+          var ext = splitted[1];
+          var html, fn;
+
+          if (splitted.length === 1) {
+            // should be a directory
+            scandir(dir + f + '/', obj);
+          }
+          else
+          {
+            if (count++ !== 0) {
+              stream.push(',\n');
+            }
+
+            if (ext === 'jade') {
+              html = fs.readFileSync('./' + dir + f);
+              fn = jade.compileClient(html, { filename: './' + dir + f });
+              stream.push('"' + pathDir + name + '"' + ':' + fn.toString());
+            }
+            else {
+              stream.push('"' + pathDir + name + '"' + ':require("./' + relativeDir + f + '")');
+            }
+          }
+        });
+
+        return obj;
       }
-
-      files.forEach(function (f) {
-        var splitted = f.split('.');
-        var name = splitted[0];
-        var ext = splitted[1];
-
-        if (splitted.length === 1) {
-          // should be a directory
-          getdir(dir + f + '/', obj);
-        }
-        else {
-          obj[relativeDir + name] = 'require("./' + relativeDir + f + '")';
-        }
-      });
-
-      result += '{';
-
-      Object.keys(obj).forEach(function (key) {
-        result += '"' + key + '"' + ':' + obj[key] + ',';
-      });
-
-      result = result.substring(0, result.length - 1) + '}';
-
-      return result;
     }
 
     function write(buf, enc, next) {
