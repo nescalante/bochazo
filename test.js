@@ -33,7 +33,7 @@ module.exports = function (file, opts) {
     stream.push('{\n');
     getdir('controllers', rc.client_controllers); stream.push(',');
     getdir('templates', rc.views);
-    stream.push(',"routes":"' + rc.routes + '"}');
+    stream.push(',"routes":require("./' + path.relative(vars.__dirname, rc.routes) + '")}');
     stream.end(';\n');
 
     return stream;
@@ -76,7 +76,7 @@ module.exports = function (file, opts) {
             if (ext === 'jade') {
               html = fs.readFileSync('./' + dir + f);
               fn = jade.compileClient(html, { filename: './' + dir + f });
-              stream.push('"' + pathDir + name + '"' + ':' + fn.toString());
+              stream.push('"' + pathDir + name + '"' + ':function(locals){var jade=require("jade/runtime");return (' + fn.toString() + ')(locals)}');
             }
             else {
               stream.push('"' + pathDir + name + '"' + ':require("./' + relativeDir + f + '")');
