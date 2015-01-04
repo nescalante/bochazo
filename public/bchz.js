@@ -4512,17 +4512,17 @@ var taunus = require('taunus');
 var main = document.getElementsByTagName('main')[0];
 var wiring = {
 "controllers":{
-"../../../dev/bochazo/node_modules/taunus-wiring/src/controllers/client/home/index":require("./controllers/client/home/index.js"),
-"../../../dev/bochazo/node_modules/taunus-wiring/src/controllers/client/index":require("./controllers/client/index.js")
+"home/index":require("c:/dev/bochazo/src/controllers/client/home/index.js"),
+"/index":require("c:/dev/bochazo/src/controllers/client/index.js")
 },"templates":{
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/home/404":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"home/404":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
 buf.push("<h2>Oops! 404!</h2><a ng-click=\"back()\" class=\"btn btn-default\">Volver</a>");;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/home/index":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"home/index":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
@@ -4575,14 +4575,14 @@ buf.push("<li><a" + (jade.attr("href", '/canchas/listado/' + sport.url, true, fa
 
 buf.push("</ul></h3></div><div class=\"col-md-4\"></div></div>");}.call(this,"sports" in locals_for_with?locals_for_with.sports:typeof sports!=="undefined"?sports:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/home/map":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"home/map":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
 buf.push("<h2>Mapa de canchas</h2><div class=\"row full-height\"><div class=\"col-md-8\"><div id=\"map-general\" class=\"map-canvas\">map</div></div><div class=\"col-md-4 visible-md visible-lg\"><div ng-show=\"count != null\" ng-class=\"{ &quot;alert-success&quot;: count &gt; 0, &quot;alert-danger&quot;: count == 0 }\" class=\"alert\"><p><strong>{{count}}</strong>&nbsp;complejo{{count == 1 ? '' : 's'}} encontrado{{count == 1 ? '' : 's'}}.</p><p ng-show=\"hasParams\">{{count == 0 ? 'Parámetros utilizados para la búsqueda' : 'Mostrando'}}:</p><ul ng-show=\"hasParams\"><li ng-show=\"params.query\">Que contengan la palabra<strong>{{params.query}}</strong></li><li ng-show=\"params.sport\">Canchas de {{params.sport}}</li><li ng-show=\"params.locations.length\">En<span ng-repeat-start=\"location in params.locations\" class=\"capitalize\">{{location}}</span><span ng-repeat-end=\"\">{{$last ? '' : $index == (params.locations.length - 2) ? ' o ' : ', '}}</span></li><li ng-show=\"params.players.length\">Para<span ng-repeat=\"player in params.players\">{{player}}{{$last ? '' : $index == (params.players.length - 2) ? (params.players[$index + 1] == 8 ? ' u ' : ' o ') : ', '}}</span>jugadores</li><li ng-show=\"params.surfaces.length\">Superficie de<span ng-repeat=\"surface in params.surfaces\" class=\"lowercase\">{{surface}}{{$last ? '' : $index == (params.surfaces.length - 2) ? ' o ' : ', '}}</span></li><li ng-show=\"params.tags.length\">Con<label ng-class=\"{ &quot;label-success&quot;: count &gt; 0, &quot;label-danger&quot;: count == 0 }\" ng-repeat-start=\"tag in params.tags\" class=\"label\">{{tag}}</label><span ng-repeat-end=\"\">{{$last ? '' : $index == (params.tags.length - 2) ? ' o ' : ', '}}</span></li></ul><p class=\"new-search\">Hacé click<a href=\"\" ng-click=\"redirectTo(&quot;/busqueda&quot;)\" class=\"alert-link\">acá</a>&nbsp;para realizar una {{hasParams ? 'nueva búsqueda' : 'búsqueda avanzada'}}.</p></div></div></div>");;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/layout":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"/layout":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
@@ -4635,14 +4635,14 @@ buf.push("<script src=\"/bchz.js\"></script>");
 }
 buf.push("</body></html>");}.call(this,"env" in locals_for_with?locals_for_with.env:typeof env!=="undefined"?env:undefined,"partial" in locals_for_with?locals_for_with.partial:typeof partial!=="undefined"?partial:undefined,"sports" in locals_for_with?locals_for_with.sports:typeof sports!=="undefined"?sports:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined,"year" in locals_for_with?locals_for_with.year:typeof year!=="undefined"?year:undefined));;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/add":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/add":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
 buf.push("<h2>Agregá tu cancha</h2><p>Si tenés o conoces un complejo que no está en nuestra base de datos, te damos la posibilidad de sumarlo a nuestro sitio.</p><p>Te pedimos que ingreses a continuación los datos correspondientes al complejo.<form name=\"place\" class=\"form-horizontal\"><div ng-class=\"{ &quot;has-error&quot;: place.description.$error.required }\" class=\"form-group\"><label for=\"description\" class=\"control-label col-sm-3\">Ingresá el nombre del complejo</label><div class=\"col-sm-6\"><input id=\"description\" type=\"text\" name=\"description\" placeholder=\"Algún nombre\" required=\"\" ng-model=\"description\" class=\"form-control\"/></div><div class=\"col-sm-3\"><p ng-show=\"place.description.$error.required\" class=\"help-block\">Campo requerido</p></div></div><div class=\"form-group\"><label for=\"info\" class=\"control-label col-sm-3\">Escribí una breve descripción</label><div class=\"col-sm-6\"><input id=\"info\" type=\"text\" name=\"info\" placeholder=\"Alguna descripción\" ng-model=\"info\" class=\"form-control\"/></div></div><div ng-class=\"{ &quot;has-error&quot;: !longitude || !latitude }\" class=\"form-group search-group\"><label for=\"address\" class=\"control-label col-sm-3\">Buscá la ubicación en el mapa</label><div class=\"col-sm-6\"><div class=\"input-group\"><input id=\"address\" type=\"text\" name=\"address\" placeholder=\"Alguna dirección\" ng-model=\"address\" ng-enter=\"addressSearch()\" class=\"form-control\"/><span class=\"input-group-btn\"><button type=\"button\" ng-class=\"{ disabled: loadingAddress }\" ng-click=\"addressSearch()\" class=\"btn btn-primary\">{{loadingAddress ? 'Buscando ...' : 'Buscar'}}</button></span></div><ol ng-show=\"addressResults.length &gt; 0\"><li ng-repeat=\"result in addressResults\"><a href=\"\" ng-click=\"setAddress(result)\">{{result.address}}</a></li></ol><div id=\"map-add\" class=\"map-canvas\"></div></div><div class=\"col-sm-3\"><p ng-show=\"!longitude || !latitude\" class=\"help-block\">Campo requerido</p></div></div><div class=\"form-group\"><label for=\"phone\" class=\"control-label col-sm-3\">Indicanos algún teléfono</label><div class=\"col-sm-6\"><input id=\"phone\" type=\"tel\" name=\"phone\" placeholder=\"Algún teléfono\" ng-model=\"phone\" class=\"form-control\"/></div></div><div class=\"form-group courts-list\"><label for=\"\" class=\"control-label col-sm-3\">Canchas del complejo</label><div class=\"col-sm-6\"><label for=\"sport\" class=\"control-label col-sm-3\">Deporte</label><div class=\"col-sm-9\"><select id=\"sport\" name=\"sport\" ng-model=\"currentCourt.sport\" ng-options=\"t.name for t in sports\" class=\"form-control\"><option value=\"\">[Seleccioná un deporte]</option></select></div></div><div ng-show=\"currentCourt.sport.allowPlayers\" class=\"col-sm-6 col-sm-offset-3\"><label for=\"players\" class=\"control-label col-sm-3\">Jugadores</label><div class=\"col-sm-9\"><input id=\"players\" type=\"number\" name=\"players\" min=\"1\" placeholder=\"Alguna cantidad\" ng-model=\"currentCourt.players\" ng-init=\"null\" class=\"form-control\"/></div></div><div class=\"col-sm-6 col-sm-offset-3\"><label for=\"surface\" class=\"control-label col-sm-3\">Superficie</label><div class=\"col-sm-9\"><select id=\"surface\" name=\"surface\" ng-disabled=\"currentCourt.sport == null\" ng-model=\"currentCourt.surface\" ng-options=\"s for s in currentCourt.sport.surfaces\" class=\"form-control\"><option value=\"\">[Seleccioná una superficie]</option></select></div></div><div class=\"col-sm-6 col-sm-offset-3\"><label for=\"is-indoor\" class=\"control-label col-sm-3\">¿Es techada?</label><div class=\"col-sm-9\"><div class=\"checkbox\"><label><input id=\"is-indoor\" type=\"checkbox\" name=\"is-indoor\" ng-disabled=\"currentCourt.sport == null\" ng-model=\"currentCourt.isIndoor\" ng-init=\"false\"/></label></div></div></div><div class=\"col-sm-6 col-sm-offset-3\"><a ng-click=\"addCourt(currentCourt)\" class=\"btn btn-primary btn-xs pull-right\">Agregar cancha</a></div><div ng-show=\"courts.length &gt; 0\" class=\"col-sm-6 col-sm-offset-3 courts-current-list\"><label class=\"control-label col-sm-3\">Listado</label><ul class=\"col-sm-9\"><li ng-repeat=\"group in groupedCourts\"><strong>{{group.key}}</strong><ul><li ng-repeat=\"court in group\" class=\"court-current-list-detail\"><a ng-click=\"addCourt(court[0])\" href=\"\" class=\"pull-right btn btn-primary btn-xs btn-court-action\">+</a><a ng-click=\"removeCourt(court[0])\" href=\"\" class=\"pull-right btn btn-primary btn-xs btn-court-action\">-</a><span>{{court.length}} cancha{{court.length > 1 ? 's' : null}}{{court.key.surface ? ' de ' + court.key.surface : ''}}{{court.key.isIndoor ? ', techada' + (court.length > 1 ? 's' : '') : null}}{{court.key.players ? ', para ' + court.key.players + ' jugadores' : null}}&nbsp;</span></li></ul></li></ul></div></div><div class=\"form-group\"><label for=\"tags\" class=\"control-label col-sm-3\">Detallá los servicios que ofrece (bar, vestuarios, estacionamiento, etc.)</label><div class=\"col-sm-6\"><tag-collection tag-collection-model=\"tags\" data-hint=\"Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲\" class=\"form-control hint--right hint--rounded\"><span ng-repeat=\"tag in tags\" class=\"label label-primary\">{{tag}}<button type=\"button\" tag-remove=\"tag\" class=\"close\">&times;</button></span><input id=\"tags\" type=\"text\" name=\"tags\" maxlength=\"18\" placeholder=\"{{tags.length == 0 ? &quot;Algún servicio&quot; : null}}\" class=\"tag-input\"/></tag-collection></div></div><div class=\"form-group\"><div class=\"col-sm-offset-3 col-sm-6\"><button type=\"submit\" ng-click=\"save()\" class=\"btn btn-primary\">¡Agregar complejo!</button></div></div></form></p>");;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/detail":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/detail":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
@@ -4781,14 +4781,14 @@ buf.push("</ul></div>");
 
 buf.push("</div><div class=\"col-md-4\"><div id=\"map-detail\" ng-show=\"showMap\" class=\"map-canvas\"></div></div></div><a href=\"/canchas\" class=\"btn btn-default\">Volver</a>");}.call(this,"address" in locals_for_with?locals_for_with.address:typeof address!=="undefined"?address:undefined,"description" in locals_for_with?locals_for_with.description:typeof description!=="undefined"?description:undefined,"detailedSummary" in locals_for_with?locals_for_with.detailedSummary:typeof detailedSummary!=="undefined"?detailedSummary:undefined,"howToArrive" in locals_for_with?locals_for_with.howToArrive:typeof howToArrive!=="undefined"?howToArrive:undefined,"info" in locals_for_with?locals_for_with.info:typeof info!=="undefined"?info:undefined,"phones" in locals_for_with?locals_for_with.phones:typeof phones!=="undefined"?phones:undefined,"tags" in locals_for_with?locals_for_with.tags:typeof tags!=="undefined"?tags:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/info":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/info":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
 buf.push("<div class=\"content\"><div class=\"infoview\"><a href=\"/canchas/{{place._id}}\"><h3>{{place.description}}</h3></a><ul><li ng-show=\"place.address\"><span class=\"glyphicon glyphicon-map-marker\"></span>{{place.address}}</li><li ng-show=\"place.phones\"><span class=\"glyphicon glyphicon-phone-alt\"></span><div ng-repeat=\"phone in place.phones\" class=\"comma-list\"><a href=\"tel:{{phone}}\">{{phone}}</a>{{$last ? '' : ', '}}</div></li><li ng-repeat=\"summary in place.summary\"><span class=\"glyphicon glyphicon-asterisk\"></span>{{summary.length}} cancha{{summary.length > 1 ? 's' : ''}} de {{summary.key}}</li><li ng-show=\"place.tags.length &gt; 0\"><span class=\"glyphicon glyphicon-tags\"></span><div ng-repeat=\"tag in place.tags\" class=\"comma-list\">{{tag}}{{$last ? '' : ', '}}</div></li></ul></div></div>");;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/list":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/list":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
@@ -5053,7 +5053,7 @@ buf.push("<a style=\"width: 200px;\" ng-click=\"showMore()\" ng-class=\"{ disabl
 }
 buf.push("</div><div class=\"col-md-4\"><div class=\"alert alert-info\">¿Querés agregar un complejo a nuestra base de datos? Agregalo haciendo click<a href=\"/canchas/agregar\" class=\"alert-link\">acá</a>.</div></div></div>");}.call(this,"count" in locals_for_with?locals_for_with.count:typeof count!=="undefined"?count:undefined,"hasParams" in locals_for_with?locals_for_with.hasParams:typeof hasParams!=="undefined"?hasParams:undefined,"list" in locals_for_with?locals_for_with.list:typeof list!=="undefined"?list:undefined,"params" in locals_for_with?locals_for_with.params:typeof params!=="undefined"?params:undefined,"sports" in locals_for_with?locals_for_with.sports:typeof sports!=="undefined"?sports:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/places":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/places":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
@@ -5243,19 +5243,19 @@ buf.push("</ul></div></article>");
 }).call(this);
 }.call(this,"list" in locals_for_with?locals_for_with.list:typeof list!=="undefined"?list:undefined,"undefined" in locals_for_with?locals_for_with.undefined:typeof undefined!=="undefined"?undefined:undefined));;return buf.join("");
 })(locals)},
-"../../dev/bochazo/node_modules/taunus-wiring/src/views/place/search":function(locals){var jade=require("jade/runtime");return (function template(locals) {
+"place/search":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
 buf.push("<h2>Búsqueda de canchas</h2><p>Ingresá a continuación los parámetros para tu búsqueda<form name=\"search\" class=\"form-horizontal\"><div class=\"form-group\"><label for=\"sport\" class=\"control-label col-sm-3\">Deporte</label><div class=\"col-sm-6\"><select id=\"sport\" name=\"sport\" ng-model=\"sport\" ng-options=\"t.name for t in sports\" class=\"form-control\"><option value=\"\">[Seleccioná un deporte]</option></select></div></div><div class=\"form-group\"><label for=\"locations\" class=\"control-label col-sm-3\">Ubicación de la cancha</label><div class=\"col-sm-6\"><tag-collection tag-collection-model=\"locations\" data-hint=\"Para agregar más de una ubicación, separalas por coma, o bien escribí lo que desees y presioná la tecla ↲\" class=\"form-control capitalized-search hint--right hint--rounded\"><span ng-repeat=\"location in locations\" class=\"label label-primary\">{{location}}<button type=\"button\" tag-remove=\"location\" tag-parent=\"locations\" class=\"close\">&times;</button></span><input id=\"locations\" type=\"text\" name=\"locations\" maxlength=\"18\" placeholder=\"{{locations.length == 0 ? &quot;Alguna ubicación&quot; : null}}\" ng-class=\"{ &quot;text-danger&quot;: validateTag(currentLocation, locations) }\" class=\"tag-input\"/></tag-collection></div></div><div ng-show=\"sport.allowPlayers\" class=\"form-group\"><label for=\"players\" class=\"control-label col-sm-3\">Cantidad de jugadores</label><div class=\"col-sm-9\"><div ng-repeat=\"player in sport.allowedPlayers\" class=\"checkbox\"><label><input type=\"checkbox\" ng-init=\"players[player] = players[player] || false\" ng-model=\"players[player]\"/>{{player}} jugadores</label></div></div></div><div ng-show=\"sport.surfaces\" class=\"form-group\"><label for=\"surfaces\" class=\"control-label col-sm-3\">Superficies</label><div class=\"col-sm-9\"><div ng-repeat=\"surface in sport.surfaces\" class=\"checkbox\"><label><input type=\"checkbox\" ng-init=\"surfaces[surface] = surfaces[surface] || false\" ng-model=\"surfaces[surface]\"/>{{surface}}</label></div></div></div><div class=\"form-group\"><label for=\"tags\" class=\"control-label col-sm-3\">Servicios requeridos</label><div class=\"col-sm-6\"><tag-collection tag-collection-model=\"tags\" data-hint=\"Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲\" class=\"form-control hint--right hint--rounded\"><span ng-repeat=\"tag in tags\" class=\"label label-primary\">{{tag}}<button type=\"button\" tag-remove=\"tag\" tag-parent=\"tags\" class=\"close\">&times;</button></span><input id=\"tags\" type=\"text\" name=\"tags\" maxlength=\"18\" placeholder=\"{{tags.length == 0 ? &quot;Algún servicio&quot; : null}}\" class=\"tag-input\"/></tag-collection></div></div><div class=\"form-group\"><div class=\"col-sm-offset-3 col-sm-6\"><div class=\"checkbox\"><label><input id=\"show-map\" type=\"checkbox\" ng-model=\"showMap\"/>Quiero ver el mapa de canchas</label></div></div></div><div class=\"form-group\"><div class=\"col-sm-offset-3 col-sm-6\"><button type=\"submit\" ng-click=\"submit()\" class=\"btn btn-primary\">¡Buscar!</button><button ng-click=\"back()\" class=\"btn btn-default\">Volver</button></div></div></form></p>");;return buf.join("");
 })(locals)}
-},"routes":require("./routes.js")};
+},"routes":require("c:/dev/bochazo/src/routes")};
 ;
 
 taunus.mount(main, wiring);
 
-},{"./controllers/client/home/index.js":57,"./controllers/client/index.js":58,"./routes.js":59,"jade/runtime":7,"taunus":21}],57:[function(require,module,exports){
+},{"c:/dev/bochazo/src/controllers/client/home/index.js":57,"c:/dev/bochazo/src/controllers/client/index.js":58,"c:/dev/bochazo/src/routes":59,"jade/runtime":7,"taunus":21}],57:[function(require,module,exports){
 'use strict';
 
 module.exports = function (model, container, route) {

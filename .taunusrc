@@ -2,6 +2,5 @@
   "views": "src/views",
   "server_routes": "src/routes",
   "server_controllers": "src/controllers/server",
-  "client_controllers": "src/controllers/client",
-  "routes": "src/routes.js"
+  "client_controllers": "src/controllers/client"
 }
