@@ -4508,13 +4508,11 @@ module.exports = {
 },{"./version.json":54}],56:[function(require,module,exports){
 'use strict';
 
-var taunus = require('taunus');
-var main = document.getElementsByTagName('main')[0];
-var wiring = {
-"controllers":{
+var taunus = { mount: function (container, options) { require("taunus").mount(container, {
+"controllers": {
 "home/index":require("c:/dev/bochazo/src/controllers/client/home/index.js"),
 "/index":require("c:/dev/bochazo/src/controllers/client/index.js")
-},"templates":{
+},"templates": {
 "home/404":function(locals){var jade=require("jade/runtime");return (function template(locals) {
 var buf = [];
 var jade_mixins = {};
@@ -5250,8 +5248,9 @@ var jade_interp;
 
 buf.push("<h2>Búsqueda de canchas</h2><p>Ingresá a continuación los parámetros para tu búsqueda<form name=\"search\" class=\"form-horizontal\"><div class=\"form-group\"><label for=\"sport\" class=\"control-label col-sm-3\">Deporte</label><div class=\"col-sm-6\"><select id=\"sport\" name=\"sport\" ng-model=\"sport\" ng-options=\"t.name for t in sports\" class=\"form-control\"><option value=\"\">[Seleccioná un deporte]</option></select></div></div><div class=\"form-group\"><label for=\"locations\" class=\"control-label col-sm-3\">Ubicación de la cancha</label><div class=\"col-sm-6\"><tag-collection tag-collection-model=\"locations\" data-hint=\"Para agregar más de una ubicación, separalas por coma, o bien escribí lo que desees y presioná la tecla ↲\" class=\"form-control capitalized-search hint--right hint--rounded\"><span ng-repeat=\"location in locations\" class=\"label label-primary\">{{location}}<button type=\"button\" tag-remove=\"location\" tag-parent=\"locations\" class=\"close\">&times;</button></span><input id=\"locations\" type=\"text\" name=\"locations\" maxlength=\"18\" placeholder=\"{{locations.length == 0 ? &quot;Alguna ubicación&quot; : null}}\" ng-class=\"{ &quot;text-danger&quot;: validateTag(currentLocation, locations) }\" class=\"tag-input\"/></tag-collection></div></div><div ng-show=\"sport.allowPlayers\" class=\"form-group\"><label for=\"players\" class=\"control-label col-sm-3\">Cantidad de jugadores</label><div class=\"col-sm-9\"><div ng-repeat=\"player in sport.allowedPlayers\" class=\"checkbox\"><label><input type=\"checkbox\" ng-init=\"players[player] = players[player] || false\" ng-model=\"players[player]\"/>{{player}} jugadores</label></div></div></div><div ng-show=\"sport.surfaces\" class=\"form-group\"><label for=\"surfaces\" class=\"control-label col-sm-3\">Superficies</label><div class=\"col-sm-9\"><div ng-repeat=\"surface in sport.surfaces\" class=\"checkbox\"><label><input type=\"checkbox\" ng-init=\"surfaces[surface] = surfaces[surface] || false\" ng-model=\"surfaces[surface]\"/>{{surface}}</label></div></div></div><div class=\"form-group\"><label for=\"tags\" class=\"control-label col-sm-3\">Servicios requeridos</label><div class=\"col-sm-6\"><tag-collection tag-collection-model=\"tags\" data-hint=\"Para agregar más de un servicio, separalos por coma, o bien escribí lo que desees y presioná la tecla ↲\" class=\"form-control hint--right hint--rounded\"><span ng-repeat=\"tag in tags\" class=\"label label-primary\">{{tag}}<button type=\"button\" tag-remove=\"tag\" tag-parent=\"tags\" class=\"close\">&times;</button></span><input id=\"tags\" type=\"text\" name=\"tags\" maxlength=\"18\" placeholder=\"{{tags.length == 0 ? &quot;Algún servicio&quot; : null}}\" class=\"tag-input\"/></tag-collection></div></div><div class=\"form-group\"><div class=\"col-sm-offset-3 col-sm-6\"><div class=\"checkbox\"><label><input id=\"show-map\" type=\"checkbox\" ng-model=\"showMap\"/>Quiero ver el mapa de canchas</label></div></div></div><div class=\"form-group\"><div class=\"col-sm-offset-3 col-sm-6\"><button type=\"submit\" ng-click=\"submit()\" class=\"btn btn-primary\">¡Buscar!</button><button ng-click=\"back()\" class=\"btn btn-default\">Volver</button></div></div></form></p>");;return buf.join("");
 })(locals)}
-},"routes":require("c:/dev/bochazo/src/routes")};
+},"routes": require("c:/dev/bochazo/src/routes") }, options); } }
 ;
+var main = document.getElementsByTagName('main')[0];
 
 taunus.mount(main, wiring);
 

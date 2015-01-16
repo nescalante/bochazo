@@ -37,7 +37,7 @@
     "test": "mocha",
     "start": "nodemon src/main & lessc src/content/site/all.less public/site.css & browserify -t jadeify -t brfs src/client.js -o public/bchz.js",
     "build": "lessc src/content/site/all.less public/site.css & browserify -t jadeify -t brfs src/client.js -o public/bchz.js",
-    "bundle": "browserify -t jadeify -t taunus-wiring -t brfs src/client.js -o public/bchz.js",
+    "bundle": "browserify -t jadeify -t ./test.js -t brfs src/client.js -o public/bchz.js",
     "deploy": "grunt deploy"
   },
   "devDependencies": {
